@@ -6,9 +6,10 @@ contributors:
   - SheepFromHeaven
 ---
 
-# Screenshot connector
-You can configure a screenshot connector module to be used by the screenshot testing process, to modify the default behaviour of the caching, comparing and publishing of your tests.
-Just create a file which defines a connector class and point to it in your stencil testing config:
+# スクリーンショットコネクタ
+
+スクリーンショットテストプロセスで使用されるスクリーンショットコネクタモジュールを構成して、テストのキャッシュ、比較、公開のデフォルトの動作を変更できます。
+コネクタクラスを定義するファイルを作成し、ステンシルテスト構成でそれを指すだけです。
 
 ```tsx
 export const config: Config = {
@@ -21,6 +22,10 @@ export const config: Config = {
 
 ## Writing a connector
 To write a connector, import the base `ScreenshotConnector` class from stencil and extend it:
+
+##コネクタの書き込み
+コネクタを作成するには、基本の `ScreenshotConnector`クラスをステンシルからインポートして拡張します。
+
 ```javascript
 const { ScreenshotConnector } = require('@stencil/core/screenshot');
 
@@ -29,10 +34,10 @@ module.exports = class ScreenshotCustomConnector extends ScreenshotLocalConnecto
 };
 ```
 
-> For a good reference on how this can be done, have a look at the default `StencilLocalConnector` [here](https://github.com/ionic-team/stencil/blob/master/src/screenshot/connector-local.ts)
+> これを行う方法の良いリファレンスについては、デフォルトの `StencilLocalConnector` [ここ](https://github.com/ionic-team/stencil/blob/master/src/screenshot/connector-local .ts)
 
-## Methods
-The base connector which can be imported and extended from stencil has the following methods which can be overwritten:
+## メソッド
+ステンシルからインポートおよび拡張できるベースコネクタには、上書き可能な次のメソッドがあります。
 
 ```tsx
 export interface ScreenshotConnector {
@@ -45,7 +50,7 @@ export interface ScreenshotConnector {
   getScreenshotCache(): Promise<ScreenshotCache>;
 
   completeBuild(masterBuild: ScreenshotBuild): Promise<ScreenshotBuildResults>;
-  
+
   publishBuild(buildResults: ScreenshotBuildResults): Promise<ScreenshotBuildResults>;
 
   updateScreenshotCache(screenshotCache: ScreenshotCache, buildResults: ScreenshotBuildResults): Promise<ScreenshotCache>;
@@ -53,35 +58,35 @@ export interface ScreenshotConnector {
   generateJsonpDataUris(build: ScreenshotBuild): Promise<void>;
 }
 ```
-For references to the interfaces, [see here](#interfaces)
+インターフェイスへの参照については、[ここを参照](#interfaces)
 
-### initBuild(options)
-This method is being called to setup the connector and ready everything for running the tests. It is responsible for setting up the variables, filepaths and folder structures needed for running the screenshot tests.
+### initBuild（options）
+このメソッドは、コネクタをセットアップし、テストを実行するためのすべての準備をするために呼び出されています。スクリーンショットテストの実行に必要な変数、ファイルパス、およびフォルダー構造の設定を担当します。
 
-> Only overwrite this method if you know what you do! For easy extention, make sure to call `super.initBuild`
+>自分が何をしているのかがわかっている場合にのみ、このメソッドを上書きしてください。簡単に拡張できるように、必ず `super.initBuild`を呼び出してください。
 
 ### pullMasterBuild()
-After initializing the connector, and setting up the build, this method is being run to give the possibility to pull the master build. This can be very usefull in case the screenshots are stored somewhere else then on the machine on which the tests are running.
+コネクタを初期化し、ビルドを設定した後、このメソッドを実行して、マスタービルドをプルできるようにします。これは、スクリーンショットがテストが実行されているマシン以外の場所に保存されている場合に非常に役立ちます。
 
 ### getMasterBuild()
-Now that the tests are setup an ready to run this method is being called to return the master build. So instead of loading the master build from a file it could be fetched from an api and returned in this method.
+テストがセットアップされたので、このメソッドを実行する準備ができて、マスタービルドを返すために呼び出されています。したがって、マスタービルドをファイルからロードする代わりに、APIからフェッチして、このメソッドで返すことができます。
 
 ### getScreenshotCache()
-This method is being called to return the screenshot cache which will then be extended with the current build results.
+このメソッドは、現在のビルド結果で拡張されるスクリーンショットキャッシュを返すために呼び出されています。
 
 ### completeBuild(masterBuild)
-After running the tests and generating the screenshots into the configured folder, this method is being called to create the result json data. At this time the images are there and the master build is being passed in as an option.
+テストを実行し、構成されたフォルダーにスクリーンショットを生成した後、このメソッドが呼び出されて、結果のjsonデータが作成されます。この時点で、イメージはそこにあり、マスタービルドはオプションとして渡されています。
 
-> Only overwrite this method if you know what you do! For easy extention, make sure to call `super.completeBuild`
+>自分が何をしているのかがわかっている場合にのみ、このメソッドを上書きしてください。簡単に拡張できるように、必ず `super.completeBuild`を呼び出してください。
 
 ### publishBuild(buildResults)
-Now that the build has been completed and the results were generated, this method will be called with the result data. In here the results can be written to a json file, or sent to a remote location. In the default `StencilLocalConnector` this method will create the compare app html.
+ビルドが完了し、結果が生成されたので、このメソッドは結果データとともに呼び出されます。ここでは、結果をjsonファイルに書き込んだり、リモートの場所に送信したりできます。デフォルトの `StencilLocalConnector`では、このメソッドは比較アプリのhtmlを作成します。
 
-### updateScreenshotCache(screenshotCache, buildResults)
-At the end of the whole run, the screenshot cache should be updated with this method. So it can be written to a file or be sent to an api from here.
+### updateScreenshotCache(screenshotCache,buildResults)
+実行全体の最後に、スクリーンショットキャッシュをこのメソッドで更新する必要があります。したがって、ここからファイルに書き込んだり、APIに送信したりできます。
 
 
-## Interfaces
+## インターフェース
 ```tsx
 export interface ScreenshotConnectorOptions {
   buildId: string;

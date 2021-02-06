@@ -8,13 +8,13 @@ contributors:
   - viernullvier
 ---
 
-# Testing Config
+# 構成のテスト
 
-The `testing` config setting specifies an object that corresponds to the jest configuration that should be used in your tests. Stencil provides a default configuration, which you likely won't need to edit, however it can be extended with the same configuration options as Jest. See the [Configuring Jest Guide](https://jestjs.io/docs/en/configuration.html) for configuration details.
+`testing`構成設定は、テストで使用する必要があるjest構成に対応するオブジェクトを指定します。 ステンシルはデフォルトの構成を提供します。これはおそらく編集する必要はありませんが、Jestと同じ構成オプションで拡張できます。 構成の詳細については、[構成Jestガイド](https://jestjs.io/docs/en/configuration.html)を参照してください。
 
-> Keep in mind that the usual way of configuring Jest (`package.json` and `jest.config.js`) is not used with the `stencil testing` command. Jest can still be used, but configuring the presets, transpilation and setting up the correct commands must be done by the project.
+> Jestを構成する通常の方法（`package.json`および`jest.config.js`）は、 `stenciltesting`コマンドでは使用されないことに注意してください。 Jestは引き続き使用できますが、プリセットの構成、トランスパイル、および正しいコマンドの設定は、プロジェクトで行う必要があります。
 
-Some additional Stencil specific options may be set here as well for configuring the e2e tests:
+e2eテストを構成するために、いくつかの追加のステンシル固有のオプションもここで設定できます。
 
 ```tsx
 export interface TestingConfig extends JestConfig {

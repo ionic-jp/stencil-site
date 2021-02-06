@@ -6,27 +6,27 @@ contributors:
   - simonhaenisch
 ---
 
-# Mocking
+# モック
 
-Since Stencil's testing capabilities are built on top of Jest, the mocking features of Jest can be utilized to mock out libraries or certain parts of your code. For further information have a look at the [Jest docs](https://jestjs.io/docs/en/manual-mocks).
+ステンシルのテスト機能はJestの上に構築されているため、Jestのモック機能を利用して、ライブラリやコードの特定の部分をモックアウトできます。 詳細については、[Jest docs](https://jestjs.io/docs/en/manual-mocks)を参照してください。
 
-## Mocking a Library
+## ライブラリのモック
 
-To create a mock for a library that is imported from `node_modules`, you can simply create a folder `__mocks__` on the same directory level as `node_modules` (usually in your project's root folder), then create a file in there with the same name as the package you want to mock, and that mock will automatically be applied.
+`node_modules`からインポートされたライブラリのモックを作成するには、`node_modules`と同じディレクトリレベル（通常はプロジェクトのルートフォルダ）にフォルダ `__mocks__`を作成し、そこにファイルを作成します。 モックしたいパッケージと同じ名前で、そのモックが自動的に適用されます。
 
-For example, if you want to mock `md5`, you'd create a file `__mocks__/md5.ts` with the following content:
+たとえば、 `md5`をモックしたい場合は、次の内容のファイル` __mocks __ /md5.ts`を作成します。
 
 ```ts
 export default () => 'fakehash';
 ```
 
-> If you want to mock a scoped package like `@capacitor/core`, you'll have to create the file as `__mocks__/@capacitor/core.ts`.
+> `@capacitor/core`のようなスコープパッケージをモックしたい場合は、ファイルを `__mocks __/@capacitor/core.ts`として作成する必要があります。
 
-## Mocking Your Own Code
+## 自分のコードをあざける
 
-To create a mock for some of your own code, you'll have to create the mocks folder on a different layer.
+独自のコードのモックを作成するには、別のレイヤーにモックフォルダーを作成する必要があります。
 
-Let's say you have a file `src/helpers/utils.ts` that exposes a `getRandomInt` helper, and a service that provides a function which uses this helper.
+`getRandomInt`ヘルパーを公開するファイル`src/helpers/utils.ts`と、このヘルパーを使用する関数を提供するサービスがあるとします。
 
 ```tsx
 // src/helpers/utils.ts
@@ -43,7 +43,7 @@ import { getRandomInt } from '../helpers/utils';
 export const bar = () => getRandomInt(0, 10);
 ```
 
-To mock this function, you create a file `src/helpers/__mocks__/utils.ts` and write your mock in that file.
+この関数をモックするには、ファイル `src/helpers/__mocks__/utils.ts`を作成し、そのファイルにモックを書き込みます。
 
 ```tsx
 // src/helpers/__mocks__/utils.ts
@@ -51,7 +51,7 @@ To mock this function, you create a file `src/helpers/__mocks__/utils.ts` and wr
 export const getRandomInt = () => 42;
 ```
 
-Because Jest only auto-mocks node modules, you'll also have to let your test know that you want it to apply that mock, by calling `jest.mock()`.
+Jestはノードモジュールのみを自動モックするため、 `jest.mock()`を呼び出して、そのモックを適用することをテストに通知する必要があります。
 
 ```tsx
 // src/foo.spec.ts
@@ -67,9 +67,9 @@ describe('Foo', () => {
 });
 ```
 
-> It's important that you call `jest.mock('...')` before your import.
+>インポートする前に `jest.mock('...')`を呼び出すことが重要です。
 
-Instead of creating a file in a `__mocks__` folder, there is an alternative approach of providing a mock: the `jest.mock()` function takes a module factory function as an optional second argument. The following test will work the same as the one before, without having to create a `src/helpers/__mocks__/utils.ts` file.
+`__mocks__`フォルダーにファイルを作成する代わりに、モックを提供する別のアプローチがあります。`jest.mock()`関数は、オプションの2番目の引数としてモジュールファクトリ関数を取ります。 次のテストは、 `src/helpers/__mocks__/utils.ts`ファイルを作成しなくても、前のテストと同じように機能します。
 
 ```tsx
 // src/foo.spec.ts
@@ -87,9 +87,9 @@ describe('Foo', () => {
 });
 ```
 
-## Mocking in E2E Tests
+## E2Eテストでのモック
 
-If you use `newE2EPage` in an end-to-end test, your component's code will be executed in a browser context (Stencil will launch a headless Chromium instance using Puppeteer). However your mocks will only be registered in the Node.js context, which means that your component will still call the original implementation. If you need to mock something in the browser context, you can either have a look at [using Jest with Puppeteer](https://jestjs.io/docs/en/puppeteer), or possibly switch to using `newSpecPage`, which creates a virtual (mocked) DOM in the node context.
+エンドツーエンドのテストで `newE2EPage`を使用する場合、コンポーネントのコードはブラウザコンテキストで実行されます（StencilはPuppeteerを使用してヘッドレスChromiumインスタンスを起動します）。 ただし、モックはNode.jsコンテキストにのみ登録されます。つまり、コンポーネントは引き続き元の実装を呼び出します。 ブラウザのコンテキストで何かをモックする必要がある場合は、[Jest with Puppeteerの使用](https://jestjs.io/docs/en/puppeteer)を参照するか、 `newSpecPage`の使用に切り替えることができます。 ノードコンテキストに仮想（モック）DOMを作成します。
 
 ```tsx
 // src/components/foo/foo.tsx
