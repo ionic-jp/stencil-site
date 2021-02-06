@@ -6,11 +6,9 @@ contributors:
   - adamdbradley
 ---
 
-# Stencil Core Compiler API
+# ステンシルコアコンパイラAPI
 
-The compiler API can be found at `@stencil/core/compiler/stencil.js`. This module can 
-work within a NodeJS environment, web worker, and browser window. The
-`stencil.min.js` file is also provided and recommended when used within a browser.
+コンパイラAPIは `@stencil/core/compiler/stencil.js`にあります。 このモジュールは、NodeJS環境、Webワーカー、およびブラウザーウィンドウ内で機能します。 `stencil.min.js`ファイルも提供されており、ブラウザ内で使用する場合に推奨されます。
 
 ```tsx
 // NodeJS (commonjs)
@@ -32,22 +30,11 @@ importScripts('https://cdn.jsdelivr.net/npm/@stencil/core@[VERSION]/compiler/ste
 transpile(code: string, opts?: TranspileOptions): Promise<TranspileResults>
 ```
 
-The `transpile()` function inputs source code as a string, with various options
-within the second argument. The function is stateless and returns a `Promise` of the
-results, including diagnostics and the transpiled code. The `transpile()` function
-does not handle any bundling, minifying, or precompiling any CSS preprocessing like
-Sass or Less. 
+`transpile()`関数は、2番目の引数内にさまざまなオプションを指定して、ソースコードを文字列として入力します。 この関数はステートレスであり、診断やトランスパイルされたコードを含む結果の「約束」を返します。 `transpile()`関数は、SassやLessなどのCSS前処理のバンドル、ミニファイ、またはプリコンパイルを処理しません。
 
-The `transpileSync()` equivalent is available so the same function
-it can be called synchronously. However, TypeScript must be already loaded within
-the global for it to work, where as the async `transpile()` function will load
-TypeScript automatically.
+同等の `transpileSync()`が使用できるため、同じ関数を同期的に呼び出すことができます。 ただし、TypeScriptが機能するには、グローバル内にすでにロードされている必要がありますが、非同期の `transpile()`関数はTypeScriptを自動的にロードします。
 
-Since TypeScript is used, the source code will transpile from TypeScript to JavaScript,
-and does not require Babel presets. Additionally, the results includes an `imports`
-array of all the import paths found in the source file. The transpile options can be
-used to set the `module` format, such as `cjs`, and JavaScript `target` version, such
-as `es2017`.
+TypeScriptが使用されるため、ソースコードはTypeScriptからJavaScriptにトランスパイルされ、Babelプリセットは必要ありません。 さらに、結果には、ソースファイルで見つかったすべてのインポートパスの `imports`配列が含まれます。 トランスパイルオプションを使用して、 `cjs`などの`module`形式、および `es2017`などのJavaScriptの`target`バージョンを設定できます。
 
 
 ## transpileSync()
@@ -56,10 +43,7 @@ as `es2017`.
 transpileSync(code: string, opts?: TranspileOptions): TranspileResults
 ```
 
-Synchronous equivalent of the `transpile()` function. When used in a browser
-environment, TypeScript must already be available globally, where as the async
-`transpile()` function will load TypeScript automatically.
-
+`transpile()`関数と同期的に同等です。 ブラウザ環境で使用する場合、TypeScriptはすでにグローバルに利用可能である必要がありますが、非同期の `transpile()`関数はTypeScriptを自動的にロードします。
 
 ## createCompiler()
 
@@ -67,15 +51,11 @@ environment, TypeScript must already be available globally, where as the async
 createCompiler(config: Config): Promise<Compiler>
 ```
 
-The compiler is the utility that brings together many tools to build optimized components, such as a
-transpiler, bundler and minifier. When using the CLI, the `stencil build` command uses the compiler for
-the various builds, such as a production build, or watch mode during development. If only one file should
-be transpiled (converting source code from TypeScript to JavaScript) then the `transpile()` function should be used instead.
+コンパイラは、トランスパイラー、バンドラー、ミニファイアなど、最適化されたコンポーネントを構築するための多くのツールをまとめたユーティリティです。 CLIを使用する場合、 `stencil build`コマンドは、本番ビルドや開発中の監視モードなど、さまざまなビルドにコンパイラを使用します。 1つのファイルのみをトランスパイルする必要がある場合（ソースコードをTypeScriptからJavaScriptに変換する場合）、代わりに `transpile()`関数を使用する必要があります。
 
-Given a Stencil config, this method asynchronously returns a `Compiler` instance. The config provided
-should already be created using the `loadConfig({...})` method.
+ステンシル構成を指定すると、このメソッドは非同期で `Compiler`インスタンスを返します。 提供されている構成は、 `loadConfig（{...}）`メソッドを使用してすでに作成されているはずです。
 
-Below is an example of a NodeJS environment running a full build.
+以下は、フルビルドを実行しているNodeJS環境の例です。
 
 ```tsx
 import { createNodeLogger, createNodeSystem } from '@stencil/core/cli';
@@ -101,9 +81,7 @@ const results = await compiler.build();
 createSystem(): CompilerSystem
 ```
 
-The compiler uses a `CompilerSystem` instance to access any file system reads and writes. When used
-from the CLI, the CLI will provide its own system based on NodeJS. This method provide a compiler
-system is in-memory only and independent of any platform.
+コンパイラは `CompilerSystem`インスタンスを使用して、ファイルシステムの読み取りと書き込みにアクセスします。 CLIから使用する場合、CLIはNodeJSに基づく独自のシステムを提供します。 このメソッドは、コンパイラシステムがメモリ内のみであり、プラットフォームに依存しないことを提供します。
 
 
 ## dependencies
@@ -112,9 +90,7 @@ system is in-memory only and independent of any platform.
 dependencies: CompilerDependency[]
 ```
 
-The `dependencies` array is only informational and provided to state which versions of dependencies
-the compiler was built and works with. For example, the version of TypeScript, Rollup and Terser used
-for this version of Stencil are listed here.
+`dependencies`配列は情報提供のみを目的としており、コンパイラが構築されて動作する依存関係のバージョンを示すために提供されています。 たとえば、このバージョンのステンシルに使用されているTypeScript、Rollup、Terserのバージョンをここに示します。
 
 
 ## loadConfig()
@@ -123,9 +99,7 @@ for this version of Stencil are listed here.
 loadConfig(init?: LoadConfigInit): Promise<LoadConfigResults>
 ```
 
-The `loadConfig(init)` method is used to take raw config information and transform it into a
-usable config object for the compiler and dev-server. The `init` argument should be given
-an already created system and logger which can also be used by the compiler.
+`loadConfig(init)`メソッドは、生の構成情報を取得し、それをコンパイラーと開発サーバーで使用可能な構成オブジェクトに変換するために使用されます。 `init`引数には、コンパイラでも使用できる、作成済みのシステムとロガーを指定する必要があります。
 
 
 ## optimizeCss()
@@ -134,7 +108,7 @@ an already created system and logger which can also be used by the compiler.
 optimizeCss(cssInput?: OptimizeCssInput): Promise<OptimizeCssOutput>
 ```
 
-Utility function used by the compiler to optimize CSS.
+CSSを最適化するためにコンパイラーが使用するユーティリティ関数。
 
 
 ## optimizeJs()
@@ -143,8 +117,7 @@ Utility function used by the compiler to optimize CSS.
 optimizeJs(jsInput?: OptimizeJsInput): Promise<OptimizeJsOutput>
 ```
 
-Utility function used by the compiler to optimize JavaScript. Knowing the JavaScript target
-will further apply minification optimizations beyond usual minification.
+JavaScriptを最適化するためにコンパイラーが使用するユーティリティ関数。 JavaScriptターゲットを知っていると、通常のミニファイを超えてミニファイ最適化がさらに適用されます。
 
 
 ## path
@@ -153,8 +126,7 @@ will further apply minification optimizations beyond usual minification.
 path: PlatformPath
 ```
 
-Utility of the `path` API providied by NodeJS, but capable of running in any environment.
-This `path` API is only the POSIX version: https://nodejs.org/api/path.html
+NodeJSによって提供される `path` APIのユーティリティですが、どの環境でも実行できます。 この `path` APIはPOSIXバージョンのみです：https：//nodejs.org/api/path.html
 
 
 ## version

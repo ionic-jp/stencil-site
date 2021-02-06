@@ -6,9 +6,9 @@ contributors:
   - adamdbradley
 ---
 
-# Stencil Core Dev Server API
+# StencilCore開発サーバーAPI
 
-The CLI API can be found at `@stencil/core/dev-server`.
+CLI APIは、 `@stencil/core/dev-server`にあります。
 
 ## startServer()
 
