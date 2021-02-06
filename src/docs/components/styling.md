@@ -9,28 +9,28 @@ contributors:
 
 # ＃スタイリングコンポーネント
 
-## Shadow DOM
+## ShadowDOM
 
 ### ShadowDOMとは
 
-[Shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom)は、DOMのカプセル化とスタイルのカプセル化を可能にするブラウザーに組み込まれたAPIです。 Shadow DOMは、コンポーネントを周囲の環境から保護します。 これは、CSSを正しくスコープすることを心配する必要がなく、内部DOMがコンポーネントの外部に干渉されることを心配する必要がないことを意味します。
+[ShadowDOM](https://developers.google.com/web/fundamentals/web-components/shadowdom)は、DOMのカプセル化とスタイルのカプセル化を可能にするブラウザーに組み込まれたAPIです。 ShadowDOMは、コンポーネントを周囲の環境から保護します。 これは、CSSを正しくスコープすることを心配する必要がなく、内部DOMがコンポーネントの外部に干渉されることを心配する必要がないことを意味します。
 
 ### ブラウザのサポート
 
-Shadow DOMは現在、次のブラウザでネイティブにサポートされています。
+ShadowDOMは現在、次のブラウザでネイティブにサポートされています。
 
 - クローム
 - Firefox
 - Safari
 - Opera
 
-Shadow DOMをサポートしていないブラウザーでは、スコープ付きCSSにフォールバックします。 これにより、Shadow DOMに付属するスタイルのカプセル化が可能になりますが、巨大なShadowDOMポリフィルは読み込まれません。
+ShadowDOMをサポートしていないブラウザーでは、スコープ付きCSSにフォールバックします。 これにより、ShadowDOMに付属するスタイルのカプセル化が可能になりますが、巨大なShadowDOMポリフィルは読み込まれません。
 
 >スコープ付きCSSとは何かについて混乱していますか？ 心配しないでください。[後で詳細を説明します](#scoped-css)。
 
-### ###StencilのShadowDOM
+### StencilのShadowDOM
 
-シャドウDOMは現在、Stencilで構築されたWebコンポーネントに対してデフォルトでオンになっていません。 Stencilで構築されたWebコンポーネントでShadowDOMをオンにするには、コンポーネントデコレータで `shadow`パラメータを使用できます。 以下はその一例です。
+ShadowDOMは現在、Stencilで構築されたWebコンポーネントに対してデフォルトでオンになっていません。 Stencilで構築されたWebコンポーネントでShadowDOMをオンにするには、コンポーネントデコレータで `shadow`パラメータを使用できます。 以下はその一例です。
 
 ```tsx
 @Component({
@@ -47,7 +47,7 @@ export class ShadowComponent {
 
 - QuerySelector: ShadowDOMを使用していて、Webコンポーネント内の要素をクエリする場合は、 `this.el.shadowRoot.querySelector()`を使用する必要があります。 これは、Webコンポーネント内のすべてのDOMがShadowDOMが作成するshadowRootにあるためです。
 
-- グローバルスタイル: Shadow DOMを使用してコンポーネントを外部スタイルにするには、[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables)または提案されている[CSSシャドウパーツ](https://meowni.ca/posts/part-theme-explainer/)を使用する必要があります。
+- グローバルスタイル: ShadowDOMを使用してコンポーネントを外部スタイルにするには、[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables)または提案されている[CSS Shadow パーツ](https://meowni.ca/posts/part-theme-explainer/)を使用する必要があります。
 
 - 通常は、次のようにコンポーネントのタグ名でスタイルをラップします。
 
@@ -60,7 +60,7 @@ my-element div {
 }
 ```
 
-Shadow DOMを有効にすると、シャドウルート内の要素がスコープされ、コンポーネント外のスタイルは適用されません。 その結果、コンポーネント内のCSSセレクターを簡略化でき、上記の例は次のようになります。
+ShadowDOMを有効にすると、Shadow ルート内の要素がスコープされ、コンポーネント外のスタイルは適用されません。 その結果、コンポーネント内のCSSセレクターを簡略化でき、上記の例は次のようになります。
 
 ```css
 :host {
@@ -73,7 +73,7 @@ div {
 
 ### スコープ付きCSS
 
-現在ShadowDOMをサポートしていないブラウザーでは、Stencilで構築されたWebコンポーネントは、大きなShadow DOMポリフィルをロードする代わりに、スコープ付きCSSの使用にフォールバックします。 スコープ付きCSSは、実行時に各スタイルにデータ属性を追加することにより、CSSを要素に自動的にスコープします。
+現在、ShadowDOMをサポートしていないブラウザーでは、Stencilで構築されたWebコンポーネントは、大きなShadowDOMポリフィルをロードする代わりに、スコープ付きCSSの使用にフォールバックします。 スコープ付きCSSは、実行時に各スタイルにデータ属性を追加することにより、CSSを要素に自動的にスコープします。
 
 
 ## グローバルスタイル
