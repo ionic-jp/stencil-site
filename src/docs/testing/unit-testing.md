@@ -8,18 +8,18 @@ contributors:
   - bassettsj
 ---
 
-# Unit Testing
+# ユニットテスト
 
-Stencil makes it easy to unit test components and app utility functions using [Jest](https://jestjs.io/). Unit tests validate the code in isolation. Well written tests are fast, repeatable, and easy to reason about.
+ステンシルを使用すると、[Jest](https://jestjs.io/)を使用してコンポーネントとアプリユーティリティ関数を簡単に単体テストできます。 単体テストは、コードを分離して検証します。 適切に作成されたテストは、高速で再現性があり、簡単に推論できます。
 
-To run unit tests, run `stencil test --spec`. Files ending in `.spec.ts` will be executed.
+単体テストを実行するには、 `stencil test--spec`を実行します。 `.spec.ts`で終わるファイルが実行されます。
 
 
 ## newSpecPage()
 
-In order to unit test a component as rendered HTML, tests can use `newSpecPage()` imported from `@stencil/core/testing`. This testing utility method is similar to `newE2EPage()`, however, `newSpecPage()` is much faster since it does not require a full [Puppeteer](https://pptr.dev/) instance to be running. Please see the [newE2EPage()](/docs/end-to-end-testing) docs on more information about complete End-to-end testing with Puppeteer.
+コンポーネントをレンダリングされたHTMLとして単体テストするために、テストでは `@stencil/core/testing`からインポートされた`newSpecPage()`を使用できます。 このテストユーティリティメソッドは `newE2EPage()`に似ていますが、完全な[Puppeteer](https://pptr.dev/)インスタンスを実行する必要がないため、 `newSpecPage()`ははるかに高速です。 Puppeteerを使用した完全なエンドツーエンドテストの詳細については、[newE2EPage()](/docs/end-to-end-testing)ドキュメントを参照してください。
 
-Below is a simple example where `newSpecPage()` is given one component class which was imported, and the initial HTML to use for the test. In this example, when the component `MyCmp` renders it sets its text content as "Success!". The matcher `toEqualHtml()` is then used to ensure the component renders as expected.
+以下は、 `newSpecPage()`にインポートされた1つのコンポーネントクラスと、テストに使用する最初のHTMLが指定されている簡単な例です。 この例では、コンポーネント `MyCmp`がレンダリングするときに、テキストコンテンツを「Success！」として設定します。 次に、マッチャー `toEqualHtml()`を使用して、コンポーネントが期待どおりにレンダリングされるようにします。
 
 
 ```typescript
@@ -38,44 +38,48 @@ it('should render my component', async () => {
 ```
 
 
-### Spec Page Options
+### スペックページオプション
 
-The `newSpecPage(options)` method takes an options argument to help write tests:
 
-| Option | Description |
+`newSpecPage(options)`メソッドは、テストの作成に役立つoptions引数を取ります。
+
+
+| オプション | 説明 |
 |--------|-------------|
-| `components` | An array of components to test. Component classes can be imported into the spec file, then their reference should be added to the `component` array in order to be used throughout the test. *Required* |
-| `html` | The initial HTML used to generate the test. This can be useful to construct a collection of components working together, and assign HTML attributes. This value sets the mocked `document.body.innerHTML`. |
-| `autoApplyChanges` | By default, any changes to component properties and attributes must call `page.waitForChanges()` in order to test the updates. As an option, `autoApplyChanges` continuously flushes the queue in the background. Defaults to  `false` |
-| `cookie` | Sets the mocked `document.cookie`. |
-| `direction` | Sets the mocked `dir` attribute on `<html>`. |
-| `language` | Sets the mocked `lang` attribute on `<html>`. |
-| `referrer` | Sets the mocked `document.referrer`. |
-| `supportsShadowDom` | Manually set if the mocked document supports Shadow DOM or not. Defaults to `true` |
-| `userAgent` | Sets the mocked `navigator.userAgent`. |
-| `url` | Sets the mocked browser's `location.href`. |
+| `components` | テストするコンポーネントの配列。コンポーネントクラスはスペックファイルにインポートできます。その後、テスト全体で使用するために、それらの参照を `component`配列に追加する必要があります。 *必須*  |
+| `html` | テストの生成に使用される最初のHTML。これは、連携して動作するコンポーネントのコレクションを構築し、HTML属性を割り当てるのに役立ちます。この値は、モックされた `document.body.innerHTML`を設定します。 |
+| `autoApplyChanges` | デフォルトでは、コンポーネントのプロパティと属性への変更は、更新をテストするために `page.waitForChanges()`を呼び出す必要があります。オプションとして、 `autoApplyChanges`はバックグラウンドでキューを継続的にフラッシュします。デフォルトは `false` |
+| `cookie` | モックされた `document.cookie`を設定します。 |
+| `direction` | 模擬の `dir`属性を`<html>`に設定します。 |
+| `language` | 模擬の `lang`属性を`<html>`に設定します。 |
+| `referrer` | モックされた `document.referrer`を設定します。 |
+| `supportsShadowDom` | モックされたドキュメントがシャドウDOMをサポートするかどうかを手動で設定します。デフォルトは `true`  |
+| `userAgent` | モックされた `navigator.userAgent`を設定します。 |
+| `url` | モックされたブラウザの `location.href`を設定します。 |
 
 
-### Spec Page Results
+### スペックページの結果
 
-The returned "page" object from `newSpecPage()` contains the initial results from the first render. It's also important to note that the returned page result is a `Promise`, so for convenience it's recommended to use async/await.
+`newSpecPage()`から返される「page」オブジェクトには、最初のレンダリングからの初期結果が含まれています。返されるページの結果は「Promise」であることに注意することも重要です。したがって、便宜上、async/awaitを使用することをお勧めします。
 
-The most useful property on the page results would be `root`, which is for convenience to find the first root component in the document. For example, if a component is nested in many `<div>` elements, the `root` property goes directly to the component being tested in order to skip the query selector boilerplate code.
+ページ結果で最も役立つプロパティは `root`です。これは、ドキュメント内の最初のルートコンポーネントを見つけるのに便利です。たとえば、コンポーネントが多くの `<div>`要素にネストされている場合、クエリセレクタのボイラープレートコードをスキップするために、 `root`プロパティはテスト対象のコンポーネントに直接移動します。
 
-| Result | Description |
+
+| 結果 | 説明 |
 |--------|-------------|
-| `body` | Mocked testing `document.body`. |
-| `doc` | Mocked testing `document`. |
-| `root` | The first component found within the mocked `document.body`. If a component isn't found, then it'll return `document.body.firstElementChild`.  |
-| `rootInstance` | Similar to `root`, except returns the component instance. If a root component was not found it'll return `null`. |
-| `setContent(html)` | Convenience function to set `document.body.innerHTML` and `waitForChanges()`. Function argument should be an html string. |
-| `waitForChanges()` | After changes have been made to a component, such as a update to a property or attribute, the test page does not automatically apply the changes. In order to wait for, and apply the update, call `await page.waitForChanges()`. |
-| `win` | Mocked testing `window`. |
+| `body` | 模擬テスト `document.body`。 |
+| `doc` | 模擬テスト `document`。 |
+| `root` | モックされた `document.body`内で最初に見つかったコンポーネント。コンポーネントが見つからない場合は、 `document.body.firstElementChild`が返されます。  |
+| `rootInstance` | コンポーネントインスタンスを返すことを除いて、 `root`と同様です。ルートコンポーネントが見つからなかった場合は、 `null`が返されます。 |
+| `setContent(html)` | `document.body.innerHTML`と` waitForChanges() `を設定する便利な関数。関数の引数はhtml文字列である必要があります。 |
+| `waitForChanges()` | プロパティや属性の更新など、コンポーネントに変更が加えられた後、テストページは変更を自動的に適用しません。更新を待って適用するには、 `await page.waitForChanges()`を呼び出します。 |
+| `win` | 模擬テスト `window`。 |
 
 
-## Testing Component Class Logic
+## コンポーネントクラスロジックのテスト
 
-For simple logic only testing, unit tests can instantiate a component by importing the class and constructing it manually. Since Stencil components are plain JavaScript objects, you can create a new component and execute its methods directly.
+単純なロジックのみのテストの場合、単体テストでは、クラスをインポートして手動で構築することにより、コンポーネントをインスタンス化できます。 ステンシルコンポーネントはプレーンなJavaScriptオブジェクトであるため、新しいコンポーネントを作成してそのメソッドを直接実行できます。
+
 
 ```typescript
 import { MyToggle } from '../my-toggle.tsx';

@@ -8,28 +8,28 @@ contributors:
   - simonhaenisch
 ---
 
-# End-to-end Testing
+# エンドツーエンドのテスト
 
-E2E tests verify your components in a real browser. For example, when `my-component` has the X attribute, the child component then renders the text Y, and expects to receive the event Z. By using Puppeteer for rendering tests (rather than a Node environment simulating how a browser works), your end-to-end tests are able to run within an actual browser in order to give better results.
+E2Eテストは、実際のブラウザーでコンポーネントを検証します。たとえば、 `my-component`にX属性がある場合、子コンポーネントはテキストYをレンダリングし、イベントZを受信することを期待します。レンダリングテストにPuppeteerを使用することにより（ブラウザの動作をシミュレートするノード環境ではなく）、より良い結果を得るために、エンドツーエンドのテストを実際のブラウザ内で実行できます。
 
-Stencil provides many utility functions to help test [Jest](https://jestjs.io/) and [Puppeteer](https://pptr.dev/). For example, a component's shadow dom can be queried and tested with the Stencil utility functions built on top of Puppeteer. Tests can not only be provided mock HTML content, but they can also go to URLs of your app which Puppeteer is able to open up and test on Stencil's dev server.
+ステンシルは、[Jest](https://jestjs.io/)および[Puppeteer](https://pptr.dev/)のテストに役立つ多くのユーティリティ関数を提供します。たとえば、コンポーネントのシャドウdomは、Puppeteer上に構築されたStencilユーティリティ関数を使用してクエリおよびテストできます。テストは、模擬HTMLコンテンツを提供できるだけでなく、Puppeteerが開いてStencilの開発サーバーでテストできるアプリのURLにアクセスすることもできます。
 
-End-to-end tests require a fresh build, dev-server, and puppeteer browser instance created before the tests can actually run. With the added build complexities, the `stencil test` command is able to organize the build requirements beforehand.
+エンドツーエンドのテストでは、テストを実際に実行する前に、新しいビルド、dev-server、およびpuppeteerブラウザーインスタンスを作成する必要があります。追加されたビルドの複雑さにより、 `stenciltest`コマンドはビルド要件を事前に整理することができます。
 
-To run E2E tests, run `stencil test --e2e`. By default, files ending in `.e2e.ts` will be executed.
+E2Eテストを実行するには、 `stencil test--e2e`を実行します。デフォルトでは、 `.e2e.ts`で終わるファイルが実行されます。
 
-Stencil's E2E test are provided with the following API, available via `@stencil/core/testing`.
-Most methods are async and return Promises. Use `async` and `await` to declutter your tests.
+ステンシルのE2Eテストは、次のAPIで提供され、 `@stencil/core/testing`から入手できます。
+ほとんどのメソッドは非同期であり、Promisesを返します。 `async`と`await`を使用して、テストを整理します。
 
-- `newE2EPage`: Should be invoked at the start of each test to instantiate a new `E2EPage` object
+- `newE2EPage`：新しい `E2EPage`オブジェクトをインスタンス化するには、各テストの開始時に呼び出す必要があります
 
-`E2EPage` is a wrapper utility to Puppeteer to simplify writing tests. Some helpful methods on `E2EPage` include:
+- `E2EPage`は、テストの作成を簡素化するためのPuppeteerのラッパーユーティリティです。 `E2EPage`のいくつかの便利なメソッドは次のとおりです。
 
-- `setContent(html: string)`: Sets the content of a page. This is where you would include the markup of the component under test.
-- `find(selector: string)`: Find an element that matches the selector. Similar to `document.querySelector`.
-- `waitForChanges()`: Both Stencil and Puppeteer have an asynchronous architecture, which is a good thing for performance. Since all calls are async, it's required that `await page.waitForChanges()` is called when changes are made to components.
+- `setContent(html: string)`：ページのコンテンツを設定します。 これは、テスト対象のコンポーネントのマークアップを含める場所です。
+- `find(selector: string)`：セレクターに一致する要素を検索します。 `document.querySelector`に似ています。
+- `waitForChanges()`：StencilとPuppeteerの両方に非同期アーキテクチャがあり、これはパフォーマンスにとって良いことです。 すべての呼び出しは非同期であるため、コンポーネントに変更が加えられたときに `await page.waitForChanges()`が呼び出される必要があります。
 
-An example E2E test might have the following boilerplate:
+E2Eテストの例には、次の定型文があります。
 
 ```typescript
 import { newE2EPage } from '@stencil/core/testing';
@@ -44,7 +44,7 @@ describe('example', () => {
 });
 ```
 
-## Example End-to-end Test
+## E2Eテストの例
 
 ```typescript
 import { newE2EPage } from '@stencil/core/testing';
@@ -77,19 +77,19 @@ it('should create toggle, unchecked by default', async () => {
 });
 ```
 
-## E2E Testing Recipes
+## E2Eテストレシピ
 
-#### Find an element in the Shadow DOM
+#### ShadowDOMで要素を検索する
 
-Use the "piercing" selector `>>>` to query for an object inside a component's shadow root:
+「ピアス」セレクター `>>>`を使用して、コンポーネントのシャドウルート内のオブジェクトをクエリします。
 
 ```typescript
 const el = await page.find('foo-component >>> .close-button');
 ```
 
-#### Set a @Prop() on a component
+#### コンポーネントに@Prop()を設定します
 
-Use `page.$eval` (part of the Puppeteer API) to set props or otherwise manipulate a component:
+`page。$ eval`（Puppeteer APIの一部）を使用して、Propを設定するか、コンポーネントを操作します。
 
 ```typescript
 // create a new puppeteer page
@@ -112,9 +112,9 @@ await page.$eval('prop-cmp', (elm: any) => {
 await page.waitForChanges();
 ```
 
-#### Set a @Prop() on a component using an external reference
+#### 外部参照を使用してコンポーネントに@Prop（）を設定します
 
-Because `page.$eval` has an isolated scope, you’ll have to explicity pass in outside references otherwise you’ll an encounter an `undefined` error. This is useful in case you’d like to import data from another file, or re-use mock data across multiple tests in the same file.
+`page。$ eval`には分離されたスコープがあるため、外部参照を明示的に渡す必要があります。そうしないと、`undefined`エラーが発生します。 これは、別のファイルからデータをインポートしたり、同じファイル内の複数のテストでモックデータを再利用したりする場合に役立ちます。
 
 ```typescript
 const props = {
@@ -129,14 +129,15 @@ await page.$eval('prop-cmp',
     elm.first = first;
     elm.lastName = lastName;
   },
-  props 
+  props
 );
 
 await page.waitForChanges();
 ```
 
 
-#### Call a @Method() on a component
+#### コンポーネントで@Method()を呼び出す
+
 
 ```typescript
 const elm = await page.find('method-cmp');
@@ -144,7 +145,7 @@ elm.setProperty('someProp', 88);
 const methodRtnValue = await elm.callMethod('someMethod');
 ```
 
-#### Type inside an input field
+#### 入力フィールドに入力します
 
 ```typescript
 const page = await newE2EPage({
@@ -169,7 +170,7 @@ await input.press('KeyH');
 await page.keyboard.up('Shift');
 ```
 
-#### Checking the text of a rendered component
+#### レンダリングされたコンポーネントのテキストを確認する
 
 ```typescript
 await page.setContent(`
@@ -180,9 +181,9 @@ const elm = await page.find('prop-cmp >>> div');
 expect(elm).toEqualText('Hello, my name is Marty McFly');
 ```
 
-#### Checking a component's HTML
+#### コンポーネントのHTMLを確認する
 
-For shadowRoot content:
+shadowRootコンテンツの場合：
 
 ```typescript
         expect(el.shadowRoot).toEqualHtml(`<div>
@@ -204,11 +205,11 @@ For non-shadow content:
     });
 ```
 
-## Caveat about e2e tests automation on CD/CI
+## CD/CIでのe2eテストの自動化に関する警告
 
-As it is a fairly common practice, you might want to automatically run your end-to-end tests on your Continous Deployment/Integration (CD/CI) system. However, some environments might need you to tweak your configuration at times. If so, the `config` object in your `stencil.config.ts` file has a `testing` attribute that accepts parameters to modify how Headless Chrome is actually used in your pipeline.
+かなり一般的な方法であるため、継続的デプロイ/統合（CD/CI）システムでエンドツーエンドのテストを自動的に実行することをお勧めします。 ただし、環境によっては、構成を微調整する必要がある場合があります。 その場合、 `stencil.config.ts`ファイルの`config`オブジェクトには、パイプラインでヘッドレスChromeが実際にどのように使用されるかを変更するパラメーターを受け入れる `testing`属性があります。
 
-Example of a config you might need in a Gitlab CI environment :
+Gitlab CI環境で必要になる可能性のある構成の例：
 
 ```typescript
 export const config: Config = {
@@ -229,4 +230,4 @@ export const config: Config = {
 };
 ```
 
-Check [this part of the doc](https://stenciljs.com/docs/config#testing) to learn more about the possibilities on this matter. 
+この問題の可能性について詳しくは、[ドキュメントのこの部分](https://stenciljs.com/docs/config#testing)を確認してください。

@@ -9,25 +9,25 @@ contributors:
   - kensodemann
 ---
 
-# Testing
+# テスト
 
-Testing within Stencil is broken up into two distinct types: Unit tests and End-to-end (e2e) tests. Both types use [Jest](https://jestjs.io/) as the JavaScript testing solution. The browser environment for end-to-end testing is done using [Puppeteer](https://pptr.dev/), which provides many advantages Stencil can start to incorporate into its builds.
-
-
-## Unit Testing vs. End-to-end Testing
-
-There are countless philosophies on how testing should be done, and what should be considered a unit test, end-to-end test or even integration tests. To simplify it all, Stencil breaks it down so developers have a defined description of when to use each type of testing.
-
-**Unit tests** focuses on testing a component's methods in isolation. For example, when a method is given the argument `X`, it should return `Y`.
-
-**End-to-end tests** focus on how the components are rendered in the DOM and how the individual components work together. For example, when `my-component` has the `X` attribute, the child component then renders the text `Y`, and expects to receive the event `Z`. End-to-end tests use [Puppeteer](https://pptr.dev/) instead of a Node environment. This allows end-to-end tests to run within an actual browser in order to provide more realistic results.
-
-By not blurring the lines between JavaScript testing and DOM testing, tests can be built out quickly across large teams.
+Stencil内のテストは、単体テストとエンドツーエンド（e2e）テストの2つの異なるタイプに分けられます。 どちらのタイプも、JavaScriptテストソリューションとして[Jest](https://jestjs.io/)を使用します。 エンドツーエンドテスト用のブラウザ環境は、[Puppeteer](https://pptr.dev/)を使用して実行されます。これにより、Stencilがビルドに組み込み始めることができる多くの利点が提供されます。
 
 
-## Testing Commands
+## ユニットテストとエンドツーエンドテスト
 
-Below is an example `npm` script which can be added to the app's `package.json` file. Notice the command is `stencil test`, with optional flags of `--spec` for unit tests, and `--e2e` for end-to-end tests.
+テストをどのように行うべきか、そして単体テスト、エンドツーエンドテスト、さらには統合テストと見なすべきものについては、無数の哲学があります。すべてを単純化するために、ステンシルはそれを分解して、開発者が各タイプのテストをいつ使用するかについて定義された説明を持っているようにします。
+
+**単体テスト**は、コンポーネントのメソッドを分離してテストすることに重点を置いています。たとえば、メソッドに引数 `X`を指定すると、`Y`が返されます。
+
+**エンドツーエンドのテスト**は、コンポーネントがDOMでどのようにレンダリングされるか、および個々のコンポーネントがどのように連携するかに焦点を当てています。たとえば、 `my-component`に`X`属性がある場合、子コンポーネントはテキスト `Y`をレンダリングし、イベント`Z`を受け取ることを期待します。エンドツーエンドのテストでは、ノード環境の代わりに[Puppeteer](https://pptr.dev/)を使用します。これにより、より現実的な結果を提供するために、実際のブラウザー内でエンドツーエンドのテストを実行できます。
+
+JavaScriptテストとDOMテストの境界線を曖昧にしないことで、大規模なチーム間でテストをすばやく構築できます。
+
+
+## テストコマンド
+
+以下は、アプリの `package.json`ファイルに追加できる`npm`スクリプトの例です。 コマンドが `stencil test`であり、単体テストの場合は` --spec`、エンドツーエンドテストの場合は `--e2e`のオプションのフラグがあることに注意してください。
 
 ```tsx
 "scripts": {
@@ -37,13 +37,12 @@ Below is an example `npm` script which can be added to the app's `package.json` 
 }
 ```
 
-All of this configuration is included with the Stencil App Starter and the Stencil Component Starter so if you
-use one of those templates to start your project, you should not have to add anything. This information is presented here primarily for informational purposes.
+この構成はすべて、Stencil AppStarterとStencilComponent Starterに含まれているため、これらのテンプレートの1つを使用してプロジェクトを開始する場合は、何も追加する必要はありません。 この情報は、主に情報提供を目的としてここに表示されます。
 
 
-### Testing Configuration
+### 構成のテスト
 
-Stencil will apply defaults from data it has already gathered. For example, Stencil already knows what directories to look through, and what files are spec and e2e files. Jest can still be configured using the same config names, but now using the stencil config `testing` property. Please see the [Testing Config docs](/docs/config/testing) for more info.
+ステンシルは、すでに収集したデータからデフォルトを適用します。 たとえば、ステンシルは、どのディレクトリを調べるか、どのファイルがspecファイルおよびe2eファイルであるかをすでに認識しています。 Jestは、同じ構成名を使用して構成できますが、ステンシル構成の `testing`プロパティを使用するようになりました。 詳細については、[テスト構成ドキュメント](/docs/config/tests)を参照してください。
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -55,9 +54,9 @@ export const config: Config = {
 };
 ```
 
-## Running and Debugging Tests in VS Code
+## VSCodeでのテストの実行とデバッグ
 
-Adding the following configurations to `.vscode/launch.json` will allow you to use the VS Code Debugger to run the Stencil test runner for the currently active file in your editor. Just make sure you're in the test file you want to run, then select the debug configuration respectively (depending on whether it's a spec or e2e test), and hit the play button.
+次の構成を `.vscode/launch.json`に追加すると、VS Code Debuggerを使用して、エディターで現在アクティブなファイルのステンシルテストランナーを実行できます。 実行するテストファイルが表示されていることを確認してから、デバッグ構成をそれぞれ選択し（スペックテストかe2eテストかに応じて）、再生ボタンを押します。
 
 ```tsx
 {
@@ -88,6 +87,6 @@ Adding the following configurations to `.vscode/launch.json` will allow you to u
 }
 ```
 
-## Other Resources
+## その他の資料
 
-- [The Basics of Unit Testing in StencilJS](https://www.joshmorony.com/the-basics-of-unit-testing-in-stencil-js/)
+- [StencilJSでのユニットテストの基本](https://www.joshmorony.com/the-basics-of-unit-testing-in-stencil-js/)
