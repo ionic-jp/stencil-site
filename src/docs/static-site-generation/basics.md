@@ -7,25 +7,25 @@ contributors:
   - adamdbradley
 ---
 
-# Static Site Generation Basics
+# 静的サイト生成の基本
 
-Rendering components at build time (rather than purely server or client-time), can add significant performance improvements to your app, and maximize SEO impact.
+(純粋にサーバーまたはクライアント時ではなく)ビルド時にコンポーネントをレンダリングすると、アプリのパフォーマンスが大幅に向上し、SEOへの影響が最大化されます。
 
-Using Static Site Generation in Stencil requires running a build command, returning promises from component lifecycle methods that fetch dynamic data, and ensuring all known URLs are properly discovered and built.
+Stencilで静的サイト生成を使用するには、ビルドコマンドを実行し、動的データをフェッチするコンポーネントライフサイクルメソッドからpromiseを返し、すべての既知のURLが適切に検出およびビルドされるようにする必要があります。
 
-## Static Build
+## 静的ビルド
 
-Stencil doesn't prerender components by default. However, the build can be made to prerender using the `--prerender` flag:
+Stencilは、デフォルトではコンポーネントを事前レンダリングしません。 ただし、ビルドは `--prerender`フラグを使用して事前レンダリングすることができます。
 
 ```bash
 stencil build --prerender
 ```
 
-## Rendering Dynamic Data
+## 動的データのレンダリング
 
-Many components need to render based on data fetched from a server. Stencil handles this by allowing components to return `Promise`'s from lifecycle methods like `componentWillLoad` (this can be achieved by using `async/await` as well).
+多くのコンポーネントは、サーバーからフェッチされたデータに基づいてレンダリングする必要があります。 ステンシルは、コンポーネントが `componentWillLoad`のようなライフサイクルメソッドから`Promise`を返すことを許可することによってこれを処理します（これは `async/await`を使用することによっても達成できます）。
 
-For example, this is how to have Stencil wait to render a component until it fetches data from the server:
+たとえば、これは、サーバーからデータをフェッチするまでStencilにコンポーネントのレンダリングを待機させる方法です。
 
 ```typescript
 async componentWillLoad() {
@@ -35,26 +35,26 @@ async componentWillLoad() {
 }
 ```
 
-## Integration with a Router
+## ルーターとの統合
 
-Since Stencil will actually navigate to and execute components, it has full support for a router, including Stencil Router.
+Stencilは実際にコンポーネントに移動して実行するため、Stencilルーターを含むルーターを完全にサポートしています。
 
-There are no changes necessary to access route params and matches. However, make sure your routes can accept a trailing slash as prerendered static content will be treated as loading an `index.html` file at that path, and so the browser may append a trailing slash.
+ルートパラメータと一致にアクセスするために必要な変更はありません。 ただし、事前にレンダリングされた静的コンテンツはそのパスで `index.html`ファイルをロードするものとして扱われるため、ルートが末尾のスラッシュを受け入れることができることを確認してください。これにより、ブラウザが末尾のスラッシュを追加する場合があります。
 
-In particular, if using Stencil Router, double check usage of `exact={true}` which could cause your routes to not match when loaded with a trailing slash.
+特に、Stencilルーターを使用している場合は、 `exact={true}`の使用法を再確認してください。これにより、末尾にスラッシュがロードされたときにルートが一致しなくなる可能性があります。
 
-## Page and URL Discovery
+## ページとURLの検出
 
-By default, Stencil crawls your app starting at base URL of `/` and discovers all paths that need to be indexed. By default this will only discover pages that are linked at build time, but can be easily configured to build any possible URL for the app.
+デフォルトでは、StencilはベースURLの `/`からアプリをクロールし、インデックスを作成する必要のあるすべてのパスを検出します。 デフォルトでは、これはビルド時にリンクされているページのみを検出しますが、アプリの可能なURLをビルドするように簡単に構成できます。
 
-As each page is generated and new links are found, Stencil will continue to crawl and prerender pages.
+各ページが生成され、新しいリンクが見つかると、ステンシルは引き続きページをクロールして事前レンダリングします。
 
-See the [prerender config](/docs/prerender-config) docs to see how this can be customized further.
+[prerender config](/docs/prerender-config)のドキュメントを参照して、これをさらにカスタマイズする方法を確認してください。
 
 
-## Things to Watch For
+## 注意事項
 
-There may be some areas of your code that should absolutely not run while prerendering. To help avoid certain code Stencil provides a `Build.isBrowser` build conditional to tell prerendering to skip over. Here is an example of how to use this utility:
+事前レンダリング中に絶対に実行してはならないコードの領域がいくつかある場合があります。 特定のコードを回避するために、Stencilは事前レンダリングにスキップするように指示する条件付きの `Build.isBrowser`ビルドを提供します。 このユーティリティの使用方法の例を次に示します。
 
 ```tsx
 import { Build } from '@stencil/core';
@@ -71,4 +71,4 @@ connectedCallback() {
 }
 ```
 
-Also note that the actual runtime generated for the browser builds will not include code that has been excluded because of the `if (Build.isBrowser)` statement. In the above example, only `console.log('running in browser')` would be included within the component's runtime.
+また、ブラウザビルド用に生成された実際のランタイムには、 `if(Build.isBrowser)`ステートメントのために除外されたコードが含まれないことに注意してください。 上記の例では、 `console.log('running in browser')`のみがコンポーネントのランタイムに含まれます。

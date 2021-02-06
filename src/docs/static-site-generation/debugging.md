@@ -7,28 +7,28 @@ contributors:
   - adamdbradley
 ---
 
-# Debugging Static Site Generation
+# 静的サイト生成のデバッグ
 
-Static Site Generation, also known as prerendering, executes your components at build time to generate a snapshot of the rendered styles and markup to be efficiently served to search engines and users on first request.
+静的サイト生成は、事前レンダリングとも呼ばれ、ビルド時にコンポーネントを実行して、レンダリングされたスタイルとマークアップのスナップショットを生成し、最初のリクエストで検索エンジンとユーザーに効率的に提供します。
 
-Since this step runs in a Node.js process instead of a browser, debugging can't be done directly in the browser. However, debugging is straightforward using existing Node.js debugging techniques.
+このステップはブラウザーではなくNode.jsプロセスで実行されるため、ブラウザーで直接デバッグを行うことはできません。 ただし、既存のNode.jsデバッグ手法を使用すると、デバッグは簡単です。
 
-## Overview
+## 概要
 
-The `stencil build --prerender` command will first build the hydrate script for a NodeJS environment, then prerender the site using the build. For a production build this is probably ideal.
+`stencil build --prerender`コマンドは、最初にNodeJS環境のハイドレートスクリプトをビルドし、次にビルドを使用してサイトを事前レンダリングします。 本番ビルドの場合、これはおそらく理想的です。
 
-However, while debugging you may not need to keep rebuilding the hydrate script, but you only need to debug through the prerendering process. Stencil creates a file in `dist/hydrate` that is used to actually execute your components.
+ただし、デバッグ中は、ハイドレートスクリプトを再構築し続ける必要はなく、事前レンダリングプロセスを通じてデバッグするだけで済みます。 Stencilは、コンポーネントを実際に実行するために使用されるファイルを `dist/hydrate`に作成します。
 
-To only prerender (and avoid rebuilding), you can use the `stencil prerender dist/hydrate/index.js` command, with the path to the script as a flag.
+事前レンダリングのみを行う（そして再構築を回避する）には、スクリプトへのパスをフラグとして使用して、 `stencil prerender dist/hydrate/index.js`コマンドを使用できます。
 
 
-## Tips for Debugging Prerendering
+## 事前レンダリングをデバッグするためのヒント
 
-By default, prerendering will start by rendering the homepage, find links within the homepage, and continue to crawl the entire site as it finds more links. While debugging, it might be easier to _not_ crawl every URL in the site, but rather have it only prerender one page. To disable crawling, set the prerender config `crawlUrls: false`.
+デフォルトでは、事前レンダリングはホームページをレンダリングすることから始まり、ホームページ内のリンクを見つけ、さらにリンクが見つかるとサイト全体をクロールし続けます。 デバッグ中は、サイト内のすべてのURLを _クロールするのではなく_、1ページだけを事前レンダリングする方が簡単な場合があります。 クロールを無効にするには、事前レンダリング構成 `crawlUrls：false`を設定します。
 
-Next, you can use the `entryUrls` config to provide an array of paths to prerender, rather than starting at the homepage.
+次に、 `entryUrls`構成を使用して、ホームページから開始するのではなく、事前レンダリングするためのパスの配列を提供できます。
 
-Additionally, console logs that are printed within the runtime are surpressed while prerendering (otherwise the terminal would be overloaded with logs). By setting `runtimeLogging: true`, the runtime console logs will be printed in the terminal. Below is an example setup for prerender debugging:
+さらに、ランタイム内で出力されるコンソールログは、事前レンダリング中に抑制されます（そうしないと、端末がログで過負荷になります）。 `runtimeLogging：true`を設定すると、ランタイムコンソールのログがターミナルに出力されます。 以下は、プリレンダーデバッグのセットアップ例です。
 
 ```tsx
 // prerender.config.ts
@@ -45,11 +45,11 @@ export const config: PrerenderConfig = {
 ```
 
 
-## Debugging in VS Code
+## VSコードでのデバッグ
 
-We've found [VS Code's Debugger](https://code.visualstudio.com/docs/editor/debugging) to be the easiest way to set breakpoints and step through the prerendering process.
+[VS Code's Debugger](https://code.visualstudio.com/docs/editor/debugging)が、ブレークポイントを設定して事前レンダリングプロセスを実行する最も簡単な方法であることがわかりました。
 
-To debug your prerendering process in VS Code, enter the Debug tab and create a new `launch.json` file with the following contents:
+VS Codeで事前レンダリングプロセスをデバッグするには、[デバッグ]タブに入り、次の内容で新しい `launch.json`ファイルを作成します。
 
 ```json
 // launch.json
@@ -73,15 +73,16 @@ To debug your prerendering process in VS Code, enter the Debug tab and create a 
 }
 ```
 
-This creates a new debugging configuration using the script that hydrates the app. We're starting up the `stencil prerender` command, and providing it a path to where
+これにより、アプリをハイドレイトするスクリプトを使用して新しいデバッグ構成が作成されます。 `stencil prerender`コマンドを起動し、そこへのパスを提供します
+ハイドレートスクリプトが見つかります。 次に、 `--max-workers = 0`を使用しているため、デバッグが困難になるような多数のプロセスを各CPUにフォークしません。
 the hydrate script can be found. Next we're using `--max-workers=0` so we do not fork numerous processes to each of your CPUs which will make it difficult to debug.
 
 
-## Debugging in Others
+## その他でのデバッグ
 
-To Debug in different tools, follow a similar approach to the command being run in the VS Code configuration, calling the `dist/hydrate/index.js` script from Node, passing the provided arguments, and setting breakpoints using your tool of choice's system for breakpoints.
+さまざまなツールでデバッグするには、VS Code構成で実行されているコマンドと同様のアプローチに従い、Nodeから `dist/hydrate/index.js`スクリプトを呼び出し、指定された引数を渡し、選択したツールを使用してブレークポイントを設定します ブレークポイント用。
 
 
-# Breakpoints and Stepping
+# ブレークポイントとステッピング
 
-To debug components during prerendering, find the transpiled source of the component in `dist/hydrate/index.js` and set breakpoints (or use raw `debugger` statements in your original component source). As the prerendering process runs, your breakpoints will be hit and the current stack context can be evaluated.
+事前レンダリング中にコンポーネントをデバッグするには、 `dist/hydrate/index.js`でコンポーネントのトランスパイルされたソースを見つけ、ブレークポイントを設定します（または、元のコンポーネントソースで生の`debugger`ステートメントを使用します）。 事前レンダリングプロセスが実行されると、ブレークポイントに到達し、現在のスタックコンテキストを評価できます。

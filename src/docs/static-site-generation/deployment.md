@@ -6,12 +6,12 @@ contributors:
   - mlynch
 ---
 
-# Deploying a Stencil Static Site
+# ステンシル静的サイトの展開
 
-Deploying a prerendered static site built with Stencil is exactly like deploying any static site, because the output is just a set of HTML files.
+Stencilで構築された事前レンダリングされた静的サイトのデプロイは、出力が単なるHTMLファイルのセットであるため、静的サイトのデプロイとまったく同じです。
 
-Every path that Stencil detects (or is provided using `entryUrls` in the prerender config) is generated in the `www` output target's directory, with each url given an `index.html` that becomes the root for the app.
+Stencilが検出する（またはプリレンダー構成で `entryUrls`を使用して提供される）すべてのパスは、`www`出力ターゲットのディレクトリに生成され、各URLにはアプリのルートとなる `index.html`が与えられます。
 
-Think of it as turning every URL in your app into a standalone web page that bootstraps the entire app. No matter what URL a visitor comes to, they will be served an `index.html` file with that page's specific content already rendered, but with the entire app then hydrating and loading.
+これは、アプリ内のすべてのURLを、アプリ全体をブートストラップするスタンドアロンのWebページに変換することと考えてください。 訪問者がどのURLにアクセスしても、そのページの特定のコンテンツが既にレンダリングされた「index.html」ファイルが提供されますが、アプリ全体がハイドレイトされて読み込まれます。
 
-This means you can simply deploy the `www` output target's directory to any static host!
+これは、 `www`出力ターゲットのディレクトリを任意の静的ホストに簡単にデプロイできることを意味します。

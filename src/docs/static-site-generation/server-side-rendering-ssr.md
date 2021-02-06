@@ -6,15 +6,14 @@ contributors:
   - mlynch
 ---
 
-# Combining Server Side Rendering and Static Site Generation
+# サーバー側のレンダリングと静的サイトの生成の組み合わせ
 
-Static Site Generation and Server Side Rendering are often confused but are very different approaches to solve the same problem: providing already rendered content to the client before the client has loaded and rendered itself.
+静的サイト生成とサーバー側レンダリングはしばしば混同されますが、同じ問題を解決するための非常に異なるアプローチです。クライアントがそれ自体をロードしてレンダリングする前に、既にレンダリングされたコンテンツをクライアントに提供します。
 
-Server Side Rendering (SSR) is the process of rendering content to a client based on an HTTP request. A client makes a request and the server processes it, returning rendered HTML back to the client. The Client then hydrates that HTML and bootstraps the client-side JS app.
+サーバーサイドレンダリング（SSR）は、HTTP要求に基づいてクライアントにコンテンツをレンダリングするプロセスです。クライアントがリクエストを作成し、サーバーがそれを処理して、レンダリングされたHTMLをクライアントに返します。次に、クライアントはそのHTMLをハイドレイトし、クライアント側のJSアプリをブートストラップします。
 
-Static Site Generation (SSG) does the rendering at build time instead of request time, so the server does not need to do any additional rendering and requests can be processed very quickly. The process for the client hydrating and bootstrapping is the same, however.
+静的サイト生成（SSG）は、要求時ではなくビルド時にレンダリングを実行するため、サーバーは追加のレンダリングを実行する必要がなく、要求を非常に迅速に処理できます。ただし、クライアントのハイドレイティングとブートストラップのプロセスは同じです。
 
-SSG has limits, and pages that require some server-side processing before rendering won't benefit from using it. However, that set of pages that _truly_ need to be rendered at request time on the server is lower than most would think. For example, instead of using SSR, why not prerender and simply make an API request from the Client? Or configure the server to modify headers without having to run a classic expressjs/etc. server?
+SSGには制限があり、レンダリングする前にサーバー側の処理が必要なページは、SSGを使用してもメリットがありません。ただし、サーバー上で要求時にレンダリングする必要があるページのセットは、ほとんどの人が考えるよりも少なくなります。たとえば、SSRを使用する代わりに、事前にレンダリングして、クライアントからAPIリクエストを作成してみませんか？または、従来のexpressjs/etcを実行せずにヘッダーを変更するようにサーバーを構成します。
 
-If a page simply _must_ be Server Side Rendered, then that can be done using Stencil's [hydration functionality](/docs/hydrate-app) in any Node.js based server.
-
+ページが単にサーバー側でレンダリングされる必要がある場合は、Node.jsベースのサーバーでStencilの[ハイドレーション機能](/docs/hydrate-app)を使用して実行できます。
