@@ -6,10 +6,9 @@ contributors:
   - adamdbradley
 ---
 
-# Stencil Core CLI API
+# ステンシルコアCLI API
 
-The CLI API can be found at `@stencil/core/cli` and ran by `bin/stencil`.
-
+CLI APIは `@stencil/core/cli`にあり、`bin/stencil`によって実行されます。
 
 ## createNodeLogger()
 
@@ -17,9 +16,7 @@ The CLI API can be found at `@stencil/core/cli` and ran by `bin/stencil`.
 createNodeLogger(process: any): Logger
 ```
 
-Creates a "logger", based off of NodeJS APIs, that will be used by the compiler and dev-server.
-By default the CLI uses this method to create the NodeJS logger. The NodeJS "process"
-object should be provided as the first argument.
+NodeJS APIに基づいて、コンパイラーとdev-serverによって使用される「ロガー」を作成します。 デフォルトでは、CLIはこのメソッドを使用してNodeJSロガーを作成します。 NodeJSの「プロセス」オブジェクトを最初の引数として指定する必要があります。
 
 
 ## createNodeSystem()
@@ -28,10 +25,7 @@ object should be provided as the first argument.
 createNodeSystem(process: any): CompilerSystem
 ```
 
-Creates the "system", based off of NodeJS APIs, used by the compiler. This includes any and
-all file system reads and writes using NodeJS. The compiler itself is unaware of Node's
-`fs` module. Other system APIs include any use of `crypto` to hash content. The NodeJS "process"
-object should be provided as the first argument.
+コンパイラーが使用するNodeJSAPIに基づいて「システム」を作成します。 これには、NodeJSを使用したすべてのファイルシステムの読み取りと書き込みが含まれます。 コンパイラ自体は、ノードの `fs`モジュールを認識していません。 他のシステムAPIには、コンテンツをハッシュするための `crypto`の使用が含まれます。 NodeJSの「プロセス」オブジェクトを最初の引数として指定する必要があります。
 
 
 ## parseFlags()
@@ -40,8 +34,7 @@ object should be provided as the first argument.
 parseFlags(args: string[]): ConfigFlags
 ```
 
-Used by the CLI to parse command-line arguments into a typed `ConfigFlags` object.
-This is an example of how it's used internally: `parseFlags(process.argv.slice(2))`.
+CLIがコマンドライン引数を解析して型付きの `ConfigFlags`オブジェクトにするために使用します。 これは、内部でどのように使用されるかの例です： `parseFlags(process.argv.slice(2))`。
 
 
 ## run()
@@ -50,8 +43,7 @@ This is an example of how it's used internally: `parseFlags(process.argv.slice(2
 run(init: CliInitOptions): Promise<void>
 ```
 
-Runs the CLI with the given options. This is used by Stencil's default `bin/stencil` file,
-but can be used externally too.
+指定されたオプションを使用してCLIを実行します。 これは、Stencilのデフォルトの `bin/stencil`ファイルで使用されますが、外部でも使用できます。
 
 
 ## runTask()
@@ -60,4 +52,4 @@ but can be used externally too.
 runTask(process: any, config: Config, task: TaskCommand): Promise<void>
 ```
 
-Runs individual tasks giving a NodeJS `process`, Stencil `config`, and task command.
+NodeJS `process`、Stencil`config`、およびtaskコマンドを指定して個々のタスクを実行します。
