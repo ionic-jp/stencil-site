@@ -6,62 +6,64 @@ contributors:
   - adamdbradley
 ---
 
-# Deno Runtime
+Traditionally, Stencil and many of today's CLIs for the web ecosystem run on top of [Node](https://nodejs.org/). The Stencil compiler, however, is not locked down to only a Node environment, but rather it can execute from any JavaScript runtime, such as a browser main thread, web worker thread, or the latest JS runtime [Deno](https://deno.land/)! Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.
 
-_`EXPERIMENTAL`: It's early days yet for Deno and how Stencil will work with it, so we'll label this experimental._
+# Denoランタイム
 
-Traditionally, Stencil and many of today's CLIs for the web ecosystem run on top of [Node](https://nodejs.org/). The Stencil compiler, however, is not locked down to only a Node environment, but rather it can execute from any JavaScript runtime, such as a browser main thread, web worker thread, or the latest JS runtime [Deno](https://deno.land/)! Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust. 
+_`EXPERIMENTAL`：DenoとStencilがどのように機能するかはまだ初期の段階なので、この実験的なラベルを付けます。_
 
-- [Deno Installation](https://deno.land/#installation)
-- [Deno Manual](https://deno.land/manual)
+従来、StencilとWebエコシステム用の今日のCLIの多くは、[Node](https://nodejs.org/)上で実行されていました。 ただし、Stencilコンパイラは、ノード環境だけにロックダウンされるのではなく、ブラウザのメインスレッド、Webワーカースレッド、最新のJSランタイムDenoなどのJavaScriptランタイムから実行できます。[Deno](https://deno.land/)、V8を使用し、Rustに組み込まれているJavaScriptおよびTypeScript用のシンプルでモダンで安全なランタイムです。
+
+- [Deno インストレーション](https://deno.land/#installation)
+- [Deno マニュアル](https://deno.land/manual)
 - [Deno Runtime API](https://doc.deno.land/builtin/stable)
 
-Stencil's architecture allows it to be passed a system (`sys`) that interacts with the runtime. For example, Node's `fs` will use `readdir()` and must be passed a callback, whereas Deno uses `readDir()` (has a capital D) and returns a promise. The same concept is applied to the browser and web worker systems, which allows the compiler to stay generic and versatile for any JS runtime.
+Stencilのアーキテクチャでは、ランタイムと相互作用するシステム（`sys`）を渡すことができます。 たとえば、ノードの `fs`は`readdir()`を使用し、コールバックを渡す必要がありますが、Denoは`readDir()`（大文字のD）を使用してpromiseを返します。 同じ概念がブラウザーとWebワーカーのシステムに適用されます。これにより、コンパイラーは、あらゆるJSランタイムに対して汎用性と汎用性を維持できます。
 
-## Installing Deno Stencil CLI
+## Deno StencilCLIのインストール
 
-The Stencil compiler, and its Command-Line Interface (CLI), can also be executed with Deno, but it works differently than a traditional Node CLI. The biggest difference is that Deno does not have a centralized package manager, so Deno doesn't have an `npm` equivalent.
+Stencilコンパイラとそのコマンドラインインターフェイス（CLI）もDenoで実行できますが、従来のノードCLIとは動作が異なります。 最大の違いは、Denoには一元化されたパッケージマネージャーがないため、Denoには同等の`npm`がないことです。
 
-With Deno there is no `npm install` command, but instead you specify the external URL of the executable script to install. After [installing Deno](https://deno.land/#installation), run the command:
+Denoには `npm install`コマンドはありませんが、代わりにインストールする実行可能スクリプトの外部URLを指定します。 [Denoのインストール](https://deno.land/#installation)の後、次のコマンドを実行します。
 
 ```bash
 deno install -n stencil --allow-read --allow-write --allow-net https://stenciljs.com/cli.ts
 ```
 
-Let's break this down a little further to explain what this command is doing:
+これをもう少し分解して、このコマンドが何をしているのかを説明しましょう。
 
-| Command / Arg                  | Description |
+| コマンド/引数                  | 説明 |
 |--------------------------------|---------------------------------------------------------------------------------|
-| `deno`                         | The Deno command already [installed](https://deno.land/#installation)     .      |
-| `install`                      | [Installer script](https://deno.land/manual/tools/script_installer) argument.    |
-| `-n`                           | The name you'll give the executable your installing.                             |
-| `stencil`                      | `stencil` is the name of the executable in this example, but can be customized to to whateve r you'd like.                         |
-| `--allow-read`                 | The CLI will need to access files, so this option allows it to read local files. |
-| `--allow-write`                | The CLI will also need to write files. |
-| `--allow-net`                  | The CLI will need to access the net to install dependencies. |
-| `https://stenciljs.com/cli.ts` | The location of the Stencil's Deno installer. |
+| `deno`                         | Denoコマンドはすでに[インストール済み](https://deno.land/#installation)です。      |
+| `install`                      | [インストーラースクリプト](https://deno.land/manual/tools/script_installer)引数。    |
+| `-n`                           | インストールする実行可能ファイルに付ける名前。                             |
+| `stencil`                      | `stencil`はこの例では実行可能ファイルの名前ですが、必要に応じてカスタマイズできます。                         |
+| `--allow-read`                 | CLIはファイルにアクセスする必要があるため、このオプションを使用すると、CLIでローカルファイルを読み取ることができます。 |
+| `--allow-write`                | CLIはファイルを書き込む必要もあります。 |
+| `--allow-net`                  | CLIは、依存関係をインストールするには、ネットにアクセスする必要があります。 |
+| `https://stenciljs.com/cli.ts` | StencilのDenoインストーラーの場所。 |
 
-Don't worry, this command doesn't need to be ran everytime you're running Stencil with Deno, but instead it's just installing it, and giving your machine the executable name of `stencil`. During the installing you'll see where additional script files are coming from, which in our case is `https://cdn.jsdelivr.net/npm/`.
+心配しないでください。このコマンドは、DenoでStencilを実行するたびに実行する必要はありませんが、代わりにインストールするだけで、マシンに実行可能ファイルの名前「stencil」を付けます。インストール中に、追加のスクリプトファイルがどこから来ているかがわかります。この場合は `https://cdn.jsdelivr.net/npm/`です。
 
-After installing you'll then have the global `stencil` command ready to be used and you can test it out by running the CLI's help command:
+インストール後、グローバルな `stencil`コマンドを使用できるようになり、CLIのhelpコマンドを実行してテストできます。
 
 ```bash
 stencil help
 ```
 
-### Updating Deno Stencil CLI
+### Deno StencilCLIの更新
 
-To update the installed Deno Stencil CLI, add the `-f` option to "force" overwriting the existing executable and reinstalling the latest.
+インストールされているDenoStencil CLIを更新するには、「-f」オプションを追加して、既存の実行可能ファイルを「強制」上書きし、最新のものを再インストールします。
 
 ```bash
 deno install -n stencil --allow-read --allow-write --allow-net -f https://stenciljs.com/cli.ts
 ```
 
 
-## Running Deno Stencil CLI
+## Deno Stencil CLIの実行
 
-After the installer script has successfully ran, the `stencil` executable is ready to be used with the same options as the Node CLI. See the [CLI docs](/docs/cli) for all available options or run `stencil help`.
+インストーラースクリプトが正常に実行されると、 `stencil`実行可能ファイルをノードCLIと同じオプションで使用できるようになります。 使用可能なすべてのオプションについては、[CLIドキュメント](/docs/cli)を参照するか、`stencil help`を実行してください。
 
-Even though `stencil` is now a global executable, its goal is still aimed at running each individual application's local Stencil version. The installed command is simply the entry, but it's not locked into a specific compiler version. When the `stencil` command is ran, it looks to use the locally installed install Stencil compiler, and if one isn't already installed, it'll dynamically load the latest Stencil version.
+`stencil`は現在グローバルな実行可能ファイルですが、その目標は、個々のアプリケーションのローカルStencilバージョンを実行することを目的としています。 インストールされたコマンドは単なるエントリですが、特定のコンパイラバージョンにロックされていません。 `stencil`コマンドを実行すると、ローカルにインストールされたインストールステンシルコンパイラが使用されているように見えます。まだインストールされていない場合は、最新のステンシルバージョンが動的にロードされます。
 
-_The Deno CLI is still experimental, the generate command has not been ported yet._
+_Deno CLIはまだ実験段階であり、generateコマンドはまだ移植されていません。_

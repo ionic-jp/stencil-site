@@ -10,7 +10,7 @@ contributors:
 
 ## Basic forms
 
-Here is an example of a component with a basic form:
+基本的な形式のコンポーネントの例を次に示します。
 
 ```tsx
 @Component({
@@ -45,12 +45,12 @@ export class MyName {
 }
 ```
 
-Let's go over what is happening here. First we bind the value of the input to a state variable, in this case `this.value`. We then set our state variable to the new value of the input with the `handleChange` method we have bound to `onInput`. `onInput` will fire every keystroke that the user types into the input.
+ここで何が起こっているのかを見てみましょう。 まず、入力の値を状態変数（この場合は `this.value`）にバインドします。 次に、 `onInput`にバインドした`handleChange`メソッドを使用して、状態変数を入力の新しい値に設定します。 `onInput`は、ユーザーが入力に入力するすべてのキーストロークを起動します。
 
 
 ## Advanced forms
 
-Here is an example of a component with a more advanced form:
+より高度な形式のコンポーネントの例を次に示します。
 
 ```tsx
 @Component({
@@ -118,6 +118,7 @@ export class MyName {
 }
 ```
 
-This form is a little more advanced in that it has two select inputs along with an email input. We also do validity checking of our email input in the `handleChange` method. We handle the `select` element in a very similar manner to how we handle text inputs.
 
-For the validity checking, we are #usingtheplatform and are using the [constraint validation api](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation) that is built right into the browser to check if the user is actually entering an email or not.
+このフォームは、電子メール入力とともに2つの選択入力があるという点で、もう少し高度です。 また、 `handleChange`メソッドでメール入力の有効性チェックを行います。 `select`要素は、テキスト入力の処理方法と非常によく似た方法で処理します。
+
+妥当性チェックでは、＃usingtheplatformを使用しており、ブラウザーに直接組み込まれている[制約検証API]((https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation))を使用して、ユーザーが実際にメールを入力しているかどうかをチェックしています。

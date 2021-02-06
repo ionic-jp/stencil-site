@@ -8,27 +8,27 @@ contributors:
   - bitflower
 ---
 
-# Hydrate App
+# ハイドレートアプリ
 
-The hydrate app is a bundle of your same components, but compiled so they can be hydrated on a NodeJS server, and generate HTML. This is the same NodeJS app which prerendering uses internally, and the same one which Angular Universal SSR uses for Ionic. Like Stencil components, the hydrate app itself is not restricted to one framework.
+ハイドレートアプリは同じコンポーネントのバンドルですが、NodeJSサーバーでハイドレートしてHTMLを生成できるようにコンパイルされています。 これは、事前レンダリングが内部で使用するのと同じNodeJSアプリであり、Angular UniversalSSRがIonicに使用するものと同じです。 ステンシルコンポーネントと同様に、ハイドレートアプリ自体は1つのフレームワークに制限されていません。
 
-_Note that Stencil does **NOT** use Puppeteer for SSR or prerendering._
+_StencilはSSRまたは事前レンダリングにPuppeteerを**使用しない**ことに注意してください。_
 
-## How to Use the Hydrate App
+## ハイドレートアプリの使用方法
 
-Server side rendering (SSR) can be accomplished in a similar way to prerendering. Instead of using the `--prerender` CLI flag, you can add `{ type: 'dist-hydrate-script' }` to your `stencil.config.js`. This will generate a `hydrate` app in your root project directory that can be imported and used by your Node server.
+サーバー側レンダリング（SSR）は、事前レンダリングと同様の方法で実行できます。 `--prerender` CLIフラグを使用する代わりに、` {type： 'dist-hydrate-script'} `を` stencil.config.js`に追加できます。 これにより、ルートプロジェクトディレクトリに「ハイドレート」アプリが生成され、ノードサーバーでインポートして使用できるようになります。
 
-After publishing your component library, you can import the hydrate app into your server's code like this:
+コンポーネントライブラリを公開した後、次のようにハイドレートアプリをサーバーのコードにインポートできます。
 
 ```javascript
 import { hydrateDocument } from 'yourpackage/hydrate';
 ```
 
-The app comes with two functions, `hydrateDocument` and `renderToString`. An advantage to `hydrateDocument` is that it can take an existing [document](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDocument) which was already parsed. The `renderToString` function instead inputs a raw html string, and does the parsing to a document.
+このアプリには、 `hydrateDocument`と`renderToString`の2つの関数が付属しています。 `hydrateDocument`の利点は、すでに解析されている既存の[ドキュメント](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDocument)を取得できることです。 代わりに、 `renderToString`関数は生のhtml文字列を入力し、ドキュメントの解析を行います。
 
-**hydrateDocument**: You can use `hydrateDocument` as a part of your server's response logic before serving the web page. `hydrateDocument` takes two arguments, a [document](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDocument) and a config object. The function returns a promise with the hydrated results. The resulting html can be parsed from the `html` property in the returned results.
+**hydrateDocument**：Webページを提供する前に、サーバーの応答ロジックの一部として `hydrateDocument`を使用できます。 `hydrateDocument`は、[document](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDocument)とconfigオブジェクトの2つの引数を取ります。 この関数は、ハイドレイトされた結果でpromiseを返します。 結果のhtmlは、返された結果の `html`プロパティから解析できます。
 
-*Example taken from Ionic Angular server*
+*IonicAngularサーバーからの例*
 
  ```javascript
 import { hydrateDocument } from 'yourpackage/hydrate';
@@ -43,26 +43,27 @@ export function hydrateComponents(doc) {
 }
 ```
 
-#### hydrateDocument Options
+#### hydrateDocumentオプション
   - `canonicalUrl` - string
-  - `constrainTimeouts` - boolean
-  - `clientHydrateAnnotations` - boolean
+  - `constrainTimeouts` - bool
+  - `clientHydrateAnnotations` - bool
   - `cookie` - string
-  - `direction` - string
-  - `language` - string
+  - `direction ` - string
+  - `language ` - string
   - `maxHydrateCount` - number
   - `referrer` - string
-  - `removeScripts` - boolean
-  - `removeUnusedStyles` - boolean
+  - `removeScripts` - bool
+  - `removeUnusedStyles` - bool
   - `resourcesUrl` - string
   - `timeout` - number
   - `title` - string
   - `url` - string
   - `userAgent` - string
 
-**renderToString**: The hydrate app also has a `renderToString` function that allows you to pass in an html string that also returns a promise of `HydrateResults`. The second parameter is a config object that can alter the output of the markup. Like `hydrateDocument`, the resulting string can be parsed from the `html` property.
+**renderToString**：ハイドレートアプリには、 `HydrateResults`の約束を返すhtml文字列を渡すことができる`renderToString`関数もあります。 2番目のパラメーターは、マークアップの出力を変更できる構成オブジェクトです。 `hydrateDocument`と同様に、結果の文字列は`html`プロパティから解析できます。
 
-*Example taken from Ionic Core*
+
+*IonicCoreからの例*
 
 ```javascript
 const results = await hydrate.renderToString(srcHtml, {

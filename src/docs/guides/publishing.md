@@ -6,21 +6,20 @@ contributors:
   - adamdbradley
 ---
 
-# Publishing A Component Library
+# コンポーネントライブラリの公開
 
-There are numerous strategies to publish and distribute your component library to be consumed by external projects. One of the benefits of Stencil is that is makes it easy to generate the various [output targets](/docs/output-targets) that's right for your use-case.
+コンポーネントライブラリを公開して配布し、外部プロジェクトで使用するための戦略は数多くあります。 ステンシルの利点の1つは、ユースケースに適したさまざまな[出力ターゲット](/docs/output-targets)を簡単に生成できることです。
 
-## Publishing to Node Package Manager (NPM)
+## ノードパッケージマネージャー（NPM）への公開
 
-The first step and highly recommended step is to
-[publish the component library NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages). Npm is an online software registry for sharing libraries, tools, utilities, packages, etc. Once the library is published to NPM, other projects are able to add your component library as a dependency and use the components within their own projects.
+最初のステップで強く推奨されるステップは、[コンポーネントライブラリNPMを公開すること](](https://docs.npmjs.com/getting-started/publishing-npm-packages))です。 Npmは、ライブラリ、ツール、ユーティリティ、パッケージなどを共有するためのオンラインソフトウェアレジストリです。ライブラリがNPMに公開されると、他のプロジェクトはコンポーネントライブラリを依存関係として追加し、独自のプロジェクト内でコンポーネントを使用できます。
 
 
 ## `package.json`
 
-The purpose of the `package.json` file is to give other tools instructions on how to find the package's files, and to provide information about the package. For example, bundlers such as [Rollup](https://rollupjs.org/) and [Webpack](https://webpack.js.org/) use this configuration to locate the project's entry files.
+`package.json`ファイルの目的は、パッケージのファイルを見つける方法について他のツールに指示を与え、パッケージに関する情報を提供することです。 たとえば、[Rollup](https://rollupjs.org/)や[Webpack](https://webpack.js.org/)などのバンドラーは、この構成を使用してプロジェクトのエントリファイルを検索します。
 
-An advantage to using the compiler is it is able to provide help on how to best setup the project for distribution. Below is a common setup found within a project's `package.json` file:
+コンパイラーを使用する利点は、配布用にプロジェクトを最適にセットアップする方法に関するヘルプを提供できることです。 以下は、プロジェクトの `package.json`ファイル内にある一般的なセットアップです。
 
 ```json
 {
@@ -40,15 +39,16 @@ An advantage to using the compiler is it is able to provide help on how to best 
 }
 ```
 
-| Property | Description                                                                                         | Recommended                       |
+| プロパティ | 説明                                                                                         | 推奨                       |
 |----------|-----------------------------------------------------------------------------------------------------|-----------------------------------|
-| `main`            | Entry file in the CommonJS module format.                                                  | `dist/index.js`                   |
-| `module`          | Entry file in the ES module format. ES modules is the standardized and recommended format. | `dist/index.mjs`                  |
-| `es2015`          | Commonly used by framework bundling.                                                       | `dist/esm/index.mjs`              |
-| `es2017`          | Commonly used by framework bundling.                                                       | `dist/esm/index.mjs`              |
-| `types`           | Entry file to the project's types.                                                         | `dist/types/index.d.ts`           |
-| `unpkg`           | Entry file for requests to the projects [unpkg](https://unpkg.com/) CDN.                   | `dist/{NAMESPACE}/{NAMESPACE}.js` |
+| `main`            | CommonJSモジュール形式のエントリファイル。 format.                                                  | `dist/index.js`                   |
+| `module`          | モジュール形式のエントリファイル。 ESモジュールは、標準化され推奨される形式です。 | `dist/index.mjs`                  |
+| `es2015`          | フレームワークのバンドルで一般的に使用されます。 bundling.                                                       | `dist/esm/index.mjs`              |
+| `es2017`          | フレームワークのバンドルで一般的に使用されます。 bundling.                                                       | `dist/esm/index.mjs`              |
+| `types`           | プロジェクトのタイプへのエントリファイル。                                                         | `dist/types/index.d.ts`           |
+| `unpkg`           | プロジェクト[unpkg](https://unpkg.com/)CDNへのリクエストのエントリファイル。                   | `dist/{NAMESPACE}/{NAMESPACE}.js` |
 
-The `collection` properties are used to allow lazy loading in other Stencil applications.
 
-Note: If you are distributing both the `dist` and `dist-custom-elements-bundle`, then it's best to pick one of them as the main entry, that's up to you.
+`collection`プロパティは、他のSnteiclアプリケーションで遅延読み込みを可能にするために使用されます。
+
+注： `dist`と`dist-custom-elements-bundle`の両方を配布する場合は、それらの1つをメインエントリとして選択するのが最善です。それはあなた次第です。

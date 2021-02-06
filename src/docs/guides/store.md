@@ -6,20 +6,20 @@ url: /docs/stencil-store
 
 # @stencil/store
 
-[Store](https://github.com/ionic-team/stencil-store) is a lightweight shared state library by the stencil core team. It implements a simple key/value map that efficiently re-renders components when necessary.
+[Store](https://github.com/ionic-team/stencil-store)は、ステンシルコアチームによる軽量の共有状態ライブラリです。 必要に応じてコンポーネントを効率的に再レンダリングする単純なキー/値マップを実装します。
 
-- Lightweight
-- Zero dependencies
-- Simple API, like a reactive Map
-- Best performance
+ - 軽量
+ - 依存関係なし
+ - リアクティブマップのようなシンプルなAPI
+ - 最高のパフォーマンス
 
-## Installation
+## インストール
 
 ```bash
 npm install @stencil/store --save-dev
 ```
 
-## Example
+## 例
 
 **store.ts:**
 
@@ -83,45 +83,45 @@ const MyGlobalCounter = () => {
 
 ### `createStore<T>(initialState)`
 
-Create a new store with the given initial state. The type is inferred from `initialState`, or can be passed as the generic type `T`.
+指定された初期状態で新しいストアを作成します。 この型は `initialState`から推測されるか、ジェネリック型`T`として渡すことができます。
 
-Returns a `store` object with the following properties.
+次のプロパティを持つ `store`オブジェクトを返します。
 
 ### `store.state`
 
-The state object is proxied, i. e. you can directly get and set properties and Store will automatically take care of component re-rendering when the state object is changed.
+状態オブジェクトはプロキシされます。 e。 プロパティを直接取得および設定でき、状態オブジェクトが変更されると、Storeがコンポーネントの再レンダリングを自動的に処理します。
 
-Note: [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) objects are not supported by IE11 (not even with a polyfill), so you need to use the `store.get` and `store.set` methods of the API if you wish to support IE11.
+注: [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)オブジェクトはIE11ではサポートされていません（ポリフィルを使用している場合でも）。したがって、IE11をサポートする場合は、APIの`store.get`メソッドと `store.set`メソッドを使用する必要があります。
 
 ### `store.on(event, listener)`
 
-Add a listener to the store for a certain action.
+特定のアクションのリスナーをストアに追加します。
 
 ### `store.onChange(propName, listener)`
 
-Add a listener that is called when a specific property changes.
+特定のプロパティが変更されたときに呼び出されるリスナーを追加します。
 
 ### `store.get(propName)`
 
-Get a property's value from the store.
+ストアからプロパティの値を取得します。
 
 ### `store.set(propName, value)`
 
-Set a property's value in the store.
+ストアにプロパティの値を設定します。
 
 ### `store.reset()`
 
-Reset the store to its initial state.
+ストアを初期状態にリセットします。
 
 ### `store.use(...subscriptions)`
 
-Use the given subscriptions in the store. A subscription is an object that defines one or more of the properties `get`, `set` or `reset`.
+ストアで指定されたサブスクリプションを使用します。 サブスクリプションは、1つ以上のプロパティ `get`、`set`、または `reset`を定義するオブジェクトです。
 
 
-## Testing
+## テスト
 
-Like any global state library, state should be reset between each spec test.
-Use the `dispose()` API in the `beforeEach` hook.
+他のグローバル状態ライブラリと同様に、各仕様テストの間に状態をリセットする必要があります。
+`beforeEach`フックで`dispose()`APIを使用します。
 
 ```ts
 import store from '../store';
