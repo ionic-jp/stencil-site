@@ -6,17 +6,17 @@ contributors:
   - manucorporat
 ---
 
-# Framework bindings
+# フレームワークバインディング
 
-Unfortunately the experience of integrating web components into existing applications can be tricky at times. More about this can be read at [https://custom-elements-everywhere.com/](https://custom-elements-everywhere.com/). In order to accommodate the various issues the Stencil team has created new output target plugins to make the process simpler.
+残念ながら、Webコンポーネントを既存のアプリケーションに統合する経験は、時には注意が必要です。これについての詳細は、[https://custom-elements-everywhere.com/](https://custom-elements-everywhere.com/)で読むことができます。さまざまな問題に対応するために、Stencilチームは、プロセスを簡素化するための新しい出力ターゲットプラグインを作成しました。
 
-The plugins add additional output targets for each framework binding that is included. This output target will emit a native angular/react/vue library, just like if your components were originally written using any of these frameworks.
+プラグインは、含まれているフレームワークバインディングごとに追加の出力ターゲットを追加します。この出力ターゲットは、コンポーネントがこれらのフレームワークのいずれかを使用して最初に作成されたかのように、ネイティブのangular/react/vueライブラリを出力します。
 
-By using stencil bindings, you can build your components once, and stencil will emit angular/react/vue libraries, this way the consumers of your components can enjoy all the framework features.
+ステンシルバインディングを使用すると、コンポーネントを1回ビルドでき、ステンシルはangular/react/vueライブラリを出力します。これにより、コンポーネントのコンシューマーはすべてのフレームワーク機能を楽しむことができます。
 
-Here is an example project repo using the plugins for reference: https://github.com/ionic-team/stencil-ds-plugins-demo
+参照用のプラグインを使用したプロジェクトリポジトリの例を次に示します。 https://github.com/ionic-team/stencil-ds-plugins-demo
 
-- [Angular bindings](/docs/angular#bindings)
-- [React bindings](/docs/react#bindings)
+- [Angularバインディング](/docs/angular#bindings)
+- [Reactバインディング](/docs/react#bindings)
 
 
