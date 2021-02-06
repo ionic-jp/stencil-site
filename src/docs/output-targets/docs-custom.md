@@ -8,11 +8,11 @@ contributors:
   - arayik-yervandyan
 ---
 
-# Custom Docs Generation
+# カスタムドキュメントの生成
 
-Stencil exposes an output target titled `docs-custom` where users can access the generated docs json data. This feature can be used to generate custom markdown or to execute other logic on the json data during the build. As with other docs output targets, `strict` mode is supported.
+Stencilは、ユーザーが生成されたdocs-jsonデータにアクセスできる `docs-custom`というタイトルの出力ターゲットを公開します。 この機能を使用して、カスタムマークダウンを生成したり、ビルド中にjsonデータに対して他のロジックを実行したりできます。 他のドキュメント出力ターゲットと同様に、 `strict`モードがサポートされています。
 
-To make use of this output target, simply add the following to your Stencil configuration.
+この出力ターゲットを利用するには、ステンシル構成に以下を追加するだけです。
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -31,48 +31,48 @@ export const config: Config = {
 
 ## Config
 
-| Property    | Description                                                                              | Default |
+| プロパティ    | 説明                                                                              | デフォルト値 |
 |-------------|------------------------------------------------------------------------------------------|---------|
-| `generator` | A function with the docs json data as argument.                                          |         |
-| `strict`    | If set to true, Stencil will output a warning whenever there is missing documentation.   | `false` |
+| `generator` | docs-jsonデータを引数として持つ関数。                                          |         |
+| `strict`    | trueに設定すると、ドキュメントが不足している場合は常にステンシルが警告を出力します。   | `false` |
 
 
 
-# Custom Docs Data Model
+# カスタムドキュメントデータモデル
 
-The generated docs JSON data will in the type of `JsonDocs` which consists of main `components` array which consists of components that stencil core found and meta information such as `timestamp` and `compiler`
+生成されたドキュメントJSONデータは、Stencilコアが検出したコンポーネントと`timestamp`や「compiler」などのメタ情報で構成されるメインの`components`配列で構成される`JsonDocs`タイプになります。
 
 ## JsonDocs
 
-| Property    | Description                                                                              |
+| プロパティ    | 説明                                                                              |
 |-------------|------------------------------------------------------------------------------------------|
-| `components` | Array with type of `JsonDocsComponent[]` which consists component information|
-| `timestamp`    | `string` with timestamp   |
-| `compiler`    | `Object` with `typescriptVersion`, `compiler`, and `version`   |
+| `components` | コンポーネント情報で構成される `JsonDocsComponent[]`のタイプの配列|
+| `timestamp`    | タイムスタンプ付きの `string`   |
+| `compiler`    | `typescriptVersion`、`compiler`、`version`を持つ`Object`   |
 
 ## JsonDocsComponent
 
-| Property    | Description                                                                              |
+| プロパティ    | 説明                                                                              |
 |-------------|------------------------------------------------------------------------------------------|
-| `dirPath` | Component directory path |
-| `fileName`    | File name |
-| `filePath`    | File path |
-| `readmePath`    | Readme file path |
-| `usagesDir`    | Usages directory path  |
-| `encapsulation`    | Component `encapsulation` type. Possible values are `shadow`, `scoped`, `none`  |
-| `tag`    | Component tag described in `.tsx` file  |
-| `readme`    | Component readme file first line content  |
-| `docs`    | Description written in top of `@Component` e.g. /**  Documentation Example */ |
-| `docsTags`    | Annotations (In the way of JSDoc ) written in `.tsx` file will be collected here   |
+| `dirPath` コンポーネントディレクトリパス |
+| `fileName`    | ファイル名 |
+| `filePath`    | ファイルパス |
+| `readmePath`    | Readmeファイルのパス|
+| `usagesDir`    | 使用ディレクトリのパス |
+| `encapsulation`    | `encapsulation`タイプコンポーネント。可能な値は`shadow`, `scoped`, `none`  |
+| `tag`    | `.tsx`ファイルに機銃されているコンポーネントタグ  |
+| `readme`    | コンポーネントreadmeファイルの最初の行の内容 |
+| `docs`    | `@Component`の上に記述された説明。例: /** ドキュメントの例 **/ |
+| `docsTags`    |  `.tsx`ファイルに書かれた注釈（JSDocの方法で）はここに集められます  |
 | `usage`    |    |
-| `props`    | Array of component properties information   |
-| `methods`    | Array of component methods information   |
+| `props`    | コンポーネントプロパティ情報の配列 |
+| `methods`    | コンポーネントメソッド情報の配列 |
 | `events`    |    |
 | `listeners`    |    |
 | `styles`    |    |
 | `slots`    |    |
 | `parts`    |    |
-| `dependents`    |  Array of components where current component is used  |
-| `dependencies`    |  Array of components which is used in current component  |
-| `dependencyGraph`    | Describes a tree of components coupling |
+| `dependents`    |  現在のコンポーネントが使用されているコンポーネントの配列  |
+| `dependencies`    | 現在のコンポーネントで使用されているコンポーネントの配列  |
+| `dependencyGraph`    | 結合するコンポーネントのツリーについて説明します |
 

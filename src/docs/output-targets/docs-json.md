@@ -11,9 +11,9 @@ contributors:
   - marcjulian
 ---
 
-# Docs Json Data
+# ドキュメントJsonデータ
 
-While auto-generated readme files formatted with markdown is convenient, there may be scenarios where it'd be better to get all of the docs in the form of json data. To build the docs as json, use the `--docs-json` flag, followed by a path on where to write the json file.
+マークダウンでフォーマットされた自動生成されたreadmeファイルは便利ですが、すべてのドキュメントをjsonデータの形式で取得したほうがよいシナリオもあります。 ドキュメントをjsonとしてビルドするには、 `--docs-json`フラグを使用し、その後にjsonファイルを書き込む場所のパスを続けます。
 
 ```tsx
   scripts: {
@@ -21,7 +21,7 @@ While auto-generated readme files formatted with markdown is convenient, there m
   }
 ```
 
-Another option would be to add the `docs-json` output target to the `stencil.config.ts` in order to auto-generate this file with every build:
+別のオプションは、ビルドごとにこのファイルを自動生成するために、 `docs-json`出力ターゲットを`stencil.config.ts`に追加することです。
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -33,37 +33,35 @@ export const config: Config = {
 };
 ```
 
-Check out the typescript declarations for the JSON output: https://github.com/ionic-team/stencil/blob/master/src/declarations/stencil-public-docs.ts
+JSON出力のtypescript宣言を確認してください：https://github.com/ionic-team/stencil/blob/master/src/declarations/stencil-public-docs.ts
 
+## CSS変数
 
-## CSS Variables
-
-Stencil will also document CSS variables when you specify them via jsdoc-style comments inside your css/scss files:
+Stencilは、css/scssファイル内のjsdocスタイルのコメントを介してCSS変数を指定すると、CSS変数も文書化します。
 
 ```css
 /**
- * @prop --background: Background of the button
- * @prop --background-activated: Background of the button when activated
- * @prop --background-focused: Background of the button when focused
+ * @prop --background: ボタンの背景
+ * @prop --background-activated: アクティブ化されたときのボタンの背景
+ * @prop --background-focused: フォーカスされたときのボタンの背景
  */
 ```
 
+## スロット
 
-## Slots
-
-Slots can be documented by adding `@slot` tags to the doc comments above the component decorator.
+スロットは、コンポーネントデコレータの上のドキュメントコメントに `@slot`タグを追加することで文書化できます。
 
 ```tsx
 /**
- * @slot slotName - slotDescription
- * @slot buttonContent - Slot for the content of the button
+ * @slot slotの名前 - slotの説明
+ * @slot buttonContent - ボタンのコンテンツ用のスロット
  */
 ```
 
 
-## Usage
+## 使用法
 
-The content of `.md` files in a `usage` subdirectory of a component will be added to the `usage` property of the generated json.
+コンポーネントの `usage`サブディレクトリにある`.md`ファイルのコンテンツは、生成されたjsonの `usage`プロパティに追加されます。
 
 ```bash
 src/
@@ -77,9 +75,9 @@ src/
 ```
 
 
-## Custom JSDocs Tags
+## カスタムJSDocsタグ
 
-In addition to reading the predefined JSDoc tags, users can provide their own custom tags which also get included in the JSON data. This makes it easier for teams to provide their own documentation and conventions to get built within the JSON data. For example, if we added a comment into our source code like this:
+事前定義されたJSDocタグを読み取ることに加えて、ユーザーは独自のカスタムタグを提供できます。これもJSONデータに含まれます。 これにより、チームが独自のドキュメントと規則を提供して、JSONデータ内に構築することが容易になります。 たとえば、次のようにソースコードにコメントを追加した場合：
 
 ```tsx
 /**
@@ -88,7 +86,7 @@ In addition to reading the predefined JSDoc tags, users can provide their own cu
  */
 ```
 
-It would end up in the JSON data like this:
+最終的には次のようなJSONデータになります。
 
 ```tsx
 "docsTags": [

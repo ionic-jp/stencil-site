@@ -8,11 +8,12 @@ contributors:
   - DavidFrahm
 ---
 
-# Webapp Output Target: `www`
 
-The `www` output target type is oriented for webapps and websites, hosted from an http server, which can benefit from prerendering and service workers, such as this very site you're reading. If the `outputTarget` config is not provided it'll default to having just the `www` type.
+＃ Webapp出力ターゲット:`www`
 
-Even if a project is meant to only build a reusable component library, the `www` output target is useful to build out and test the components throughout development.
+`www`出力ターゲットタイプは、httpサーバーからホストされているWebアプリとWebサイトを対象としています。これは、読んでいるこのサイトなど、事前レンダリングとサービスワーカーの恩恵を受けることができます。 `outputTarget`設定が提供されていない場合、デフォルトでは`www`タイプのみになります。
+
+プロジェクトが再利用可能なコンポーネントライブラリのみを構築することを意図している場合でも、 `www`出力ターゲットは、開発全体を通じてコンポーネントを構築およびテストするのに役立ちます。
 
 ```tsx
 outputTargets: [
@@ -24,12 +25,12 @@ outputTargets: [
 
 ## Config
 
-| Property        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Default       |
+| プロパティ | 説明 | デフォルト値 |
 |-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| `baseUrl`       | The `baseUrl` represents the site's "base" url to be served from. For example, this site's base url is `https://stenciljs.com/`. However, if the entire site's output is to live within a sub directory, then this directory's path should be the `baseUrl`. For example, Ionic's documentation is a stand-alone Stencil site that lives in the `/docs` directory within `https://ionicframework.com/`. In this example, `https://ionicframework.com/docs/` would be the base url.                                                                                                                                                     | `/`           |
-| `buildDir`      | The `buildDir` is the directory of Stencil's generated scripts, such as the component files. For production builds, this directory will contain both `es5` and `esm` builds for each component.  (Don't worry, users only request the one their browser needs.)                                                                                                                                                                                                                                                                                                                                                                                                                                                | `build`       |
-| `dir`           | The `dir` config specifies the public web distribution directory. This directory is commonly the root directory of an app to be served, such as serving static files from. This directory is built and rebuilt directly from the source files. Additionally, since this is a build target, all files will be deleted and rebuilt after each build, so it's best to always copy source files into this directory. It's recommended this directory is not committed to a repository.                                                                                                                                                               | `www`         |
-| `empty`         | By default, before each build the `dir` directory will be emptied of all files. However, to prevent this directory from being emptied change this value to `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `true`        |
-| `indexHtml`     | The `indexHtml` property represents the location of the root index html file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `index.html`  |
-| `serviceWorker` | The `serviceWorker` config lets you customize the service worker that gets automatically generated by the Stencil compiler. To override Stencil's defaults, set any of the values listed in the [Workbox documentation](https://developers.google.com/web/tools/workbox/modules/workbox-build#full_generatesw_config).
+| `baseUrl`       | `baseUrl`は、提供されるサイトの「ベース」URLを表します。たとえば、このサイトのベースURLは `https://stenciljs.com/`です。ただし、サイト全体の出力がサブディレクトリ内にある場合、このディレクトリのパスは `baseUrl`である必要があります。たとえば、Ionicのドキュメントは、 `https://ionicframework.com/`内の `/docs`ディレクトリにあるスタンドアロンのステンシルサイトです。この例では、 `https://ionicframework.com/docs/`がベースURLになります。 | `/`           |
+| `buildDir`      | `buildDir`は、コンポーネントファイルなどのステンシルで生成されたスクリプトのディレクトリです。本番ビルドの場合、このディレクトリには、各コンポーネントの `es5`ビルドと` esm`ビルドの両方が含まれます。 （心配しないでください。ユーザーはブラウザーに必要なものだけを要求します。） | `build`       |
+| `dir`           | `dir`設定は、パブリックWeb配布ディレクトリを指定します。このディレクトリは通常、静的ファイルの提供など、提供されるアプリのルートディレクトリです。このディレクトリは、ソースファイルから直接ビルドおよび再ビルドされます。さらに、これはビルドターゲットであるため、ビルドのたびにすべてのファイルが削除および再ビルドされるため、常にソースファイルをこのディレクトリにコピーすることをお勧めします。このディレクトリはリポジトリにコミットしないことをお勧めします。 | `www`         |
+| `empty`         | デフォルトでは、各ビルドの前に、 `dir`ディレクトリからすべてのファイルが空になります。ただし、このディレクトリが空にならないようにするには、この値を「false」に変更します。 | `true`        |
+| `indexHtml`     | `indexHtml`プロパティは、ルートインデックスhtmlファイルの場所を表します。 | `index.html`  |
+| `serviceWorker` | `serviceWorker`構成を使用すると、ステンシルコンパイラによって自動的に生成されるサービスワーカーをカスタマイズできます。ステンシルのデフォルトを上書きするには、[ワークボックスのドキュメント](https://developers.google.com/web/tools/workbox/modules/workbox-build#full_generatesw_config)にリストされている値のいずれかを設定します。
 
