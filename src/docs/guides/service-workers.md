@@ -8,30 +8,30 @@ contributors:
   - DavidFrahm
 ---
 
-# Service Workers
+# サービスワーカー
 
-[Service workers](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) are a very powerful api that is essential for [PWAs](https://blog.ionic.io/what-is-a-progressive-web-app/), but can be hard to use. To help with this, we decided to build support for Service Workers into Stencil itself using [Workbox](https://workboxjs.org/).
+[ServiceWorker](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers)は、[PWAs](https://blog.ionic.io/what-is-a-progressive-web-app/),に不可欠な非常に強力なAPIですが、使いにくい場合があります。 これを支援するために、[Workbox](https://workboxjs.org/).を使用してServiceWorkerのサポートをStencil自体に組み込むことにしました。
 
-## What is Workbox?
+## Workboxとは何ですか？
 
-Workbox is a library that greatly simplifies the Service Worker API. It allows you to quickly generate a service worker that can handle caching static assets, cache remote assets using routes (similar to Express) or even do offline Google Analytics. Because we are built on top of Workbox, you can easily use any of the functionality they offer. For more info on Workbox, [check out their docs](https://developers.google.com/web/tools/workbox/)
+Workboxは、Service WorkerAPIを大幅に簡素化するライブラリです。 これにより、静的アセットのキャッシュを処理したり、ルートを使用してリモートアセットをキャッシュしたり（Expressと同様）、オフラインのGoogleAnalyticsを実行したりできるServiceWorkerをすばやく生成できます。 Workbox上に構築されているため、Workboxが提供する機能を簡単に使用できます。 Workboxの詳細については、[ドキュメントを確認してください](https://developers.google.com/web/tools/workbox/)
 
-## Usage
+## 使用法
 
-When doing a production build of an app built using Stencil, the Stencil compiler will automatically generate a service worker for you and inject the necessary code to register the service worker in your index.html. Also, because the files Stencil generates are hashed, every time you do a production build and push an update to your app, the service worker will know to update, therefore ensuring your users are never stuck on a stale version of your site.
+Stencilを使用してビルドされたアプリの本番ビルドを実行する場合、Stencilコンパイラは自動的にServiceWorkerを生成し、index.htmlにサービスワーカーを登録するために必要なコードを挿入します。 また、Stencilが生成するファイルはハッシュ化されているため、本番ビルドを実行してアプリに更新をプッシュするたびに、ServiceWorkerは更新を認識し、ユーザーが古いバージョンのサイトにとらわれることがないようにします。
 
-Lets run through the steps needed to enable service workers for your project:
+プロジェクトでServiceWorkerを有効にするために必要な手順を実行してみましょう。
 
-- `cd` into your project
-- Run `npm run build`
+- `cd`コマンドでプロジェクトフォルダに移動
+- `npm runbuild`を実行します
 
-And that's it! You should now have an `sw.js` file in your `www` folder and the code to register the service worker in your `www/index.html` file.
+以上です！ これで、 `www`フォルダーに`sw.js`ファイルがあり、 `www/index.html`ファイルにServiceWorkerを登録するためのコードがあります。
 
-> The component starter by default does not have service workers enabled as a service worker is not needed for component collections
+> コンポーネントの収集にはサービスワーカーが必要ないため、コンポーネントスターターではデフォルトでサービスワーカーが有効になっていません。
 
-## Config
+## 構成
 
-Stencil uses Workbox underneath, and by default generates a service worker from a config object using the `generateSW` mode. Therefore it supports all of the [Workbox generateSW config options](https://developers.google.com/web/tools/workbox/modules/workbox-build#full_generatesw_config). Here is the default config Stencil uses:
+Stencilはその下のWorkboxを使用し、デフォルトでは、 `generateSW`モードを使用して構成オブジェクトからサービスワーカーを生成します。 したがって、すべての[Workbox generateSW config options](https://developers.google.com/web/tools/workbox/modules/workbox-build#full_generatesw_config)をサポートします。 Stencilが使用するデフォルトの構成は次のとおりです。
 
 ```tsx
 {
@@ -41,9 +41,9 @@ Stencil uses Workbox underneath, and by default generates a service worker from 
 };
 ```
 
-This configuration does pre-caching of all of your app's assets.
+この構成では、アプリのすべてのアセットが事前にキャッシュされます。
 
-To modify this config you can use the `serviceWorker` param of your Stencil config. Here is an example:
+この構成を変更するには、StencilConfigの`serviceWorker`パラメーターを使用できます。 次に例を示します。
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -62,9 +62,9 @@ export const config: Config = {
 };
 ```
 
-### Disabling the service worker
+### サービスワーカーの無効化
 
-If you do not want a service worker to be generated during the build, this can be turned off. To disable this feature, set the `serviceWorker` property to `null` in the `www` output target.
+ビルド中にServiceWorkerを生成したくない場合は、これをオフにすることができます。 この機能を無効にするには、 `www`出力ターゲットで`serviceWorker`プロパティを `null`に設定します。
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -79,13 +79,13 @@ export const config: Config = {
 };
 ```
 
-## Using a custom service worker
+## カスタムサービスワーカーの使用
 
-Already have a service worker or want to include some custom code? We support that, too. By specifying a source file for your service worker, Stencil switches to the `injectManifest` mode of Workbox. That gives you full control over your service worker, while still allowing you to automatically inject a precache manifest.
+すでにServiceWorkerがいますか、それともカスタムコードを含めたいですか？ 私たちもそれをサポートします。 ServieWorkerのソースファイルを指定することにより、StencilはWorkboxの「injectManifest」モードに切り替わります。 これにより、ServiceWorerを完全に制御しながら、プリキャッシュマニフェストを自動的に挿入できます。
 
-Let's go through the steps needed for this functionality:
+この機能に必要な手順を実行してみましょう。
 
-- First we need to pass the path to our custom service worker to the `swSrc` command in the `serviceWorker` config. Here is an example:
+- 最初に、CustomServiceWorkerへのパスを `serviceWorker`構成の`swSrc`コマンドに渡す必要があります。 次に例を示します。
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -102,7 +102,7 @@ export const config: Config = {
 };
 ```
 
-- Now we need to include some boilerplate code in our custom service worker:
+- 次に、カスタムServiceWorkerに定型コードを含める必要があります。
 
 ```tsx
 // change to the version you get from `npm ls workbox-build`
@@ -114,15 +114,15 @@ importScripts('workbox-v4.3.1/workbox-sw.js');
 self.workbox.precaching.precacheAndRoute([]);
 ```
 
-This code imports the Workbox library, creates a new instance of the service worker and tells Workbox where to insert the pre-cache array.
+このコードは、Workboxライブラリをインポートし、Service Workerの新しいインスタンスを作成し、プリキャッシュ配列を挿入する場所をWorkboxに指示します。
 
-### Showing a reload toast when an update is available
+### アップデートが利用可能になったときにリロードトーストを表示する
 
-When a new service worker is available, by default, it will be downloaded and then go into a state of waiting to be activated. The new service worker won't take over until all tabs of the site are closed and the site is visited again. This is to avoid unexpected behavior from conflicts with files being served from cache, and works well in many cases.
+新しいServiceWorkerが使用可能になると、デフォルトでダウンロードされ、アクティブ化されるのを待機する状態になります。新しいServiceWorkerは、サイトのすべてのタブが閉じられ、サイトに再度アクセスするまで引き継ぎません。これは、キャッシュから提供されるファイルとの競合による予期しない動作を回避するためであり、多くの場合に適切に機能します。
 
-If you want to give your users the option to immediately access the new update, a common way is to show them a toast that lets them know about the update and offers a "reload" button. The reload let's the new service worker take over, serving the fresh content, and triggers a page reload, to avoid cache issues.
+ユーザーに新しい更新にすぐにアクセスするオプションを提供したい場合、一般的な方法は、更新についてユーザーに知らせ、「再読み込み」ボタンを提供するトーストをユーザーに表示することです。リロードにより、新しいServiceWorkerが引き継ぎ、新しいコンテンツを提供し、ページのリロードをトリガーして、キャッシュの問題を回避します。
 
-The following example showcases this in combination with the Ionic framework, but the toast-related code should be easily adaptable to any UI. Add the following to your root component (commonly `app-root.tsx`).
+次の例は、これをIonicフレームワークと組み合わせて示していますが、トースト関連のコードは、どのUIにも簡単に適応できるはずです。以下をルートコンポーネント（通常は `app-root.tsx`）に追加します。
 
 ```tsx
 @Listen("swUpdate", { target: 'window' })
@@ -151,7 +151,7 @@ async onServiceWorkerUpdate() {
 }
 ```
 
-The `swUpdate` event is emitted by Stencil every time a new service worker is installed. When a service worker is waiting for registration, the toast is shown. After clicking the reload button, a message is posted to the waiting service worker, letting it know to take over. This message needs to be handled by the service worker; therefore we need to create a custome one (e. g. `src/sw.js`) and add a listener to call `skipWaiting()`.
+`swUpdate`イベントは、新しいServiceWorkerがインストールされるたびにStencilによって発行されます。 ServiceWorkerが登録を待っているときは、トーストが表示されます。 リロードボタンをクリックすると、待機中のServiceWorkerにメッセージが送信され、引き継ぐように通知されます。 このメッセージは、ServiceWorkerが処理する必要があります。 したがって、カスタムのもの（たとえば、 `src/sw.js`）を作成し、`skipWaiting()`を呼び出すリスナーを追加する必要があります。
 
 ```tsx
 importScripts("workbox-v4.3.1/workbox-sw.js");
@@ -165,9 +165,9 @@ self.addEventListener("message", ({ data }) => {
 self.workbox.precaching.precacheAndRoute([]);
 ```
 
-> Don't forget to set `swSrc` in your Stencil config.
+> StencilConfigで `swSrc`を設定することを忘れないでください。
 
-Finally, we want our app to reload when the new service worker has taken over, so that no outdated code is served from the cache anymore. We can use the service worker's `controllerchange` event for that, by attaching an event listener in our root component's `componentWillLoad` lifecycle hook.
+最後に、新しいService Workerが引き継いだときにアプリをリロードして、古いコードがキャッシュから提供されないようにします。 ルートコンポーネントの `componentWillLoad`ライフサイクルフックにイベントリスナーをアタッチすることで、ServiceWorkerの controllerchange`イベントを使用できます。
 
 ```tsx
 componentWillLoad() {
@@ -186,9 +186,9 @@ componentWillLoad() {
 }
 ```
 
-### Handle push events
+### プッシュイベントを処理する
 
-A common use case for custom service workers is to handle browser push notifications. But before we will be able show push notifications, we first need to use the Notifications API to request permissions from the user to do so.
+カスタムServiceWorkerの一般的な使用例は、ブラウザーのプッシュ通知を処理することです。 ただし、プッシュ通知を表示できるようになる前に、まずNotifications APIを使用して、ユーザーに許可を要求する必要があります。
 
 ```tsx
 if ('Notification' in window && 'serviceWorker' in navigator) {
@@ -199,15 +199,15 @@ if ('Notification' in window && 'serviceWorker' in navigator) {
 }
 ```
 
-The current permission status can always be checked using `Notification.permission`.
+現在の許可ステータスは、 `Notification.permission`を使用していつでも確認できます。
 
-To show a notification to the user after being granted permission, we can use the `showNotification` method of our service worker's registration (within our custom service worker).
+許可が与えられた後にユーザーに通知を表示するには、（カスタムServiceWorker内で）ServiceWorkerの登録の `showNotification`メソッドを使用できます。
 
 ```tsx
 self.registration.showNotification('Hakuna matata.');
 ```
 
-Usually we will have a backend that will send out push notifications to clients, and we want our service worker to handle them. To do that, we can register an event listener in our worker for the `push` event. The event will be of type [`PushEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PushEvent) and have a `data` field of type [`PushMessageData`](https://developer.mozilla.org/en-US/docs/Web/API/PushMessageData).
+通常、クライアントにプッシュ通知を送信するバックエンドがあり、ServiceWorkerにそれらを処理してもらいます。 これを行うには、 `push`イベントのイベントリスナーをワーカーに登録します。 イベントのタイプは[`PushEvent`](https://developer.mozilla.org/en-US/docs/Web/API/PushEvent)で、タイプの`data`フィールドは[`PushMessageData`](https://developer.mozilla.org/en-US/docs/Web/API/PushMessageData)。
 
 ```tsx
 self.addEventListener('push', event => {
@@ -227,9 +227,9 @@ self.addEventListener('push', event => {
 });
 ```
 
-If the data is a JSON string, then `data.json()` can be used to immediately get the parsed data. The `event.waitUntil` method is used to ensure that the service worker doesn't terminate before the asynchronous `showNotification` operation has completed.
+データがJSON文字列の場合、 `data.json()`を使用して、解析されたデータをすぐに取得できます。 `event.waitUntil`メソッドは、非同期の`showNotification`操作が完了する前にServiceWorkerが終了しないようにするために使用されます。
 
-Furthermore, we will likely want to handle notification clicks. The API provides the events `notificationclick` and `notificationclose` for that.
+さらに、通知のクリックを処理する必要があります。 APIは、そのためのイベント `notificationclick`と`notificationclose`を提供します。
 
 ```tsx
 self.addEventListener('notificationclick', event => {
@@ -247,11 +247,11 @@ self.addEventListener('notificationclick', event => {
 });
 ```
 
-Now our service worker is able to receive and process push notifications, however we still need to register the client with our backend. Browsers provide a push service for that reason, which your app can subscribe to. The subscription object contains an endpoint URL with a unique identifier for each client. You can send your notifications to that URL, encrypted with a public key which is also provided by the subscription object.
+これで、サービスワーカーはプッシュ通知を受信して​​処理できるようになりましたが、クライアントをバックエンドに登録する必要があります。そのため、ブラウザはプッシュサービスを提供し、アプリはこれをサブスクライブできます。サブスクリプションオブジェクトには、クライアントごとに一意の識別子を持つエンドポイントURLが含まれています。サブスクリプションオブジェクトによっても提供される公開鍵で暗号化された通知をそのURLに送信できます。
 
-In order to implement this, we first need to get each client to subscribe to the browser's push service, and then send the subscription object to our backend. Then our backend can generate the push notifications, encrypt them with the public key, and send them to the subscription endpoint URL.
+これを実装するには、最初に各クライアントにブラウザのプッシュサービスをサブスクライブさせてから、サブスクリプションオブジェクトをバックエンドに送信する必要があります。次に、バックエンドはプッシュ通知を生成し、公開鍵で暗号化して、サブスクリプションエンドポイントURLに送信できます。
 
-First we will implement a function to subscribe the user to the push service, which as a best practice should be triggered from a user action signalling that they would like to receive push notifications. Assuming that notification permissions have already been granted, the following function can be used for that.
+最初に、ユーザーをプッシュサービスにサブスクライブする関数を実装します。これは、ベストプラクティスとして、プッシュ通知を受信することを通知するユーザーアクションからトリガーする必要があります。通知権限が既に付与されていると仮定すると、以下の機能を使用できます。
 
 ```tsx
 async function subscribeUser() {
@@ -290,3 +290,9 @@ self.registration.pushManager.getSubscription().then(subscription => {
 
 * For more information on push notifications and the related APIs please refer to the [Web Fundamentals Introduction to Push Notifications](https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications) and the [MDN Push API docs](https://developer.mozilla.org/en-US/docs/Web/API/Push_API).
 * [This Twitter thread by David Brunelle](https://twitter.com/davidbrunelle/status/1073394572980453376) explains how to implement versioning in your PWA in order to handle breaking API changes. The problem here is that your service worker enabled app will continue to serve an outdated (cached) app against your updated API. In order to solve this a version check can be implemented.
+
+
+### 参考文献
+
+*プッシュ通知と関連APIの詳細については、[Web Fundamentals Introduction to Push Notifications](https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications)と[MDN Push API docs](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)のドキュメントを参照してください。
+* [David BrunelleによるこのTwitterスレッド](https://twitter.com/davidbrunelle/status/1073394572980453376)では、APIの重大な変更を処理するために、PWAにバージョニングを実装する方法について説明しています。 ここでの問題は、Service Worker対応アプリが、更新されたAPIに対して古い（キャッシュされた）アプリを引き続き提供することです。 これを解決するために、バージョンチェックを実装できます。

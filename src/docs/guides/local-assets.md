@@ -7,15 +7,15 @@ contributors:
   - simonhaenisch
 ---
 
-# Local Assets
+# ローカルアセット
 
-Components usually need assets, such as images, videos or any kind of data files, Stencil includes certain features to make this task easy.
+コンポーネントには通常、画像、ビデオ、またはあらゆる種類のデータファイルなどのアセットが必要です。Stencilには、このタスクを簡単にするための特定の機能が含まれています。
 
-## Component's assetsDirs
+## コンポーネントのassetsDirs
 
-Lets dive in and look at an example of how to use local assets:
+ローカルアセットの使用方法の例を詳しく見てみましょう。
 
-Below is an example of your Component's folder structure containing the component, the stylesheet, and an assets directory. 
+以下は、コンポーネント、スタイルシート、およびアセットディレクトリを含むコンポーネントのフォルダ構造の例です。
 
 ```bash
 src/
@@ -28,7 +28,7 @@ src/
       stencil-asset.tsx
 ```
 
-Below is the `stencil-asset.tsx` file which will correctly load the assets based on a property called `src`. 
+以下は、 `src`と呼ばれるプロパティに基づいてアセットを正しくロードする`stencil-asset.tsx`ファイルです。
 
 ```tsx
 import { Component, Prop, getAssetPath, h } from '@stencil/core';
@@ -48,14 +48,14 @@ export class StencilAsset {
 }
 ```
 
-As you can see from this example, the component decorator has the `assetsDirs` property, which points to the `./assets` folder, this instructs the Stencil compiler to copy that folder into the distribution folder (`dist` or `www`).
+この例からわかるように、コンポーネントデコレータには `./assets`フォルダを指す`assetsDirs`プロパティがあり、これはStencilコンパイラにそのフォルダを配布フォルダ（ `dist`または`www`）にコピーするように指示します。
 
-Then, within the component's logic, the `getAssetPath` function (imported from `@stencil/core`) is used to determine the absolute path from where the assets should be loaded from.
+次に、コンポーネントのロジック内で、 `getAssetPath`関数（`@stencil/core`からインポート）を使用して、アセットのロード元となる絶対パスを決定します。
 
-### Use Cases
+### ユースケース
 
-Some use cases we have come up with are:
+私たちが思いついたいくつかのユースケースは次のとおりです。
 
-- Loading from a collection of SVGs
-- Loading and applying fonts on demand
-- Loading images or videos
+- SVGのコレクションからの読み込み
+- オンデマンドでフォントを読み込んで適用する
+- 画像またはビデオの読み込み

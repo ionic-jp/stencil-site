@@ -9,19 +9,21 @@ contributors:
   - joestrouth1
 ---
 
-# Stencil Style Guide
 
-This is a component style guide created and enforced internally by the core team of Stencil, for the purpose of standardizing [Ionic Core](https://ionicframework.com/) components. This should only be used as a reference for other teams in creating their own style guides. Feel free to modify to your team's own preference.
+＃Stencil Style Guide
 
-> In order to enforce this (or your team's) style guide, we recommend leveraging a static analysis tool like [TSLint](https://palantir.github.io/tslint/). Ionic follows [tslint-ionic-rules](https://github.com/ionic-team/tslint-ionic-rules/blob/master/tslint.js). Optionally, the _community maintained_ package [tslint-stencil](https://www.npmjs.com/package/tslint-stencil) provides rules specifically for writing Stencil components.
+これは、[Ionic Core](https://ionicframework.com/)コンポーネントを標準化する目的で、Stencilのコアチームによって内部的に作成および実施されるコンポーネントスタイルガイドです。 これは、他のチームが独自のスタイルガイドを作成する際の参照としてのみ使用する必要があります。 チームの好みに合わせて自由に変更してください。
 
-## File structure
+>この（またはチームの）スタイルガイドを実施するには、[TSLint](https://palantir.github.io/tslint/)などの静的分析ツールを活用することをお勧めします。 Ionicは[tslint-ionic-rules](https://github.com/ionic-team/tslint-ionic-rules/blob/master/tslint.js)に従います。 オプションで、_communitymaintained_ パッケージ[tslint-stencil](https://www.npmjs.com/package/tslint-stencil)は、特にステンシルコンポーネントを作成するためのルールを提供します。
 
-- One component per file.
-- One component per directory. Though it may make sense to group similar components into the same directory, we've found it's easier to document components when each one has its own directory.
-- Implementation (.tsx) and styles of a component should live in the same directory.
 
-Example from ionic-core:
+## ファイル構造
+
+- ファイルごとに1つのコンポーネント。
+- ディレクトリごとに1つのコンポーネント。 類似のコンポーネントを同じディレクトリにグループ化することは理にかなっているかもしれませんが、各コンポーネントに独自のディレクトリがあると、コンポーネントを文書化する方が簡単であることがわかりました。
+- コンポーネントの実装（.tsx）とスタイルは同じディレクトリに存在する必要があります。
+
+Ionic Coreの例：
 
 ```bash
 ├── my-card
@@ -45,34 +47,35 @@ Example from ionic-core:
 ```
 
 
-## Naming
-### HTML tag
+## ネーミング
+### HTMLタグ
 
-#### Prefix
-The prefix has a major role when you are creating a collection of components intended to be used across different projects, like [@ionic/core](https://www.npmjs.com/package/@ionic/core). Web Components are not scoped because they are globally declared within the webpage, which means an "unique" prefix is needed to prevent collisions. The prefix is also able help to quickly identify the collection of an component. Additionally, web components are required to contain a "-" dash within the tag name, so using the first section to namespace your components is a natural fit.
+#### プレフィックス
+[@ionic/core](https://www.npmjs.com/package/@ionic/core)のように、さまざまなプロジェクトで使用することを目的としたコンポーネントのコレクションを作成する場合、プレフィックスは主要な役割を果たします。 Webコンポーネントは、Webページ内でグローバルに宣言されているため、スコープが設定されていません。つまり、衝突を防ぐために「一意の」プレフィックスが必要です。 プレフィックスは、コンポーネントのコレクションをすばやく識別するのにも役立ちます。 さらに、Webコンポーネントはタグ名内に「-」ダッシュを含める必要があるため、最初のセクションを使用してコンポーネントに名前空間を付けるのが自然です。
 
-We do not recommend using "stencil" as prefix, since Stencil DOES NOT emit stencil components, but rather the output is standards compliant web components.
+Stencilはステンシルコンポーネントを出力しないため、プレフィックスとして「stencil」を使用することはお勧めしません。出力は標準に準拠したWebコンポーネントです。
 
-DO NOT do this:
+こんなことしないで：
 ```markup
 <stencil-component>
 <stnl-component>
 ```
 
-Instead, use your own naming or brand. For example, [Ionic](https://ionicframework.com/) components are all prefixed with `ion-`.
+代わりに、独自の名前またはブランドを使用してください。 たとえば、[Ionic](https://ionicframework.com/)コンポーネントには、すべて「ion-」というプレフィックスが付いています。
 ```markup
 <ion-button>
 <ion-header>
 ```
 
-#### Name
 
-Components are not actions, they are conceptually "things". It is better to use nouns instead of verbs, such as "animation" instead of "animating". "input", "tab", "nav", "menu" are some examples.
+#### 名前
+
+コンポーネントはアクションではなく、概念的には「モノ」です。 「animating」の代わりに「animation」など、動詞の代わりに名詞を使用することをお勧めします。 「入力」、「タブ」、「ナビゲーション」、「メニュー」はいくつかの例です。
 
 
-#### Modifiers
+#### 修飾子
 
-When several components are related and/or coupled, it is a good idea to share the name, and then add different modifiers, for example:
+複数のコンポーネントが関連している、または結合されている場合は、名前を共有してから、次のように異なる修飾子を追加することをお勧めします。
 
 ```markup
 <ion-card>
@@ -81,9 +84,9 @@ When several components are related and/or coupled, it is a good idea to share t
 ```
 
 
-### Component (TS class)
+### コンポーネント（TSクラス）
 
-The name of the ES6 class of the component SHOULD NOT have a prefix since classes are scoped. There is no risk of collision.
+クラスはスコープされているため、コンポーネントのES6クラスの名前にはプレフィックスを付けないでください。 衝突の危険はありません。
 
 ```tsx
 @Component({
@@ -100,16 +103,16 @@ export class Menu { ... }
 
 ## TypeScript
 
-1. **Follow** [tslint-ionic-rules](https://github.com/ionic-team/tslint-ionic-rules/blob/master/tslint.js)
+1. **フォローする** [tslint-ionic-rules](https://github.com/ionic-team/tslint-ionic-rules/blob/master/tslint.js)
 
-2. **Variable decorators should be inlined.**
+2. **可変デコレータはインライン化する必要があります。**
 
 ```tsx
 @Prop() name: string;
 @Element() el: HTMLElement;
 ```
 
-3. **Method decorator should be multi-line**
+3. **メソッドデコレータは複数行である必要があります**
 
 ```tsx
 @Listen('click')
@@ -118,17 +121,17 @@ onClick() {
 }
 ```
 
-4. **Use private variables and methods as much possible:** They are useful to detect deadcode and enforce encapsulation. Note that this is a feature which TypeScript provides to help harden your code, but using `private`, `public` or `protected` does not make a difference in the actual JavaScript output.
+4. **プライベート変数とメソッドを可能な限り使用します。**デッドコードを検出し、カプセル化を実施するのに役立ちます。これはTypeScriptがコードを強化するために提供する機能ですが、 `private`、`public`、または `protected`を使用しても、実際のJavaScript出力に違いはありません。
 
-5. **Code with Method/Prop/Event/Component decorators should have jsdocs:** This allows for documentation generation and for better user experience in an editor that has TypeScript intellisense
+5. **メソッド/プロップ/イベント/コンポーネントデコレータを含むコードにはjsdocsが必要です：**これにより、ドキュメントの生成が可能になり、TypeScriptインテリセンスを備えたエディターでのユーザーエクスペリエンスが向上します。
 
-## Code organization
+## コード編成
 
-**Newspaper Metaphor from The Robert C. Martin's _Clean Code_**
+**ロバートC.マーチンの _クリーンコード_ からのNewspaperのメタファー**
 
-> The source file should be organized like a newspaper article, with the highest level summary at the top, and more and more details further down. Functions called from the top function come directly below it, and so on down to the lowest level and most detailed functions at the bottom. This is a good way to organize the source code, even though IDEs make the location of functions less important, since it is so easy to navigate in and out of them.
+>ソースファイルは新聞記事のように整理する必要があります。最高レベルの要約が上部にあり、詳細はさらに下にあります。一番上の関数から呼び出された関数はそのすぐ下にあり、以下同様に最下位レベルに、最も詳細な関数が一番下にあります。これは、IDEによって関数の場所の重要性が低くなったとしても、ソースコードを整理するのに適した方法です。これは、関数の出入りが非常に簡単だからです。
 
-### High level example (commented)
+### 高レベルの例（コメント付き）
 
 ```tsx
 @Component({

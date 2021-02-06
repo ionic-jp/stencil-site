@@ -6,37 +6,36 @@ url: /docs/web-workers
 
 # Web Workers
 
-[Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) are a widely supported technology (Chrome, Firefox, Safari, Edge and IE11) that allows JavaScript to execute in a different thread, maximizing the usage of multiple CPUs; but most importantly not blocking the **main thread**.
-
-The **main thread** is where Javascript runs by default and has access to the `document`, `window` and other DOM APIs. The problem is that long-running JS prevents the browser from running smooth animations (CSS animations, transitions, canvas, svg...), making your site look frozen. That's why if your application needs to run CPU-intensive tasks, Web Workers are a great help.
+**メインスレッド**は、Javascriptがデフォルトで実行される場所であり、 `document`、`window`、およびその他のDOMAPIにアクセスできます。 問題は、JSを長時間実行すると、ブラウザーがスムーズなアニメーション（CSSアニメーション、トランジション、キャンバス、svg ...）を実行できなくなり、サイトがフリーズしたように見えることです。 そのため、アプリケーションでCPUを集中的に使用するタスクを実行する必要がある場合は、Webワーカーが非常に役立ちます。
 
 
-## When to use Web Workers?
+## Webワーカーを使用するタイミングは？
 
-The first thing to understand is when to use a Web Workers, and when *not* to use them since they come with a set of costs and limitations:
+最初に理解することは、Webワーカーを使用する場合と、一連のコストと制限が伴うためにWebワーカーを使用しない場合です。
 
-- There is no access to the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction). This means you cannot interact with `document`, `window` or any elements in the page.
-- There is no access to any of the `@stencil/core` APIs. For example, you cannot declare and use a component in a Web Worker, for the same reasons there is **no access to the DOM**.
-- A Web Worker has its own **isolated state** since each worker has their own memory space. For example, a variable declared on the main thread cannot be directly referenced from a worker.
-- There is an overhead when passing data between workers and the main thread. As a general rule, it's best to minimize the amount of data sent to and from the worker and be mindful if the work to send your data takes more time than doing it on the main thread.
-- Communication is always **asynchronous**. Luckily Promises and async/await makes this relatively easy, but it's important to understand that communication between threads is always asynchronous.
-- You can **only** pass [primitives](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Primitive_values) and objects that implement the [structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm). Best way to think of it is any data that can be serialized to JSON is safe to use.
+- [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)にアクセスできません。つまり、 `document`、`window`、またはページ内の要素を操作することはできません。
+- `@stencil/core`APIへのアクセスはありません。たとえば、**DOMへのアクセスがない**のと同じ理由で、WebWorkerでコンポーネントを宣言して使用することはできません。
+- 各ワーカーには独自のメモリスペースがあるため、Webワーカーには独自の **分離状態**があります。たとえば、メインスレッドで宣言された変数は、ワーカーから直接参照することはできません。
+- ワーカーとメインスレッドの間でデータを渡すときにオーバーヘッドが発生します。原則として、ワーカーとの間で送受信されるデータの量を最小限に抑え、データを送信する作業がメインスレッドで行うよりも時間がかかる場合は注意が必要です。
+- 通信は常に**非同期**です。幸いなことに、Promisesとasync/awaitを使用すると、これは比較的簡単になりますが、スレッド間の通信は常に非同期であることを理解することが重要です。
+- [プリミティブ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Primitive_values)と[構造化クローンアルゴリズム](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm)。それを考える最良の方法は、JSONにシリアル化できるデータが安全に使用できることです。
 
-In short, it's generally a good idea to use workers to move logic that is thread-blocking -- or UI-blocking, preventing users from interacting with the page -- into a Web Worker, such as real-time code syntax highlighting.
+つまり、一般に、ワーカーを使用して、スレッドブロッキング（またはUIブロッキング）であるロジックをWebワーカーに移動し、リアルタイムのコード構文の強調表示など、ユーザーがページを操作できないようにすることをお勧めします。
 
-## Best Practices when using Web Workers
+## Webワーカーを使用する場合のベストプラクティス
 
-- Use pure and functional algorithms in workers. `(input1, input2) => output`.
-- The worker logic itself can be as complex as it has to be, however, the input and output data should stay fairly simple.
-- Look for ways to reduce passing data between the main thread and worker thread.
-- Class instances cannot be passed as data. Instead, only work with data can be JSON serializable.
-- Minimize state within the worker, or better yet, completely avoid maintaining any state (e.g., don't put redux inside a worker).
-- The cost of a worker should be easily amortized because it would be doing some CPU-intensive jobs.
+- ワーカーで純粋で機能的なアルゴリズムを使用します。 `(input1, input2)=>output`。
+- ワーカーロジック自体は必要なだけ複雑になる可能性がありますが、入力データと出力データはかなり単純なままにする必要があります。
+- メインスレッドとワーカースレッド間でのデータの受け渡しを減らす方法を探します。
+- クラスインスタンスをデータとして渡すことはできません。 代わりに、データを処理することだけがJSONシリアル化可能になります。
+- ワーカー内の状態を最小限に抑えるか、さらに良いことに、状態を維持しないようにします（たとえば、ワーカー内にreduxを入れないでください）。
+- CPUを集中的に使用するジョブを実行するため、ワーカーのコストは簡単に償却できます。
 
 
-## How vanilla Web Workers "work"?
 
-The browser comes with a `Worker` API, that works the following way:
+## バニラWebワーカーはどのように「機能」しますか？
+
+ブラウザには、次のように機能する `Worker`APIが付属しています。
 
 ```tsx
 const worker = new Worker('/my-worker.js');
@@ -46,20 +45,22 @@ worker.onmessage = (ev) => {
 };
 ```
 
-This API, while powerful, is very low level and makes it tedious to write complex apps, since the event-driven paradigm leads easily to [spaghetti-code](https://en.wikipedia.org/wiki/Spaghetti_code), and quickly misses out on strongly-typed functions and data.
+このAPIは強力ですが、レベルが非常に低く、複雑なアプリを作成するのが面倒です。これは、イベント駆動型パラダイムが[spaghetti-code](https://en.wikipedia.org/wiki/Spaghetti_code)に簡単につながるためです。 厳密に型指定された関数とデータをすぐに見逃します。
 
-For further information, check out [this fantastic tutorial](https://www.html5rocks.com/en/tutorials/workers/basics/) by our friends at HTML5Rocks.
+詳細については、HTML5Rocksの友人による[この素晴らしいチュートリアル](https://www.html5rocks.com/en/tutorials/workers/basics/)をチェックしてください。
 
-A Web Worker also requires the generation of a separate JavaScript bundle, such as the `my-worker.js` file in the example above. This means you usually need extra build scripts and tooling that transpiles and bundles the worker entry point into another `.js` file. Additionally, the main bundle must be able to reference the worker bundle's file location, which is oftentimes a challenge after transpiling, bundling, minifying, filename hashing and deploying to production servers.
+Web Workerでは、上記の例の `my-worker.js`ファイルなどの個別のJavaScriptバンドルも生成する必要があります。 これは通常、ワーカーエントリポイントを別の `.js`ファイルに変換してバンドルする追加のビルドスクリプトとツールが必要であることを意味します。 さらに、メインバンドルは、ワーカーバンドルのファイルの場所を参照できる必要があります。これは、トランスパイル、バンドル、ミニファイ、ファイル名のハッシュ、および本番サーバーへのデプロイ後にしばしば困難になります。
 
-Fortunately, Stencil can help you solve these two problems:
+幸い、ステンシルは次の2つの問題の解決に役立ちます。
 
-- Tooling: Transpiling, bundling, hashing, worker url path referencing
-- Communication: Converting event-based communication to Promises, while still maintaining types.
+- ツール：トランスパイル、バンドリング、ハッシュ、ワーカーURLパス参照
+- コミュニケーション：タイプを維持しながら、イベントベースのコミュニケーションをPromiseに変換します。
 
-## Web Workers with Stencil
+## Stencilを使用したWebワーカー
 
-As we already mention, Stencil's compiler can help you to use workers in production seamlessly. Any TypeScript file within the `src` directory that ends with `.worker.ts` will automatically use a worker. For example:
+すでに述べたように、Stencilのコンパイラは、本番環境でワーカーをシームレスに使用するのに役立ちます。 `.worker.ts`で終わる`src`ディレクトリ内のTypeScriptファイルは自動的にワーカーを使用します。
+
+例えば：
 
 **src/stuff.worker.ts:**
 
@@ -108,13 +109,14 @@ export class MyApp {
 ```
 
 
-Under the hood, Stencil compiles a worker file and uses the standard `new Worker()` API to instantiate the worker. Then it creates proxies for each of the exported functions, so developers can interact with it using [structured programming constructs](https://en.wikipedia.org/wiki/Structured_programming) instead of event-based ones.
+内部的には、Stencilはワーカーファイルをコンパイルし、標準の `new Worker()` APIを使用してワーカーをインスタンス化します。 次に、エクスポートされた関数ごとにプロキシを作成するため、開発者はイベントベースの関数の代わりに[構造化プログラミング構造](https://en.wikipedia.org/wiki/Structured_programming)を使用してプロキシを操作できます。
 
-> Workers are already placed in a different chunk, and dynamically loaded using `new Worker()`. You should avoid using a dynamic `import()` to load them, as this will cause two network requests. Instead, use ES module imports as it's only importing the proxies for communicating with the worker.
+> ワーカーはすでに別のチャンクに配置されており、 `new Worker()`を使用して動的にロードされます。 動的な `import()`を使用してそれらをロードすることは避けてください。これにより、2つのネットワーク要求が発生します。 代わりに、ESモジュールのインポートを使用します。これは、ワーカーと通信するためのプロキシのみをインポートするためです。
 
-### Imports within a worker
 
-Normal `ESM` imports are possible when building workers in Stencil. Under the hood, the compiler bundles all the dependencies of a worker into a single file that becomes the worker's entry-point, a dependency-free file that can run without problems.
+### ワーカー内でのインポート
+
+Stencilでワーカーを構築する場合、通常の「ESM」インポートが可能です。 内部的には、コンパイラーはワーカーのすべての依存関係を単一のファイルにバンドルします。このファイルは、ワーカーのエントリーポイントになり、問題なく実行できる依存関係のないファイルです。
 
 **src/loader.worker.ts:**
 
@@ -136,30 +138,30 @@ async function loadOriginalImage(src: string) {
 }
 ```
 
-In this example, we are building a worker called `loader.worker.ts` that imports an NPM dependency (`upngjs`, used to parse png files), and a local module (`./materials`). Stencil will use [Rollup](https://rollupjs.org/guide/en/) to bundle all dependencies and remove all imports at runtime. Be aware that code will be duplicated if imported inside and outside a worker.
+この例では、NPM依存関係（pngファイルの解析に使用される `upngjs`）とローカルモジュール（`./materials`）をインポートする `loader.worker.ts`というワーカーを構築しています。 ステンシルは[ロールアップ](https://rollupjs.org/guide/en/)を使用してすべての依存関係をバンドルし、実行時にすべてのインポートを削除します。 ワーカーの内外にインポートすると、コードが複製されることに注意してください。
 
-#### Dynamic imports
+#### 動的インポート
 
-In order to load scripts dynamically inside of a worker, Web Workers come with a handy API, [`importScript()`](https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts).
+ワーカー内でスクリプトを動的にロードするために、Webワーカーには便利なAPI [`importScript()`]（https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts）が付属しています。 ）。
 
-Here's an example of how to use `typescript` directly from a CDN with `importScript()`.
+これは、 `importScript()`を使用してCDNから直接 `typescript`を使用する方法の例です。
 
 ```tsx
 importScripts("https://cdn.jsdelivr.net/npm/typescript@latest/lib/typescript.js");
 ```
 
-> Do not use `importScript()` to import NPM dependencies you have installed using `npm` or `yarn`. Use normal ES module imports as usual, so the bundler can understand it.
+> `npm`または` yarn`を使用してインストールしたNPM依存関係をインポートするために `importScript()`を使用しないでください。 バンドラーが理解できるように、通常のESモジュールインポートを通常どおり使用します。
 
-### Worker Callbacks
 
-In most cases, waiting for a Promise to resolve with the output data is all we'll need. However, a limitation with native Promises is that it provides only one returned value. Where a traditional callback still shines is that it can be called numerous times with different data.
+### ワーカーのコールバック
 
-Let's say that we have a long running process that may take a few seconds to complete. With a Promise, we're unable to periodically receive the progress of the task, since all we can do is wait for Promise to resolve.
+ほとんどの場合、Promiseが出力データで解決するのを待つだけで十分です。 ただし、ネイティブPromisesの制限は、戻り値が1つしかないことです。 従来のコールバックが依然として優れているのは、さまざまなデータを使用して何度も呼び出すことができることです。
 
-A feature with Stencil's worker is the ability to pass a callback to the method, and within the worker, execute the callback as much as it's needed before the task resolves.
+完了までに数秒かかる可能性のある長時間実行プロセスがあるとしましょう。 Promiseでは、Promiseが解決するのを待つだけなので、タスクの進行状況を定期的に受け取ることはできません。
 
-In the example below, the task is given a number that it counts down from the number provided, and the task completes when it gets to `0`. During the count down, however, the main thread will still receive an update every second. This example will console log from `5` to `0`
+ステンシルのワーカーの機能は、メソッドにコールバックを渡し、ワーカー内で、タスクが解決する前に必要なだけコールバックを実行する機能です。
 
+以下の例では、タスクには指定された番号からカウントダウンする番号が与えられ、タスクは「0」に達すると完了します。 ただし、カウントダウン中も、メインスレッドは毎秒更新を受け取ります。 この例では、ログを「5」から「0」にコンソールします
 
 **src/countdown.worker.ts:**
 
@@ -202,7 +204,7 @@ export class MyApp {
 }
 ```
 
-When executed, the result would take 5 seconds and would log:
+実行すると、結果は5秒かかり、ログに記録されます。
 
 ```
 start 5
@@ -222,6 +224,16 @@ For a direct worker reference, add `?worker` at the end of an ESM import. This v
 - `workerPath`: The path to the worker's entry-point (usually a path to a `.js` file).
 - `workerName`: The name of the worker, useful for debugging purposes.
 
+## 高度なケース
+
+[`postMessage()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage)と [`onmessage`](https://developer.mozilla.org/en-US/docs/Web/API/DedicatedWorkerGlobalScope/onmessage)を手動で使用する必要があるため、実際の[`Worker`](https://developer.mozilla.org/en-US/docs/Web/API/Worker)インスタンスにアクセスする必要がある場合があります。 ただし、ワーカーをバンドルし、メインバンドルでワーカーバンドルのURLパスを正しく参照する必要がある場合は、ツールに関する課題があります。 その場合、Stencilにはワーカーを直接公開するAPIもあるため、前述のプロキシの代わりに使用できます。
+
+ワーカーを直接参照するには、ESMインポートの最後に `?worker`を追加します。 この仮想ESモジュールは以下をエクスポートします。
+- `worker`：実際のWorkerインスタンス。
+- `workerPath`：ワーカーのエントリポイントへのパス（通常は `.js`ファイルへのパス）。
+- `workerName`：デバッグの目的で役立つワーカーの名前。
+
+
 
 **src/my-app/my-app.tsx:**
 
@@ -229,7 +241,7 @@ For a direct worker reference, add `?worker` at the end of an ESM import. This v
 import { Component } from '@stencil/core';
 import { sum } from '../../stuff.worker';
 
-// Using the ?worker query, allows to access the worker instance directly.
+// ?workerクエリを使用すると、ワーカーインスタンスに直接アクセスできます。
 import { worker } from '../../stuff.worker.ts?worker';
 
 @Component({
@@ -238,17 +250,17 @@ import { worker } from '../../stuff.worker.ts?worker';
 export class MyApp {
 
   componentWillLoad() {
-    // Use worker api directly
+    // ワーカーAPIを直接使用する
     worker.postMessage(['send data manually']);
 
-    // Use the proxy
+    // プロキシを使用する
     const result = await sum(1, 2);
     console.log(result); // 3
   }
 }
 ```
 
-You can even use this feature you create multiple Worker manually:
+この機能を使用して、複数のワーカーを手動で作成することもできます。
 
 ```tsx
 import { workerPath } from '../../stuff.worker.ts?worker';
@@ -261,13 +273,13 @@ const workerPool = [
 ];
 ```
 
-In this example, we exclusively take advantage of the bundling performed by the compiler to obtain the `workerPath` to the worker's entry point, then manually create a pool of workers.
+この例では、コンパイラによって実行されるバンドルを排他的に利用して、ワーカーのエントリポイントへの `workerPath`を取得し、手動でワーカーのプールを作成します。
 
-> Stencil will not instantiate a worker if it's unused, it takes advantage of tree-shaking to do this.
+>ステンシルは、使用されていない場合はワーカーをインスタンス化しません。これを行うには、ツリーシェイクを利用します。
 
 #### Worker Termination
 
-Any Web Workers can be terminated using the [`Worker.terminate()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/terminate) API, but since Stencil creates one worker shared across all the proxied methods, it's not recommended to terminate it manually. If you have a use-case for using `terminate` and rebuilding workers, then we recommend using the `workerPath` and creating a new Worker directly:
+[`Worker.terminate()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/terminate)APIを使用して、任意のWebワーカーを終了できますが、Stencilが1つのワーカーを作成するため プロキシされたすべてのメソッドで共有されるため、手動で終了することはお勧めしません。 `terminate`を使用してワーカーを再構築するユースケースがある場合は、`workerPath`を使用して新しいワーカーを直接作成することをお勧めします。
 
 ```tsx
 import { workerPath } from '../../stuff.worker.ts?worker';
