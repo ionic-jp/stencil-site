@@ -8,48 +8,48 @@ contributors:
   - bitflower
 ---
 
-# Static Site Generation with Stencil
+# Stencilによる静的サイトの生成
 
-One of the best ways to build fast, interactive web sites and web apps is to utilize Static Site Generation instead of Server Side Rendering (known as SSR) or Client Side Rendering (known as Single Page Apps, or SPAs).
+高速でインタラクティブなWebサイトおよびWebアプリを構築するための最良の方法の1つは、サーバー側レンダリング（SSRと呼ばれる）またはクライアント側レンダリング（シングルページアプリまたはSPAと呼ばれる）の代わりに静的サイト生成を利用することです。
 
-Static Site Generation (SSG) means building and rendering components and routes at build time (aka prerendering) rather than server request time (SSR) or at client run-time (SPA). Because a route is already prerendered, all of the content for the route is available to search engines and clients _immediately_, so SEO and performance are maximized.
+静的サイト生成（SSG）とは、サーバー要求時（SSR）またはクライアント実行時（SPA）ではなく、ビルド時（別名、事前レンダリング）にコンポーネントとルートを構築およびレンダリングすることを意味します。ルートはすでに事前にレンダリングされているため、ルートのすべてのコンテンツを検索エンジンとクライアントが _すぐに_ 利用できるため、SEOとパフォーマンスが最大化されます。
 
-Static Site Generation doesn't mean your pages have to be and/or _stay_ static! Stencil utilizes hydration to efficiently load client-side components at runtime to get the best of both worlds.
+静的サイト生成は、ページが静的である必要がある、および/または _静的である必要がある_ という意味ではありません。Stencilは、"ハイドレート (hydrate)"を利用して、実行時にクライアント側のコンポーネントを効率的にロードし、両方の長所を活用します。
 
-For an example of what this looks like, right-click on this very page and hit the View Page Source option. You'll notice this page does not require any external JavaScript or CSS files for the first paint.
+例えば、このページを右クリックして、[ページソースの表示]オプションをクリックしてください。このページでは、最初のペイントに外部のJavaScriptファイルやCSSファイルは必要ありません。
 
-Since Static Site Generation prerenders components, there are some tradeoffs and things to keep in mind, but most components can be easily prerendered without much modification.
+静的サイト生成はコンポーネントを事前レンダリングするため、いくつかのトレードオフと留意事項がありますが、ほとんどのコンポーネントは、多くの変更を加えることなく簡単に事前レンダリングできます。
 
-Stencil makes SSG easy, so read on to see how to incorporate it into your apps.
+StencilはSSGを簡単にするので、アプリに組み込む方法を確認してください。
 
-## Benefits of Static Site Generation
+## 静的サイト生成の利点
 
-- Great [Lighthouse](https://developers.google.com/web/tools/lighthouse/) scores
-- Faster time to [Largest Contentful Paint (LCP)](https://web.dev/lcp/)
-- Better [Search Engine Optimization (SEO)](https://support.google.com/webmasters/answer/7451184)
-- Provides functionality for users with JavaScript disabled
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse/)のスコアが素晴らしい！！
+- [Largest Contentful Paint (LCP)](https://web.dev/lcp/)までの時間の短縮
+- より良い[Search Engine Optimization (SEO)](https://support.google.com/webmasters/answer/7451184)
+- JavaScriptが無効なユーザーでも表示可能
 
-## How Static Site Generation and Prerendering Works
+## 静的サイトの生成と事前レンダリングのしくみ
 
-**Build Hydrate App**: The first step in prerendering is for the compiler to generate a "hydrate" app, which is a single directory to be used by Node.js. The "hydrate" app is automatically generated when the `--prerender` CLI flag is provided and by default the app is saved to `dist/hydrate`. Prerendering uses the hydrate app internally, however it can be used directly at a lower-level. [Learn more about the Hydrate App](./hydrate-app).
+**Hydrateアプリのビルド**: 事前レンダリングの最初のステップは、コンパイラーが「ハイドレート」アプリを生成することです。これは、Node.jsで使用される単一のディレクトリです。 「ハイドレート」アプリは、 `--prerender` CLIフラグが指定されると自動的に生成され、デフォルトではアプリは「dist/hydrate」に保存されます。事前レンダリングでは内部でハイドレートアプリを使用しますが、下位レベルで直接使用することもできます。 [ハイドレートアプリについて学ぶ](./hydrate-app)。
 
-**Fork Prerender Tasks to Available CPUs**: Stencil can efficiently divide out the prerendering to each of the current machine's CPUs using [Node.js' Child Process API](https://nodejs.org/api/child_process.html). By tasking each CPU on the machine, the compiler can drastically speed up prerendering times.
+**使用可能なCPUへのフォーク事前レンダリングタスク**: Stencilは、[Node.jsの子プロセスAPI](https://nodejs.org/api/child_process.html)を使用して、現在のマシンの各CPUへの事前レンダリングを効率的に分割できます。 。コンパイラーは、マシン上の各CPUにタスクを実行することにより、事前レンダリング時間を大幅に短縮できます。
 
-**Prerender Index**: After the compiler has completed the build and created child processes on each available CPU, it will then kick off the prerendering by starting at the single base URL, or the configured entry URLs. Once the page has finished prerendering it'll be written to the configured `www` directory as an `index.html` file.
+**プリレンダーインデックス**: コンパイラがビルドを完了し、使用可能な各CPUで子プロセスを作成した後、単一のベースURLまたは構成されたエントリURLから開始して、プリレンダーを開始します。ページの事前レンダリングが完了すると、構成済みの `www`ディレクトリに`index.html`ファイルとして書き込まれます。
 
-**Crawl App**: During each page prerender, Stencil also collects the anchor elements and URLs used within the page. With this information, it's able to inform the main thread of which pages should be prerendered next. The main thread is in charge of orchestrating all of the URLs, and the job is finished once all of the pages have been crawled and prerendered.
+**クロールアプリ**: 各ページの事前レンダリング中に、Stencilはページ内で使用されるアンカー要素とURLも収集します。この情報を使用して、次にどのページを事前レンダリングする必要があるかをメインスレッドに通知できます。メインスレッドはすべてのURLの調整を担当し、すべてのページがクロールされて事前レンダリングされると、ジョブは終了します。
 
-**Deploy Static Files to Production**: Now that all of the pages have been prerendered and written as static HTML files, the `www` directory can now be deployed to a server. A significant difference from prerendering and Serverside Rendering (SSR), is that the HTTP server is just serving up static HTML files rather than dynamically generating the HTML on the server.
+***静的ファイルを本番環境にデプロイ**: すべてのページが事前にレンダリングされ、静的HTMLファイルとして書き込まれたため、 `www`ディレクトリをサーバーにデプロイできるようになりました。事前レンダリングやサーバーサイドレンダリング（SSR）との大きな違いは、HTTPサーバーがサーバー上でHTMLを動的に生成するのではなく、静的なHTMLファイルを提供するだけであるということです。
 
-**Static HTML Response**: With the static HTML files deploy to a server, visitors of each prerendered page first receive the HTML with inline styles, and no blocking JS or CSS. Additionally, the compiler is already aware of the exact modules the visitor will need for this page, and will asynchronously preload the modules using [link `modulepreload`](https://html.spec.whatwg.org/multipage/links.html#link-type-modulepreload).
+**静的HTML応答**: 静的HTMLファイルがサーバーにデプロイされると、事前にレンダリングされた各ページの訪問者は、最初にインラインスタイルのHTMLを受け取り、JSやCSSをブロックしません。さらに、コンパイラは、訪問者がこのページに必要とする正確なモジュールをすでに認識しており、[link `modulepreload`を使用してモジュールを非同期的にプリロードします。](https://html.spec.whatwg.org/multipage/links.html#link-type-modulepreload)。
 
-**Client-side Hydration**: After the HTML and inlined styles have rendered the first paint, the next step is for the same nodes within the DOM to be hydrated by the client-side JavaScript. Each component within the page will asynchronously hydrate using the initial order they were found in the DOM structure. Next, as each component lazily hydrates they're able to reuse the existing nodes found in the DOM.
+**クライアント側のハイドレーション**: HTMLとインラインスタイルが最初のペイントをレンダリングした後、次のステップは、DOM内の同じノードがクライアント側のJavaScriptによってハイドレーションされることです。ページ内の各コンポーネントは、DOM構造で見つかった最初の順序を使用して非同期的にハイドレイトします。次に、各コンポーネントがゆっくりと水和すると、DOMにある既存のノードを再利用できます。
 
-## Tooling
+## ツール
 
-To be clear, Stencil does _not_ use `Puppeteer` or `jsdom` for prerendering. Puppeteer is great for End-to-End
-testing, but for performance reasons it's not ideal to quickly generate a large website with hundreds or thousands of pages. Additionally, `jsdom` is often used for unit testing, but in our experience it's difficult to use with async components and its global environment nature.
+明示しておくと、Stencilは事前レンダリングに `Puppeteer`または`jsdom`を使用しません。 Puppeteerはエンドツーエンドに最適です
+テストしますが、パフォーマンス上の理由から、数百または数千ページの大規模なWebサイトをすばやく生成することは理想的ではありません。さらに、 `jsdom`は単体テストによく使用されますが、私たちの経験では、非同期コンポーネントとそのグローバル環境の性質で使用することは困難です。
 
-Instead, Stencil uses its own internal DOM APIs which strictly follow the web standards, but optimized for prerendering, Static Site Generation and Serverside Rendering. By doing so, developers can still use all the same APIs they're already familiar with, but they'll seemlessly work within a NodeJS environment too. This means developers often do not have to write code differently in how they're building components, but rather they focus only on writing one type of component, and coding it using the standards they already know. To reiterate, developers do not have to learn a new API for prerendering. It's just the same web APIs your components are already using.
+代わりに、Stencilは独自の内部DOM APIを使用します。これは、Web標準に厳密に従いますが、事前レンダリング、静的サイト生成、およびサーバーサイドレンダリング用に最適化されています。そうすることで、開発者はすでに使い慣れているものと同じAPIをすべて使用できますが、NodeJS環境内でも機能するようには見えません。つまり、開発者はコンポーネントの構築方法を変える必要がないことが多く、1つのタイプのコンポーネントを記述し、すでに知っている標準を使用してコーディングすることに集中します。繰り返しになりますが、開発者は事前レンダリングのための新しいAPIを学ぶ必要はありません。これは、コンポーネントがすでに使用しているのと同じWebAPIです。
 
-Every component, machine and environment will perform differently, so it's difficult to provide a consistent benchmark. However, what we do know is that [Ionic's Documentation site](https://ionicframework.com/docs) has hundreds of pages and Stencil is able to prerender the entire site in a few seconds.
+コンポーネント、マシン、環境ごとにパフォーマンスが異なるため、一貫したベンチマークを提供することは困難です。ただし、[Ionicのドキュメントサイト](https://ionicframework.com/docs)には数百のページがあり、Stencilはサイト全体を数秒で事前レンダリングできることがわかっています。
