@@ -7,9 +7,9 @@ contributors:
   - jthoms1
 ---
 
-# Distribution Output Target
+# Distributionアウトプットターゲット
 
-The `dist` type is to generate the component(s) as a reusable library that can be self-lazy loading, such as [Ionic](https://www.npmjs.com/package/@ionic/core). When creating a distribution, the project's `package.json` will also have to be updated. However, the generated bundle is treeshakable, ensuring that only imported components will end up in the build.
+`dist`タイプは、[Ionic](https://www.npmjs.com/package/@ionic/core)などの自己遅延読み込みが可能な再利用可能なライブラリとしてコンポーネントを生成することです。 ディストリビューションを作成するときは、プロジェクトの `package.json`も更新する必要があります。 ただし、生成されたバンドルはツリーシェイク可能であるため、インポートされたコンポーネントのみがビルドに含まれるようになります。
 
 ```tsx
 outputTargets: [
@@ -20,50 +20,49 @@ outputTargets: [
 ```
 
 
-## How is this different than "dist-custom-elements-bundle" output target?
+## これは「dist-custom-elements-bundle」出力ターゲットとどのように異なりますか？
 
-To start, Stencil was designed to lazy-load itself only when the component was actually used on a page. There are many benefits to this approach, such as simply adding a script tag to any page and the entire library is available for use, yet only the components actually used are downloaded. For example, [`@ionic/core`](https://www.npmjs.com/package/@ionic/core) comes with over 100 components, but a one webpage may only need `ion-toggle`. Instead of requesting the entire component library, or generating a custom bundle for just `ion-toggle`, the `dist` output target is able to generate a tiny entry build ready to load any of its components on-demand.
+まず、Stencilは、コンポーネントが実際にページで使用された場合にのみ、それ自体を遅延ロードするように設計されました。このアプローチには多くの利点があります。たとえば、任意のページにスクリプトタグを追加するだけで、ライブラリ全体を使用できますが、実際に使用されるコンポーネントのみがダウンロードされます。たとえば、[`@ionic/core`](https://www.npmjs.com/package/@ionic/core)には100を超えるコンポーネントが付属していますが、1つのWebページに必要なのは`ion-toggle`だけです。コンポーネントライブラリ全体をリクエストしたり、 `ion-toggle`だけのカスタムバンドルを生成したりする代わりに、`dist`出力ターゲットは、そのコンポーネントをオンデマンドでロードする準備ができた小さなエントリビルドを生成できます。
 
-The `dist-custom-elements-bundle` on the other hand is a direct build of the custom element that extends `HTMLElement`, without any lazy-loading. The custom elements bundle does not apply polyfills, nor automatically define each custom elements. This may be preferred for projects that will handle bundling, lazy-loading and defining the custom elements themselves.
+一方、 `dist-custom-elements-bundle`は、遅延読み込みを行わずに、`HTMLElement`を拡張するカスタム要素を直接ビルドしたものです。カスタム要素バンドルは、ポリフィルを適用せず、各カスタム要素を自動的に定義しません。これは、カスタム要素自体のバンドル、遅延読み込み、および定義を処理するプロジェクトに適している場合があります。
 
-Luckily, both builds can be generated at the same time, and shipped in the same distribution. It would be up to the consumer of your component library to decide which build to use.
+幸い、両方のビルドを同時に生成して、同じディストリビューションで出荷することができます。使用するビルドを決定するのは、コンポーネントライブラリの利用者次第です。
 
 ## Config
 
-| Property | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Default |
+| プロパティ | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | デフォルト値 |
 |----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `dir`    | The `dir` config specifies the public distribution directory. This directory is commonly the `dist` directory found within [npm packages](https://docs.npmjs.com/getting-started/packages). This directory is built and rebuilt directly from the source files. Additionally, since this is a build target, all files will be deleted and rebuilt after each build, so it's best to always copy source files into this directory. It's recommended this directory is not committed to a repository. | `dist`  |
-| `empty`  | By default, before each build the `dir` directory will be emptied of all files. However, to prevent this directory from being emptied change this value to `false`.                                                                                                                                                                                                                                                                                                                          | `true`  |
+| `dir`    | `dir`設定は、パブリック配布ディレクトリを指定します。このディレクトリは通常、[npmパッケージ](https://docs.npmjs.com/getting-started/packages)内にある `dist`ディレクトリです。このディレクトリは、ソースファイルから直接ビルドおよび再ビルドされます。さらに、これはビルドターゲットであるため、ビルドのたびにすべてのファイルが削除および再ビルドされるため、常にソースファイルをこのディレクトリにコピーすることをお勧めします。このディレクトリはリポジトリにコミットしないことをお勧めします。 | `dist`  |
+| `empty`  | デフォルトでは、各ビルドの前に、 `dir`ディレクトリからすべてのファイルが空になります。ただし、このディレクトリが空にならないようにするには、この値を「false」に変更します。 | `true`  |
 
 
-## Publishing
+## 公開
 
-Next you can publish your library to [Node Package Manager (NPM)](https://www.npmjs.com/). For more information about setting up the `package.json` file, and publishing, see: [Publishing Component Library To NPM](/docs/publishing).
-
-
-## Distribution Options
-
-Each output target, form of bundling and distribution each have their own pros and cons. Luckily you can worry about writing some good source code for your component, and Stencil will handle generating the various bundles, and consumers of your library can decide how to apply your components to their external projects. Below are a few of the options.
+次に、ライブラリを[Node Package Manager(NPM)](https://www.npmjs.com/)に公開できます。 `package.json`ファイルの設定と公開の詳細については、[コンポーネントライブラリをNPMに公開する](/docs/Publishing)を参照してください。
 
 
-### Script tag
+## 配布オプション
 
-- Use a script tag linked to a CDN copy of your published NPM module, for example: `<script type="module" src='https://cdn.jsdelivr.net/npm/my-name@0.0.1/dist/myname.js'></script>`.
-- The initial script itself is extremely tiny and does not represent the entire library, it's only a small registry.
-- You can use any or all components within your library anywhere within that webpage.
-- Doesn't matter if the actual component was written within the HTML, or created with vanilla JavaScript, jQuery, React, etc.
-- Only the components used on that page will actually be requested and lazy-loaded.
+各出力ターゲット、バンドルの形式、および配布には、それぞれ独自の長所と短所があります。 幸いなことに、コンポーネントの適切なソースコードの記述について心配することができます。ステンシルはさまざまなバンドルの生成を処理し、ライブラリの利用者はコンポーネントを外部プロジェクトに適用する方法を決定できます。 以下はいくつかのオプションです。
 
 
-### Import the `dist` library using a bundler
-- Run `npm install my-name --save`
-- Add an `import` within the root component: `import my-component`;
-- Stencil will automatically setup the lazy-loading capabilities for the Stencil library.
-- Then you can use the element anywhere in your template, JSX, html etc.
+### スクリプトタグ
+
+- 公開されたNPMモジュールのCDNコピーにリンクされたスクリプトタグを使用します。例： `<script type="module" src='https://cdn.jsdelivr.net/npm/my-name@0.0.1/dist/myname.js'></script>`。
+- 最初のスクリプト自体は非常に小さく、ライブラリ全体を表すわけではなく、小さなレジストリにすぎません。
+- ライブラリ内の任意またはすべてのコンポーネントを、そのWebページ内のどこでも使用できます。
+- 実際のコンポーネントがHTML内で記述されているか、バニラJavaScript、jQuery、Reactなどで作成されているかは関係ありません。
+- そのページで使用されているコンポーネントのみが実際にリクエストされ、遅延読み込みされます。
+
+### バンドラーを使用して `dist`ライブラリをインポートする
+-`npm install my-name--save`を実行します
+- ルートコンポーネント内に `import`を追加します：`import my-component`;
+- Stencilは、Stencilライブラリの遅延読み込み機能を自動的にセットアップします。
+- 次に、テンプレート、JSX、htmlなどの任意の場所で要素を使用できます。
 
 
-### Import the `dist` library into another Stencil app
-- Run `npm install my-name --save`
-- Add an `import` within the root component: `import my-component`;
-- Stencil will automatically setup the lazy-loading capabilities for the Stencil library.
-- Then you can use the element anywhere in your template, JSX, html etc.
+### `dist`ライブラリを別のステンシルアプリにインポートします
+-`npm install my-name--save`を実行します
+- ルートコンポーネント内に `import`を追加します：`import my-component`;
+- Stencilは、Stencilライブラリの遅延読み込み機能を自動的にセットアップします。
+- 次に、テンプレート、JSX、htmlなどの任意の場所で要素を使用できます。

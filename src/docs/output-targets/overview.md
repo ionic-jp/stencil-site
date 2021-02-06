@@ -7,20 +7,20 @@ contributors:
   - manucorporat
 ---
 
-# Output Targets
+# 出力ターゲット
 
-One of the more powerful features of the compiler is its ability to generate various builds depending on _"how"_ the components are going to be used. Stencil is able to take an app's source and compile it to numerous targets, such as a webapp to be deployed on an http server, as a third-party component lazy-loaded library to be distributed on [npm](https://www.npmjs.com/), or a vanilla custom elements bundle. By default, Stencil apps have an output target type of `www`, which is best suited for a webapp.
+コンパイラのより強力な機能の1つは、コンポーネントが使用される _方法_ に応じてさまざまなビルドを生成する機能です。 Stencilは、アプリのソースを取得して、httpサーバーにデプロイするWebアプリ、[npm](https://www.npmjs.com/)で配布するサードパーティコンポーネントの遅延読み込みライブラリ、またはVanillaJSのカスタムエレメントなど、多数のターゲットにコンパイルできます。 デフォルトでは、Stecnilの出力ターゲットタイプは `www`であり、これはWebアプリに最適です。
 
 
-## Output Target Types:
- - [`dist-custom-elements-bundle`: Custom Elements](/docs/custom-elements)
- - [`dist`: Distribution](/docs/distribution)
- - [`www`: Website](/docs/www)
- - [`docs-readme`: Documentation readme files formatted in markdown](/docs/docs-readme)
- - [`docs-json`: Documentation data formatted in JSON](/docs/docs-json)
- - [`docs-custom`: Custom documentation generation](/docs/docs-custom)
+## 出力ターゲットタイプ
+ - [`dist-custom-elements-bundle`: カスタムエレメント](/docs/custom-elements)
+ - [`dist`: ディストリビューション](/docs/distribution)
+ - [`www`: Webサイト](/docs/www)
+ - [`docs-readme`: マークダウンでフォーマットされたドキュメントのreadmeファイル](/docs/docs-readme)
+ - [`docs-json`: JSONでフォーマットされたドキュメントデータ](/docs/docs-json)
+ - [`docs-custom`: カスタムドキュメントの生成](/docs/docs-custom)
 
-## Example:
+## 例:
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -38,44 +38,43 @@ export const config: Config = {
 ```
 
 
-## Differential Bundling
+## ディファレンシャルバンドリング
 
-It's also important to note that the compiler will automatically generate the numerous bundles in order to support "differential bundling". What this means is that during production builds, Stencil will generate code for both modern browsers, and legacy browsers (IE11) from the same source code. The advantage of differential bundling is that modern browsers can avoid all the polyfills and bloated legacy JavaScript, and use the modern APIs already baked into the browser.
+「差分バンドリング」をサポートするために、コンパイラーが多数のバンドルを自動的に生成することに注意することも重要です。 これが意味するのは、本番ビルド中に、ステンシルは同じソースコードから最新のブラウザーとレガシーブラウザー（IE11）の両方のコードを生成するということです。 ディファレンシャルバンドルの利点は、最新のブラウザーがすべてのポリフィルと肥大化したレガシーJavaScriptを回避し、ブラウザーに既に組み込まれている最新のAPIを使用できることです。
 
-In the example below there are two script tags, however, only one of them will be requested by the user. For IE11 users, they'll download the `app.js` file which is in the `ES5` syntax and has all the polyfills. For users on modern browsers, they will only download the `app.esm.js` file which uses up-to-date JavaScript features such as [ES modules](https://developers.google.com/web/fundamentals/primers/modules), [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Dynamic_Import), [async/await](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await), [Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), etc.
+以下の例では、2つのスクリプトタグがありますが、ユーザーが要求するのはそのうちの1つだけです。 IE11ユーザーの場合、`ES5`構文ですべてのポリフィルを含む`app.js`ファイルをダウンロードします。 最新のブラウザを使用しているユーザーは、[ESモジュール](https://developers.google.com/web/fundamentals/primers/modules)、[動的インポート](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Dynamic_Import)、[非同期/待機](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)、[クラス](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)などの最新のJavaScript機能を使用する `app.esm.js`ファイルのみをダウンロードします。
 
-Note: [buildEs5](https://stenciljs.com/docs/config#buildes5) must be set to true to generate the IE11 ES5 file 
+注：IE11 ES5ファイルを生成するには、[buildEs5](https://stenciljs.com/docs/config#buildes5)をtrueに設定する必要があります
 
 ```markup
 <script type="module" src="/build/app.esm.js"></script>
 <script nomodule src="/build/app.js"></script>
 ```
 
+## ドキュメントの自動生成
 
-## Docs Auto-Generation
+アプリがますます多くのコンポーネントで拡張され、チームのサイズとメンバーが時間の経過とともに調整され続けるにつれて、すべてのコンポーネントが適切に文書化され、文書自体が維持されることが重要です。 ドキュメントの保守は、開発者がしなければならない最も面白くないことのいくつかとともにすぐそこにありますが、それはそれを簡単にすることができないという意味ではありません。
 
-As apps scale with more and more components, and team size and members continue to adjust over time, it's vital all components are well documented, and that the documentation itself is maintained. Maintaining documentation is right up there with some of the least interesting things developers must do, but that doesn't mean it can't be made easier.
-
-Throughout the build process, the compiler is able to extract documentation from each component, to include JSDocs comments, types of each member on the component (thanks TypeScript!) and CSS Variables (CSS Custom Properties).
+ビルドプロセス全体を通じて、コンパイラは各コンポーネントからドキュメントを抽出して、JSDocsコメント、コンポーネントの各メンバーのタイプ（TypeScriptに感謝）、CSS変数（CSSカスタムプロパティ）を含めることができます。
 
 
-### Component Property Docs Example:
+### コンポーネントプロパティドキュメントの例：
 
-To add a description to a `@Prop`, simply add a comment on the previous line:
+`@Prop`に説明を追加するには、前の行にコメントを追加するだけです。
 
 ```tsx
-/** (optional) The icon to display */
+/** (optional) 表示するアイコン */
 @Prop() iconType = "";
 ```
 
-### CSS Example:
+### CSSの例
 
-Stencil will also document CSS variables when you specify them via jsdoc-style comments inside your css or scss files:
+Stencilは、cssまたはscssファイル内のjsdocスタイルのコメントを介してCSS変数を指定すると、CSS変数も文書化します。
 
 ```css
  :root {
    /**
-    * @prop --primary: Primary header color.
+    * @prop --primary: プライマリヘッダーの色
     */
    --primary: blue;
  }

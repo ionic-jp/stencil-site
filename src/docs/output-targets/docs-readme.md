@@ -11,11 +11,11 @@ contributors:
   - marcjulian
 ---
 
-# Docs Readme Markdown File Auto-Generation
+# ドキュメントのReadmeマークダウンファイルの自動生成
 
-Stencil is able to auto-generate `readme.md` files in markdown. This is an opt-in feature and will save the readme files as a sibling to the component within the same directory. When this feature is used it can be useful for others to easily find and read formatted docs about one component. In particular, when a `readme.md` file is placed within a directory on Github, it will default the readme markdown file as the primary content of the page.
+Stencilは、マークダウンで `readme.md`ファイルを自動生成することができます。 これはオプトイン機能であり、readmeファイルを兄弟として同じディレクトリ内のコンポーネントに保存します。 この機能を使用すると、他の人が1つのコンポーネントに関するフォーマットされたドキュメントを簡単に見つけて読むことができます。 特に、 `readme.md`ファイルがGithubのディレクトリ内に配置されると、デフォルトでreadmeマークダウンファイルがページのプライマリコンテンツになります。
 
-To auto-generate readme files, add the `docs-readme` output target to your `stencil.config.ts`:
+readmeファイルを自動生成するには、 `docs-readme`出力ターゲットを`stencil.config.ts`に追加します。
 
 ```tsx
 import { Config } from '@stencil/core';
@@ -27,26 +27,26 @@ export const config: Config = {
 };
 ```
 
-Another option would be to add the flag `--docs-readme`, such as:
+別のオプションは、次のようなフラグ `--docs-readme`を追加することです。
 
 ```bash
 stencil build --docs-readme
 ```
 
-## Adding Custom Markdown to Auto-Generated Files
+## 自動生成されたファイルへのカスタムマークダウンの追加
 
-Once you've generated a `readme.md` file you can customize it with your own markdown content. Simply add your own markdown above the comment that reads: `<!-- Auto Generated Below -->`.
+`readme.md`ファイルを生成したら、独自のマークダウンコンテンツでカスタマイズできます。 `<!--以下に自動生成-->`というコメントの上に独自のマークダウンを追加するだけです。
 
-## Custom Footer
+## カスタムフッター
 
-Removing or customizing the footer can be done by adding a `footer` property to the output target. Markdown can be used to enhance the footer if needed.
+フッターの削除またはカスタマイズは、出力ターゲットに `footer`プロパティを追加することで実行できます。 必要に応じて、マークダウンを使用してフッターを拡張できます。
 
 ```tsx
 import { Config } from '@stencil/core';
 
 export const config: Config = {
   outputTargets: [
-    { 
+    {
       type: 'docs-readme',
       footer: '*Built with love!*',
     }
@@ -54,16 +54,16 @@ export const config: Config = {
 };
 ```
 
-## Generating to a Directory
+## ディレクトリへの生成
 
-By default, a readme file will be generated in its corresponding component directory. This behavior can be changed through the `dir` property of the output target configuration. Specifying a directory will create the structure `{dir}/{component}/readme.md`.
+デフォルトでは、readmeファイルは対応するコンポーネントディレクトリに生成されます。 この動作は、出力ターゲット構成の `dir`プロパティを介して変更できます。 ディレクトリを指定すると、構造体 `{dir}/{component}/readme.md`が作成されます。
 
 ```tsx
 import { Config } from '@stencil/core';
 
 export const config: Config = {
   outputTargets: [
-    { 
+    {
       type: 'docs-readme',
       dir: 'output'
     }
@@ -71,16 +71,16 @@ export const config: Config = {
 };
 ```
 
-## Strict Mode
+## strictモード
 
-Adding `strict: true` to the output target configuration will cause Stencil to output a warning whenever the project is built with missing documentation.
+出力ターゲット構成に `strict:true`を追加すると、ドキュメントが不足しているプロジェクトがビルドされるたびに、Stencilが警告を出力します。
 
 ```tsx
 import { Config } from '@stencil/core';
 
 export const config: Config = {
   outputTargets: [
-    { 
+    {
       type: 'docs-readme',
       strict: true
     }
