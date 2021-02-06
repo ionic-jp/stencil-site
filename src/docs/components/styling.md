@@ -7,7 +7,7 @@ contributors:
   - shreeshbhat
 ---
 
-# ＃スタイリングコンポーネント
+# スタイリングコンポーネント
 
 ## ShadowDOM
 
