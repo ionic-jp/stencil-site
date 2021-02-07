@@ -1,6 +1,6 @@
 ---
-title: Stencil Copy Tasks
-description: Stencil Copy Tasks
+title: Stencilコピータスク
+description: Stencilコピータスク
 url: /docs/copy-tasks
 contributors:
   - adamdbradley

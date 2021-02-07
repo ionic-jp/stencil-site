@@ -1,12 +1,10 @@
 ---
-title: Running Stencil with Deno
-description: Deno, A secure runtime for JavaScript and TypeScript.
+title: DenoでStencilを実行する
+description: Deno、JavaScriptとTypeScriptの安全なランタイム。
 url: /docs/deno
 contributors:
   - adamdbradley
 ---
-
-Traditionally, Stencil and many of today's CLIs for the web ecosystem run on top of [Node](https://nodejs.org/). The Stencil compiler, however, is not locked down to only a Node environment, but rather it can execute from any JavaScript runtime, such as a browser main thread, web worker thread, or the latest JS runtime [Deno](https://deno.land/)! Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.
 
 # Denoランタイム
 

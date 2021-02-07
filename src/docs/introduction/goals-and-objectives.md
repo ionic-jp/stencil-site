@@ -1,6 +1,6 @@
 ---
-title: Stencil Goals and Objectives
-description: Stencil aims to combine the best concepts of the most popular frontend frameworks into a compile-time tool rather than run-time tool.
+title: Stencilの目的と目標
+description: Stencilは、最も人気のあるフロントエンドフレームワークの最高の概念を、ランタイムツールではなくコンパイル時ツールに結合することを目的としています。
 url: /docs/goals-and-objectives
 contributors:
   - adamdbradley

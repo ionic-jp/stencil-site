@@ -1,6 +1,6 @@
 ---
-title: Using JSX
-description: Using JSX
+title: JSXの使用
+description: JSXの使用
 url: /docs/templating-jsx
 contributors:
   - jthoms1

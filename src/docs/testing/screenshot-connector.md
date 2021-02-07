@@ -1,6 +1,6 @@
 ---
-title: Screenshot Connector
-description: Screenshot Connector
+title: スクリーンショットコネクター
+description: スクリーンショットコネクター
 url: /docs/screenshot-connector
 contributors:
   - SheepFromHeaven

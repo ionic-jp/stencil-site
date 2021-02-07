@@ -1,6 +1,6 @@
 ---
-title: Stencil Style Guide
-description: Stencil Style Guide
+title: Stencilのスタイルガイド
+description: Stencilのスタイルガイド
 url: /docs/style-guide
 contributors:
   - jthoms1

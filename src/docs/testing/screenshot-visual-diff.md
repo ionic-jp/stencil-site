@@ -1,6 +1,6 @@
 ---
-title: Screenshot Visual Diff
-description: Screenshot Visual Diff
+title: スクリーンショットのビジュアル差分
+description: スクリーンショットのビジュアル差分
 url: /docs/screenshot-visual-diff
 contributors:
   - adamdbradley

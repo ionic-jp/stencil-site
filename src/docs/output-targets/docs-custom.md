@@ -1,6 +1,6 @@
 ---
-title: Custom Docs Generation
-description: Custom Docs Generation
+title: カスタムドキュメントの生成
+description: カスタムドキュメントの生成
 url: /docs/docs-custom
 contributors:
   - adamdbradley

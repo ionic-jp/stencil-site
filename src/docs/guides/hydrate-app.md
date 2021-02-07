@@ -1,6 +1,6 @@
 ---
-title: Hydrate App
-description: Hydrate App
+title: ハイドレートアプリ
+description: ハイドレートアプリ
 url: /docs/hydrate-app
 contributors:
   - adamdbradley

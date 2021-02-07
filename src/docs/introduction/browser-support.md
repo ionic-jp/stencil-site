@@ -1,6 +1,6 @@
 ---
-title: Stencil Web Component Browser Support
-description: Out-of-the-box browser support provided by Stencil web components.
+title: Stencil Webコンポーネントブラウザのサポート
+description: StencilWebコンポーネントによって提供されるすぐに使用可能なブラウザーサポート。
 url: /docs/browser-support
 contributors:
   - adamdbradley

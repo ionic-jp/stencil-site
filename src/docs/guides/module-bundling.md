@@ -1,6 +1,6 @@
 ---
-title: Module Bundling
-description: Module Bundling
+title: モジュールのバンドル
+description: モジュールのバンドル
 url: /docs/module-bundling
 contributors:
   - jthoms1

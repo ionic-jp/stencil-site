@@ -1,6 +1,6 @@
 ---
-title: Docs Readme Auto-Generation
-description: Docs Readme Auto-Generation
+title: ドキュメントのReadme自動生成
+description: ドキュメントのReadme自動生成
 url: /docs/docs-readme
 contributors:
   - adamdbradley

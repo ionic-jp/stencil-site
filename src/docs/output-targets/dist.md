@@ -1,6 +1,6 @@
 ---
-title: Distributing Web Components Built with Stencil
-description: Distributing Web Components Built with Stencil
+title: Stencilで構築されたWebコンポーネントの配布
+description: Stencilで構築されたWebコンポーネントの配布
 url: /docs/distribution
 contributors:
   - adamdbradley

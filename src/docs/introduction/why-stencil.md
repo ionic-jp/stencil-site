@@ -1,6 +1,6 @@
 ---
-title: Stencil - A Compiler for Web Components
-description: Stencil has a number of add-ons that you can use with the build process.
+title: Stencil - Webコンポーネント用のコンパイラ
+description: Stencilには、ビルドプロセスで使用できるアドオンがいくつかあります。
 url: /docs/introduction
 contributors:
   - jthoms1

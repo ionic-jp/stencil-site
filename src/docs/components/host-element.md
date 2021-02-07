@@ -1,6 +1,6 @@
 ---
-title: Working with host elements
-description: Working with host elements
+title: ホスト要素の操作
+description: ホスト要素の操作
 url: /docs/host-element
 contributors:
   - jthoms1

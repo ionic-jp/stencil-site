@@ -1,6 +1,6 @@
 ---
-title: Stencil for Design Systems
-description: Stencil for Design Systems
+title: Design SystemsのためのStencil
+description: Design SystemsのためのStencil
 url: /docs/stencil-for-design-systems
 contributors:
   - dotNetkow

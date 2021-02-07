@@ -1,6 +1,6 @@
 ---
-title: Events
-description: Events
+title: イベント
+description: イベント
 url: /docs/events
 contributors:
   - jthoms1

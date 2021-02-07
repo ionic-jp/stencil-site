@@ -1,6 +1,6 @@
 ---
-title: Styling Components
-description: Styling Components
+title: スタイリングコンポーネント
+description: スタイリングコンポーネント
 url: /docs/styling
 contributors:
   - jthoms1
