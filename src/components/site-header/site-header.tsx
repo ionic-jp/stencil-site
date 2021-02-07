@@ -56,20 +56,20 @@ export class SiteHeader {
   render() {
     return (
       <ResponsiveContainer>
-        <stencil-route class="burger-menu" url="/docs" component="app-burger" />    
+        <stencil-route class="burger-menu" url="/docs" component="app-burger" />
         <stencil-route-link url="/" class="logo-link" anchorTitle="Stencil logo">
           <app-icon name="logo"/>
         </stencil-route-link>
 
         <div class="header-menu">
           <stencil-route-link urlMatch="/docs" url="/docs/introduction" onClick={() => { this.hideNav() }}>
-            Docs
+            ドキュメント
           </stencil-route-link>
           <stencil-route-link url="/resources" exact={true} onClick={() => { this.hideNav() }}>
-            Resources
+            リソース
           </stencil-route-link>
           <stencil-route-link url="/blog" onClick={() => { this.hideNav() }}>
-            Blog
+            ブログ
           </stencil-route-link>
 
           <ul class="external-links list--unstyled">

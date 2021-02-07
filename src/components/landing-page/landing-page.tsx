@@ -31,7 +31,7 @@ export class LandingPage {
             <announcement-bar></announcement-bar>
             <h1>構築. 再利用性. 導入. </h1>
             <p>Stencilは、再利用可能でスケーラブルなデザインシステムを構築するためのツールチェーンです。あらゆるブラウザで動作する、小型で高速かつ100%標準ベースのWebコンポーネントを生成します。</p>
-            <stencil-route-link url="/docs/getting-started" class="hero-button" anchorClass="btn-get-started">Get started</stencil-route-link>
+            <stencil-route-link url="/docs/getting-started" class="hero-button" anchorClass="btn-get-started">はじめに</stencil-route-link>
             <stencil-route-link url="/docs/introduction" class="hero-button" anchorClass="btn-why-stencil">Why Stencil?</stencil-route-link>
           </hgroup>
           <svg class="landing-page__bg" width="661" height="573" viewBox="0 0 661 573" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +152,7 @@ export class LandingPage {
 
         <section class="gradient-bg">
           <ResponsiveContainer>
-            <h2><strong>Stencil doesn’t fight the web platform.</strong> It embraces it.</h2>
+            <h2><strong>Stencilはウェブプラットフォームとは戦いません。</strong> それを受け入れます。</h2>
             <ul class="feature-list list--unstyled">
               <li class="feature-list__item">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,21 +160,21 @@ export class LandingPage {
                   <path d="M16 23C19.866 23 23 19.866 23 16C23 12.134 19.866 9 16 9C12.134 9 9 12.134 9 16C9 19.866 12.134 23 16 23Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <h3>シンプル</h3>
-                <p>With intentionally small tooling, a tiny API, and zero configuration, Stencil gets out of the way and lets you focus on your work.</p>
+                <p>意図的に小さなツール、小さなAPI、ゼロ構成により、Stencilは邪魔にならず、作業に集中できます。</p>
               </li>
               <li class="feature-list__item">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M32 9.44131C32 11.9453 30.9989 14.3467 29.2168 16.1173L18.5481 26.7486H7.32378L12.8017 21.306H20.4702C21.2663 21.306 21.9116 20.6645 21.9116 19.8732C21.9116 19.0819 21.2663 18.4404 20.4702 18.4404H15.686L23.9875 10.1925C24.5505 9.63308 24.5507 8.72586 23.988 8.16617C23.4252 7.60647 22.5125 7.60625 21.9495 8.16566L5.09347 24.9129V13.3809L15.778 2.76529C17.5601 0.994706 19.9771 0 22.4974 0C25.0177 0 27.4347 0.994706 29.2168 2.76529C30.9989 4.53588 32 6.93732 32 9.44131ZM5.09347 24.9129V26.7486H7.32378L2.46041 31.5806C1.89736 32.14 0.9847 32.1398 0.421929 31.5801C-0.140841 31.0204 -0.140614 30.1132 0.422437 29.5537L5.09347 24.9129Z" fill="#141334"/>
                 </svg>
-                <h3>Lightweight</h3>
-                <p>A tiny runtime, prerendering, and the raw power of native Web Components make Stencil one of the fastest compilers around.</p>
+                <h3>軽量</h3>
+                <p>小さなランタイム、事前レンダリング、およびネイティブWebコンポーネントの生のパワーにより、Stencilは最も高速なコンパイラの1つになっています。</p>
               </li>
               <li class="feature-list__item">
                 <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M15 30C23.2843 30 30 23.2843 30 15C30 12.1808 29.2223 9.54324 27.8696 7.2902L31.5477 3.66785C32.1512 3.07346 32.1507 2.11024 31.5466 1.51645C30.9424 0.922648 29.9634 0.923129 29.3599 1.51752L26.0119 4.81476C23.2719 1.85374 19.3524 0 15 0C6.71573 0 0 6.71573 0 15C0 23.2843 6.71573 30 15 30ZM26.0119 4.81476L13.9602 16.6839L10.1062 12.8921C9.5024 12.298 8.52339 12.298 7.91955 12.8921C7.31572 13.4862 7.31572 14.4494 7.91955 15.0435L12.8675 19.9116C13.1575 20.1969 13.551 20.3572 13.9612 20.3571C14.3714 20.357 14.7648 20.1965 15.0547 19.911L27.8696 7.2902C27.3358 6.40101 26.7124 5.5717 26.0119 4.81476Z" fill="#141334"/>
                 </svg>
                 <h3>将来への対応</h3>
-                <p>Build cross-framework components and design systems on open web standards, and break free of Framework Churn.</p>
+                <p>オープンWeb標準に基づいてクロスフレームワークコンポーネントと設計システムを構築し、フレームワークチャーンから解放されます。</p>
               </li>
             </ul>
           </ResponsiveContainer>
@@ -184,16 +184,16 @@ export class LandingPage {
           <ResponsiveContainer>
             <div class="two-col">
               <hgroup>
-                <h2>The perfect tool for <strong>building a design system.</strong></h2>
+                <h2><strong>設計システムを構築するための</strong>完璧なツール。</h2>
               </hgroup>
               <div>
                 <ul class="list--icon list--unstyled">
-                  <li><app-icon name="checkmark"/>Ensure consistent UX and brand experiences, at scale</li>
-                  <li><app-icon name="checkmark"/>Web components run on any platform or device</li>
-                  <li><app-icon name="checkmark"/>Build a custom UI library that works across teams and projects</li>
+                  <li><app-icon name="checkmark"/>大規模で一貫したUXとブランドエクスペリエンスを確保する</li>
+                  <li><app-icon name="checkmark"/>Webコンポーネントは任意のプラットフォームまたはデバイスで実行されます</li>
+                  <li><app-icon name="checkmark"/>チームやプロジェクト間で機能するカスタムUIライブラリを構築する</li>
                 </ul>
-                <p>Interested in learning more about building design systems with Stencil?</p>
-                <stencil-route-link anchorClass="btn btn--tertiary btn--small" url="/docs/stencil-for-design-systems">Show me more</stencil-route-link>
+                <p>Stencilを使用した設計システムの構築について詳しく知りたいですか？</p>
+                <stencil-route-link anchorClass="btn btn--tertiary btn--small" url="/docs/stencil-for-design-systems">詳細を見る</stencil-route-link>
               </div>
             </div>
           </ResponsiveContainer>
@@ -203,13 +203,13 @@ export class LandingPage {
           <ResponsiveContainer>
             <div class="two-col">
               <hgroup>
-                <h2><strong>Awesome developer experience</strong> out of the box.</h2>
+                <h2>すぐに使える<strong>素晴らしいDX</strong></h2>
               </hgroup>
               <div>
                 <ul class="list--icon list--unstyled">
-                  <li><app-icon name="checkmark"/> Built-in dev-server for hot module reloading</li>
-                  <li><app-icon name="checkmark"/> Screenshot visual UI diffs</li>
-                  <li><app-icon name="checkmark"/> Auto-generate component documentation <br/><span class="small">(including css variables)</span></li>
+                  <li><app-icon name="checkmark"/> ホットモジュールのリロード用の組み込み開発サーバー</li>
+                  <li><app-icon name="checkmark"/> スクリーンショットのビジュアルUIの差分</li>
+                  <li><app-icon name="checkmark"/> コンポーネントドキュメントの自動生成<br/><span class="small">(CSS変数を含む)</span></li>
                 </ul>
               </div>
             </div>
@@ -220,11 +220,11 @@ export class LandingPage {
           <ResponsiveContainer>
             <div class="two-col">
               <hgroup>
-                <h2><strong>Build one component library</strong> for all of your apps.</h2>
+                <h2>すべてのアプリに対応する<strong>コンポーネントライブラリを構築できます</strong></h2>
               </hgroup>
               <div>
-                <p>Stencil components are just Web Components, so they work with any major framework or no framework at all.</p>
-                <p>Learn how Stencil seamlessly integrates with:</p>
+                <p>Stencilコンポーネントは単なるWebコンポーネントです。そのため、主要なフレームワーク、または、フレームワークなしでも機能します</p>
+                <p>Stencilがどのようにシームレスに統合されるかを学ぶ:</p>
                 <ul class="card-links list--unstyled">
                   <li>
                     <stencil-route-link class="card-links__item" url="/docs/react">
@@ -258,20 +258,20 @@ export class LandingPage {
 
         <section class="stencil-story">
           <ResponsiveContainer>
-            <h2><strong>The Stencil story</strong></h2>
-            <p>Stencil was created to power the components for Ionic Framework - a cross-platform mobile development technology stack used by more than 5M developers worldwide.</p>
+            <h2><strong>Stencilストーリー</strong></h2>
+            <p>Stencilは、世界中の500万人以上の開発者が使用するクロスプラットフォームのモバイル開発テクノロジースタックであるIonicFrameworkのコンポーネントを強化するために作成されました。</p>
             <div class="videos">
               <a href="https://youtu.be/RZ6MLELGsD8" class="video-thumbnail video-thumbnail--architecting">
                 <app-icon name="play"/>
-                <span>Architecting A Component Compiler</span>
+                <span>コンポーネントコンパイラの設計</span>
               </a>
               <a href="https://youtu.be/M1F81V-NhP0" class="video-thumbnail video-thumbnail--announcement">
                 <app-icon name="play"/>
-                <span>See the v1 announcement</span>
+                <span>v1の発表を見る</span>
               </a>
               <a href="https://youtu.be/UfD-k7aHkQE" class="video-thumbnail video-thumbnail--launch">
                 <app-icon name="play"/>
-                <span>Watch launch video</span>
+                <span>ローンチビデオを見る</span>
               </a>
             </div>
           </ResponsiveContainer>
