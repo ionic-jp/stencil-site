@@ -1,6 +1,6 @@
 ---
-title: Web Workers
-description: Web Workers
+title: Webワーカー
+description: WebワーカーWeb Workers
 url: /docs/web-workers
 ---
 

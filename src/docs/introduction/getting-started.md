@@ -1,6 +1,6 @@
 ---
-title: Getting Started
-description: Getting Started
+title: 始める
+description: Stencilを始める
 url: /docs/getting-started
 contributors:
   - jthoms1

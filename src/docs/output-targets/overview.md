@@ -1,6 +1,6 @@
 ---
-title: Stencil Output Targets
-description: Stencil Output Targets
+title: Stencilの出力ターゲット
+description: Stencilの出力ターゲット
 url: /docs/output-targets
 contributors:
   - adamdbradley

@@ -1,13 +1,13 @@
 ---
-title: My First Component
-description: My First Component
+title: 初めてのWebコンポーネント
+description: 初めてのWebコンポーネント
 url: /docs/my-first-component
 contributors:
   - jthoms1
   - simonhaenisch
 ---
 
-# 初めてのコンポーネント
+# 初めてのWebコンポーネント
 
 Stencilコンポーネントは `my-first-component.tsx` のような `.tsx` 拡張子を持つ新しいファイルを追加して `src/components` ディレクトリに配置することで作成されます。
 Stencilコンポーネントは、[JSX](https://facebook.github.io/react/docs/introducing-jsx.html)と、 TypeScriptを使ってビルドされるので、`.tsx` 拡張子は必須です。

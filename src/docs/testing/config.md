@@ -1,6 +1,6 @@
 ---
-title: Testing Config
-description: Testing Config
+title: テストのコンフィグ
+description: テストのコンフィグ
 url: /docs/testing-config
 contributors:
   - adamdbradley

@@ -1,6 +1,6 @@
 ---
-title: Testing
-description: Testing overview.
+title: テスト
+description: テストの概要
 url: /docs/testing-overview
 contributors:
   - adamdbradley

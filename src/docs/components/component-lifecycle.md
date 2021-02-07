@@ -1,6 +1,6 @@
 ---
-title: Component Lifecycle Methods
-description: Component Lifecycle Methods
+title: コンポーネントのライフスタイル関数
+description: コンポーネントのライフスタイル関数
 url: /docs/component-lifecycle
 contributors:
   - jthoms1

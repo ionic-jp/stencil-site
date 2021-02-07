@@ -1,6 +1,6 @@
 ---
-title: Bundling Custom Elements with Stencil
-description: Bundling Custom Elements with Stencil
+title: カスタムエレメントをステンシルでバンドルする
+description: カスタムエレメントをステンシルでバンドルする
 url: /docs/custom-elements
 contributors:
   - adamdbradley

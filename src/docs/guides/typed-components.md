@@ -1,6 +1,6 @@
 ---
-title: Typed Components
-description: Typed Components
+title: 型付きコンポーネント
+description: 型付きコンポーネント
 url: /docs/typed-components
 contributors:
   - adamdbradley

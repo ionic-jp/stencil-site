@@ -1,6 +1,6 @@
 ---
-title: Webapp Output Target
-description: Webapp Output Target
+title: Webapp出力ターゲット
+description: Webapp出力ターゲット
 url: /docs/www
 contributors:
   - jthoms1

@@ -1,6 +1,6 @@
 ---
-title: Decorators
-description: Decorators
+title: デコレータ
+description: Stencilのデコレータ
 url: /docs/component
 contributors:
   - jthoms1

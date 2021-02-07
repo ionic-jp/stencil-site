@@ -1,6 +1,6 @@
 ---
-title: Component API
-description: Component API
+title: コンポーネントAPI
+description: コンポーネントAPI
 url: /docs/api
 contributors:
   - manucorporat

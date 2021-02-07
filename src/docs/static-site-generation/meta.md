@@ -1,6 +1,6 @@
 ---
-title: SEO Meta Tags in SSG
-description: Managing meta tags for SEO and social media embeding in Stencil Static Sites
+title: SSGのSEOメタタグ
+description: Stencilの静的サイトに埋め込むSEOおよびソーシャルメディアのメタタグの管理
 url: /docs/static-site-generation-meta-tags
 contributors:
   - mlynch

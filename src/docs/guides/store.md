@@ -1,6 +1,6 @@
 ---
-title: 'Store'
-description: Store
+title: Stencilストア
+description: Stencilストア
 url: /docs/stencil-store
 ---
 

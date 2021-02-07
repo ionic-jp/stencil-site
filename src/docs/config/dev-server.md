@@ -1,6 +1,6 @@
 ---
-title: Integrated Dev Server Config
-description: Integrated Dev Server Config
+title: 統合された開発サーバー構成
+description: 統合された開発サーバー構成
 url: /docs/dev-server
 contributors:
   - adamdbradley

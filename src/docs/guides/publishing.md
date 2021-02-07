@@ -1,6 +1,6 @@
 ---
-title: Publishing A Component Library
-description: Publishing A Component Library
+title: コンポーネントライブラリの公開
+description: コンポーネントライブラリの公開
 url: /docs/publishing
 contributors:
   - adamdbradley

@@ -1,6 +1,6 @@
 ---
-title: Docs JSON Data Output Target
-description: Docs JSON Output Target
+title: ドキュメントJSONデータ出力ターゲット
+description: ドキュメントJSONデータ出力ターゲット
 url: /docs/docs-json
 contributors:
   - adamdbradley

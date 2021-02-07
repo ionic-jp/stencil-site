@@ -1,6 +1,6 @@
 ---
-title: Combining Server Side Rendering and Static Site Generation
-description: How to combine both Server Side Rendering and Static Site Generation approaches
+title: サーバーサイドレンダリングと静的サイト生成の組み合わせ
+description: サーバー側のレンダリングと静的サイト生成の両方のアプローチを組み合わせる方法
 url: /docs/static-site-generation-server-side-rendering-ssr
 contributors:
   - mlynch

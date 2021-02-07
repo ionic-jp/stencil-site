@@ -1,6 +1,6 @@
 ---
-title: End-to-end Testing
-description: End-to-end Testing
+title: E2Eテスト
+description: E2Eテスト
 url: /docs/end-to-end-testing
 contributors:
   - adamdbradley

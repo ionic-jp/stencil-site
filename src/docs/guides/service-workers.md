@@ -1,6 +1,6 @@
 ---
-title: Service Workers
-description: Service Workers
+title: サービスワーカー
+description: サービスワーカー
 url: /docs/service-workers
 contributors:
   - jthoms1

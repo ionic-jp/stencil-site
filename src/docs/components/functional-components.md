@@ -1,14 +1,14 @@
 ---
-title: Functional Components
-description: Functional Components
+title: 関数コンポーネント
+description: 関数コンポーネント
 url: /docs/functional-components
 contributors:
   - simonhaenisch
 ---
 
-# 関数型コンポーネントの操作
+# 関数コンポーネントの操作
 
-関数型コンポーネントは、StencilのJSXコンパイラの一部であるため、通常のStencilのWebコンポーネントとはまったく異なります。 関数型コンポーネントは、基本的に、Propのオブジェクトを取得してJSXに変換する関数です。
+関数コンポーネントは、StencilのJSXコンパイラの一部であるため、通常のStencilのWebコンポーネントとはまったく異なります。 関数コンポーネントは、基本的に、Propのオブジェクトを取得してJSXに変換する関数です。
 
 ```tsx
 const Hello = props => <h1>Hello, {props.name}!</h1>;

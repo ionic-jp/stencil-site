@@ -1,6 +1,6 @@
 ---
-title: Mocking
-description: Mocking
+title: モック
+description: モック
 url: /docs/mocking
 contributors:
   - simonhaenisch

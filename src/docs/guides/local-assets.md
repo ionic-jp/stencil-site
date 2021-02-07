@@ -1,6 +1,6 @@
 ---
-title: Local Assets
-description: Using Local Assets in your Components
+title: ローカルアセット
+description: コンポーネントでのローカルアセットの使用
 url: /docs/local-assets
 contributors:
   - splitinfinities

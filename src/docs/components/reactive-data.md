@@ -1,6 +1,6 @@
 ---
-title: Reactive Data, Handling arrays and objects
-description: Reactive Data, Handling arrays and objects
+title: リアクティブデータ、配列とオブジェクトの処理
+description: リアクティブデータ、配列とオブジェクトの処理
 url: /docs/reactive-data
 contributors:
   - jthoms1

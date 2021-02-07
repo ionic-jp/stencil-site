@@ -1,6 +1,6 @@
 ---
-title: Prerender Config
-description: Prerender Config
+title: プリレンダリングのコンフィグ
+description: プリレンダリングのコンフィグ
 url: /docs/prerender-config
 contributors:
   - adamdbradley

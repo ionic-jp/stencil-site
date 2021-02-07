@@ -1,6 +1,6 @@
 ---
-title: React Integration with Stencil
-description: React Integration with Stencil
+title: ReactとStencilの連携
+description: ReactとStencilの連携
 url: /docs/react
 contributors:
   - jthoms1

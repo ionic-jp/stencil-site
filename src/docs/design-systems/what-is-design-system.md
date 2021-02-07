@@ -1,6 +1,6 @@
 ---
-title: What is a Design System
-description: What is a Design System
+title: Design Systemとは？
+description: Design Systemとは？
 url: /docs/what-is-design-system
 contributors:
   - dotNetkow

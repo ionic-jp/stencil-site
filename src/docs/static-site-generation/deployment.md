@@ -1,6 +1,6 @@
 ---
-title: Deploying a Static Site
-description: Deploying a Static Site
+title: 静的サイトのデプロイ
+description: 静的サイトのデプロイ
 url: /docs/static-site-generation-deployment
 contributors:
   - mlynch

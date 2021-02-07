@@ -1,6 +1,6 @@
 ---
-title: Methods
-description: methods
+title: メソッドデコレータ
+description: メソッドデコレータ
 url: /docs/methods
 contributors:
   - jthoms1

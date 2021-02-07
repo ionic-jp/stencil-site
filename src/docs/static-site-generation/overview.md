@@ -1,5 +1,5 @@
 ---
-title: Static Site Generation
+title: 静的サイトジェネレーション
 description:
 url: /docs/static-site-generation
 contributors:

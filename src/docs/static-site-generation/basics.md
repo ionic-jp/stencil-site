@@ -1,6 +1,6 @@
 ---
-title: Static Site Generation Basics in Stencil
-description: Quick introducgion to configuring and using Static Site Generation in Stencil
+title: Stencilでの静的サイト生成の基本
+description: Stencilでの静的サイト生成の構成と使用の簡単な紹介
 url: /docs/static-site-generation-basics
 contributors:
   - mlynch

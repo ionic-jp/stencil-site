@@ -1,6 +1,6 @@
 ---
-title: Stencil Frequently Asked Questions
-description: Stencil is a developer-focused toolchain for building reusable, scalable component libraries, applications and design systems.
+title: Stencilのよくある質問
+description: Stencilは、再利用可能でスケーラブルなコンポーネントライブラリ、アプリケーション、および設計システムを構築するための開発者向けのツールチェーンです。
 url: /docs/faq
 contributors:
   - adamdbradley

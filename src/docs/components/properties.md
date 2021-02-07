@@ -1,6 +1,6 @@
 ---
-title: Properties
-description: Properties
+title: プロパティ
+description: プロパティ
 url: /docs/properties
 contributors:
   - jthoms1
