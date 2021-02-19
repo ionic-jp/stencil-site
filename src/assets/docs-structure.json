@@ -28,7 +28,7 @@
         "url": "/docs/my-first-component"
       },
       {
-        "text": "FAQ",
+        "text": "よくある質問",
         "filePath": "/assets/docs/introduction/faq.json",
         "url": "/docs/faq"
       },
@@ -98,12 +98,12 @@
         "url": "/docs/host-element"
       },
       {
-        "text": "スタリing",
+        "text": "スタイリングコンポーネント",
         "filePath": "/assets/docs/components/styling.json",
         "url": "/docs/styling"
       },
       {
-        "text": "機能コンポーネント",
+        "text": "関数型コンポーネント",
         "filePath": "/assets/docs/components/functional-components.json",
         "url": "/docs/functional-components"
       }

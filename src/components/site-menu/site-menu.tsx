@@ -23,6 +23,9 @@ export class SiteMenu implements ComponentInterface {
         indexName: 'stenciljs',
         inputSelector: 'input[name="search"]',
         debug: false, // Set debug to true if you want to inspect the dropdown
+        algoliaOptions: {
+          facetFilters: ['tags:com'],
+        },
       });
     }
   }
@@ -40,9 +43,7 @@ export class SiteMenu implements ComponentInterface {
         <SiteProviderConsumer.Consumer>
           {({ toggleLeftSidebar }: SiteState) => (
             <div>
-              {
-                // <search-bar class="site-search" debounce={500} searchTerm={this.searchTerm} placeholder={'Search Docs'}></search-bar>
-              }
+              {<search-bar class="site-search" debounce={500} searchTerm={this.searchTerm} placeholder={'Search Docs'}></search-bar>}
               <ul class="menu-list">
                 {this.siteStructureList.map(item => (
                   <li>
