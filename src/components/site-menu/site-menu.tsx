@@ -24,7 +24,7 @@ export class SiteMenu implements ComponentInterface {
         inputSelector: 'input[name="search"]',
         debug: false, // Set debug to true if you want to inspect the dropdown
         algoliaOptions: {
-          facetFilters: ['tags：concepts'],
+          facetFilters: ['tags:com'],
         },
       });
     }
