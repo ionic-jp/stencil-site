@@ -28,7 +28,6 @@ export class LandingPage {
       <div>
         <ResponsiveContainer class="hero">
           <hgroup>
-            <announcement-bar></announcement-bar>
             <h1>再利用可能なコンポーネントを構築、導入。</h1>
             <p>Stencilは、再利用可能でスケーラブルなデザインシステムを構築するためのツールチェーンです。あらゆるブラウザで動作する、小型で高速かつ100%標準ベースのWebコンポーネントを生成します。</p>
             <stencil-route-link url="/docs/getting-started" class="hero-button" anchorClass="btn-get-started">はじめに</stencil-route-link>
