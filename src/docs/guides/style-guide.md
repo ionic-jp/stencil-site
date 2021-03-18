@@ -10,7 +10,7 @@ contributors:
 ---
 
 
-＃Stencil Style Guide
+# Stencil Style Guide
 
 これは、[Ionic Core](https://ionicframework.com/)コンポーネントを標準化する目的で、Stencilのコアチームによって内部的に作成および実施されるコンポーネントスタイルガイドです。 これは、他のチームが独自のスタイルガイドを作成する際の参照としてのみ使用する必要があります。 チームの好みに合わせて自由に変更してください。
 

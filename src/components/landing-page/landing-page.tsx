@@ -29,10 +29,10 @@ export class LandingPage {
         <ResponsiveContainer class="hero">
           <hgroup>
             <announcement-bar></announcement-bar>
-            <h1>構築. 再利用性. 導入. </h1>
+            <h1>再利用可能なコンポーネントを構築、導入。</h1>
             <p>Stencilは、再利用可能でスケーラブルなデザインシステムを構築するためのツールチェーンです。あらゆるブラウザで動作する、小型で高速かつ100%標準ベースのWebコンポーネントを生成します。</p>
             <stencil-route-link url="/docs/getting-started" class="hero-button" anchorClass="btn-get-started">はじめに</stencil-route-link>
-            <stencil-route-link url="/docs/introduction" class="hero-button" anchorClass="btn-why-stencil">Why Stencil?</stencil-route-link>
+            <stencil-route-link url="/docs/introduction" class="hero-button" anchorClass="btn-why-stencil">なぜStencil?</stencil-route-link>
           </hgroup>
           <svg class="landing-page__bg" width="661" height="573" viewBox="0 0 661 573" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path opacity="0.5" d="M301.972 460.59H459.711L374.445 553H217.555L301.972 460.59Z" fill="#EFF1FF"/>
