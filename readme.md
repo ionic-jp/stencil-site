@@ -17,10 +17,11 @@
 #### 2. 翻訳する
 #### 3. プルリクエストを作成する
 
+[CONTRIBUTING.md](https://github.com/ionic-jp/stencil-docs/blob/master/CONTRIBUTING.md)
 
 ## ローカルでサイトをビルドする方法
 
-このサイトをビルドするには、まずこのリポジトリをcloneしてください。nodeおよびnpmの最新バージョンを使用していることを確認しておいてください。次に、 `npm install`と` npm start`を実行して、開発モードでサイトを起動します。
+このサイトをビルドするには、まずこのリポジトリをcloneしてください。nodeおよびnpmの最新バージョンを使用していることを確認しておいてください。次に、`npm install`、`npm run docs`そして`npm start`を実行して、開発モードでサイトを起動します。
 
 ## 関連リンク
 
