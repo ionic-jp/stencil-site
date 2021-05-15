@@ -12,9 +12,9 @@ contributors:
 
 例えば、Slotポリフィルを使用する場合、すべてのDOM APIが完全にポリフィルされるわけではありません。 全てのユーザーが追加のランタイムを必要とするわけではないため、これらのほとんどはオプトインです。
 
-デフォルトでは、StencilはIE11、Edge 18以下（Chromiumに移行する前のEdge）およびSafari 10では機能しません。レガシーブラウザをサポートするには、ブラウザでポリフィルをダウンロードして実行する必要があります。 `extras`設定を使用することで、アプリはこれらの追加のランタイム設定をオプトインできます。
+デフォルトでは、StencilはIE11、Edge 18以下（Chromiumに移行する前のEdge）およびSafari 10では機能しません。レガシーブラウザをサポートするには、ブラウザでポリフィルをダウンロードして実行する必要があります。`extras`設定を使用することで、アプリはこれらの追加のランタイム設定をオプトインできます。
 
-例は  __supporting__ レガシーブラウザをサポートする`extras` 設定例です:
+例は  __supporting__ レガシーブラウザをサポートする`extras`設定例です:
 
 ```tsx
 export const config: Config = {
@@ -32,7 +32,7 @@ export const config: Config = {
 };
 ```
 
-注：この例ではレガシーブラウザをサポートする必要があるため、 `buildEs5：'prod'`も設定で設定されています。詳細については、[buildEs5 config](/docs/config＃buildes5)を参照してください。
+注：この例ではレガシーブラウザをサポートする必要があるため、`buildEs5：'prod'`も設定で設定されています。詳細については、[buildEs5 config](/docs/config＃buildes5)を参照してください。
 
 ### appendChildSlotFix
 
@@ -57,7 +57,7 @@ div {
 
 ### dynamicImportShim
 
-動的な `import（）`シム。これは、Edge18以下およびFirefox67以下でのみ必要です。 Edge 18以下（Chromiumに移行する前のEdge）をサポートする必要がない場合は、 `dynamicImportShim`を` false`に設定することをお勧めします。デフォルトは `false`です。
+動的な`import()`シム。これは、Edge18以下およびFirefox67以下でのみ必要です。Edge 18以下（Chromiumに移行する前のEdge）をサポートする必要がない場合は、`dynamicImportShim`を`false`に設定することをお勧めします。デフォルトは `false`です。
 
 
 ### lifecycleDOMEvents
