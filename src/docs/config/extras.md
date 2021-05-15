@@ -57,7 +57,7 @@ div {
 
 ### dynamicImportShim
 
-動的な`import()`シム。これは、Edge18以下およびFirefox67以下でのみ必要です。Edge 18以下（Chromiumに移行する前のEdge）をサポートする必要がない場合は、`dynamicImportShim`を`false`に設定することをお勧めします。デフォルトは `false`です。
+動的な`import()` shimです。これは、Edge18以下およびFirefox67以下でのみ必要です。Edge 18以下（Chromiumに移行する前のEdge）をサポートする必要がない場合は、`dynamicImportShim`を`false`に設定することをお勧めします。デフォルトは `false`です。
 
 
 ### lifecycleDOMEvents
@@ -76,16 +76,16 @@ div {
 
 ### safari10
 
-safari 10は`<script type="module">`でESモジュールをサポートしていますが、`<script nomodule>`は実装されていませんでした。`safari10`が`false`に設定されている場合、ランタイムはsafari 10のサポートを適用しません。もしアプリケーションがsafari 10をサポートする必要がない場合は、この値を`false`に設定することをお勧めします。デフォルトでは`false`に設定されます。
+safari 10は`<script type="module">`でESモジュールをサポートしていますが、`<script nomodule>`は実装されていませんでした。`safari10`が`false`に設定されている場合、ランタイムはsafari 10のサポートを適用しません。もしアプリケーションがsafari 10をサポートする必要がない場合は、この値を`false`に設定することをお勧めします。デフォルトは `false`です。
 
 ### scriptDataOpts
 
-実際の`<script>`要素の`data-opts`プロパティにデータを割り当てることが可能であり、そのデータはStencilの最初の自動実行に渡されます。この機能は非常に特殊なケースでのみ必要とされ、ほとんどの場合必要とされません。`false`に設定すると、このデータは読み込まれません。デフォルトでは`false`に設定されます。
+実際の`<script>`要素の`data-opts`プロパティにデータを割り当てることが可能であり、そのデータはStencilの最初の自動実行に渡されます。この機能は非常に特殊なケースでのみ必要とされ、ほとんどの場合必要とされません。`false`に設定すると、このデータは読み込まれません。デフォルトは `false`です。
 
 ### shadowDomShim
 
-もし`true`で有効にすると、shadow dom shimが必要かどうかをチェックします。しかし、shadow dom がすでにブラウザでネイティブにサポートされていると判断された場合はshimを要求しません。もし`false`に設定すると、すべての shadow domテストを回避します。アプリが IE11 や Edge 18 以下をサポートする必要がない場合は、`shadowDomShim`を`false`に設定することを推奨します。デフォルトでは`false`に設定されます。
+もし`true`で有効にすると、shadow dom shimが必要かどうかをチェックします。しかし、shadow dom がすでにブラウザでネイティブにサポートされていると判断された場合はshimを要求しません。もし`false`に設定すると、すべての shadow domテストを回避します。アプリが IE11 や Edge 18 以下をサポートする必要がない場合は、`shadowDomShim`を`false`に設定することを推奨します。デフォルトは `false`です。
 
 ### slotChildNodesFix
 
-shadow domをサポートしていないブラウザ（IE11とEdge 18以下）では、slotがポリフィルされて同じ動作をシミュレートします。ただし、ホスト要素の`childNodes`と`children`ゲッターは、デフォルトのスロットの子ノードと要素のみを表すようには修正されません。デフォルトでは`false`に設定されます。
+shadow domをサポートしていないブラウザ（IE11とEdge 18以下）では、slotがポリフィルされて同じ動作をシミュレートします。ただし、ホスト要素の`childNodes`と`children`ゲッターは、デフォルトのスロットの子ノードと要素のみを表すようには修正されません。デフォルトは `false`です。
