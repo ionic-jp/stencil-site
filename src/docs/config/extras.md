@@ -12,9 +12,9 @@ contributors:
 
 例えば、Slotポリフィルを使用する場合、すべてのDOM APIが完全にポリフィルされるわけではありません。 全てのユーザーが追加のランタイムを必要とするわけではないため、これらのほとんどはオプトインです。
 
-デフォルトでは、StencilはIE11、Edge 18以下（Chromiumに移行する前のEdge）およびSafari 10では機能しません。レガシーブラウザをサポートするには、ブラウザでポリフィルをダウンロードして実行する必要があります。 `extras`設定を使用することで、アプリはこれらの追加のランタイム設定をオプトインできます。
+デフォルトでは、StencilはIE11、Edge 18以下（Chromiumに移行する前のEdge）およびSafari 10では機能しません。レガシーブラウザをサポートするには、ブラウザでポリフィルをダウンロードして実行する必要があります。`extras`設定を使用することで、アプリはこれらの追加のランタイム設定をオプトインできます。
 
-例は  __supporting__ レガシーブラウザをサポートする`extras` 設定例です:
+例は  __supporting__ レガシーブラウザをサポートする`extras`設定例です:
 
 ```tsx
 export const config: Config = {
@@ -32,7 +32,7 @@ export const config: Config = {
 };
 ```
 
-注：この例ではレガシーブラウザをサポートする必要があるため、 `buildEs5：'prod'`も設定で設定されています。詳細については、[buildEs5 config](/docs/config＃buildes5)を参照してください。
+注：この例ではレガシーブラウザをサポートする必要があるため、`buildEs5：'prod'`も設定で設定されています。詳細については、[buildEs5 config](/docs/config＃buildes5)を参照してください。
 
 ### appendChildSlotFix
 
@@ -57,7 +57,7 @@ div {
 
 ### dynamicImportShim
 
-動的な `import（）`シム。これは、Edge18以下およびFirefox67以下でのみ必要です。 Edge 18以下（Chromiumに移行する前のEdge）をサポートする必要がない場合は、 `dynamicImportShim`を` false`に設定することをお勧めします。デフォルトは `false`です。
+動的な`import()` shimです。これは、Edge18以下およびFirefox67以下でのみ必要です。Edge 18以下（Chromiumに移行する前のEdge）をサポートする必要がない場合は、`dynamicImportShim`を`false`に設定することをお勧めします。デフォルトは `false`です。
 
 
 ### lifecycleDOMEvents
@@ -76,16 +76,16 @@ div {
 
 ### safari10
 
-Safari 10 supports ES modules with `<script type="module">`, however, it did not implement `<script nomodule>`. When set `safari10` is set to `false`, the runtime will not patch support for Safari 10. If the app does not need to support Safari 10, it's recommended to set this to `false`. Defaults to `false`.
+safari 10は`<script type="module">`でESモジュールをサポートしていますが、`<script nomodule>`は実装されていませんでした。`safari10`が`false`に設定されている場合、ランタイムはsafari 10のサポートを適用しません。もしアプリケーションがsafari 10をサポートする必要がない場合は、この値を`false`に設定することをお勧めします。デフォルトは `false`です。
 
 ### scriptDataOpts
 
-It is possible to assign data to the actual `<script>` element's `data-opts` property, which then gets passed to Stencil's initial bootstrap. This feature is only required for very special cases and rarely needed. When set to `false` it will not read this data. Defaults to `false`.
+実際の`<script>`要素の`data-opts`プロパティにデータを割り当てることが可能であり、そのデータはStencilの最初の自動実行に渡されます。この機能は非常に特殊なケースでのみ必要とされ、ほとんどの場合必要とされません。`false`に設定すると、このデータは読み込まれません。デフォルトは `false`です。
 
 ### shadowDomShim
 
-If enabled `true`, the runtime will check if the shadow dom shim is required. However, if it's determined that shadow dom is already natively supported by the browser then it does not request the shim. Setting to `false` will avoid all shadow dom tests. If the app does not need to support IE11 or Edge 18 and below, it's recommended to set `shadowDomShim` to `false`. Defaults to `false`.
+もし`true`で有効にすると、shadow dom shimが必要かどうかをチェックします。しかし、shadow dom がすでにブラウザでネイティブにサポートされていると判断された場合はshimを要求しません。もし`false`に設定すると、すべての shadow domテストを回避します。アプリが IE11 や Edge 18 以下をサポートする必要がない場合は、`shadowDomShim`を`false`に設定することを推奨します。デフォルトは `false`です。
 
 ### slotChildNodesFix
 
-For browsers that do not support shadow dom (IE11 and Edge 18 and below), slot is polyfilled to simulate the same behavior. However, the host element's `childNodes` and `children` getters are not patched to only show the child nodes and elements of the default slot. Defaults to `false`.
+shadow domをサポートしていないブラウザ（IE11とEdge 18以下）では、slotがポリフィルされて同じ動作をシミュレートします。ただし、ホスト要素の`childNodes`と`children`ゲッターは、デフォルトのスロットの子ノードと要素のみを表すようには修正されません。デフォルトは `false`です。
