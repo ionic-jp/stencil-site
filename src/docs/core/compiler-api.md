@@ -58,11 +58,11 @@ createCompiler(config: Config): Promise<Compiler>
 以下は、フルビルドを実行しているNodeJS環境の例です。
 
 ```tsx
-import { createNodeLogger, createNodeSystem } from '@stencil/core/cli';
+import { createNodeLogger, createNodeSys } from '@stencil/core/sys/node';
 import { createCompiler, loadConfig } from '@stencil/core/compiler';
 
 const logger = createNodeLogger(process);
-const sys = createNodeSystem(process);
+const sys = createNodeSys(process);
 const validated = await loadConfig({
   logger,
   sys,

@@ -116,6 +116,7 @@ JSXとVDomは必ずしも同じものではないことに注意することが�
 
 遅延読み込みの詳細については、[遅延読み込みWebコンポーネントがStencilでどのように機能するか](/blog/how-lazy-loading-web-components-work)でも確認できます。
 
+You can also learn more about lazy loading in [How Lazy-Loading Web Components Work with Stencil](https://web.archive.org/web/20201108000809/https://stenciljs.com/blog/how-lazy-loading-web-components-work).
 
 ### StencilがHTMLElementを拡張しないのはなぜですか？
 
@@ -210,7 +211,7 @@ StencilをInternetExplorer 11以降で動作させるには、いくつかのポ
 Stencilはオープンソースプロジェクトであり、貢献することをお勧めします。まず、GitHubで問題を作成し、機能リクエストを送信して、バグの再現を支援します。投稿に興味がある場合は、[コントリビュートガイド](https://github.com/ionic-team/ionic/blob/master/.github/CONTRIBUTING.md)を参照し、[issueを報告してください](https://github.com/ionic-team/stencil/issues)。
 
 
-### Stencilはオープンソースですか？
+Stencil is an open source project, and we encourage you to contribute. You can start by creating issues on GitHub, submitting feature requests, and helping to replicate bugs. If you’re interested in contributing, please see our [Contributor Guide](https://github.com/ionic-team/stencil/blob/master/.github/CONTRIBUTING.md) and check out our [issue tracker](https://github.com/ionic-team/stencil/issues).
 
 はい、Stencilはオープンソースであり、そのソースコードは[GitHubにあります](https://github.com/ionic-team/stencil)です。コミュニティからの貢献を歓迎します。
 
@@ -220,6 +221,11 @@ Stencilはオープンソースプロジェクトであり、貢献すること�
 Stencilのソフトウェアライセンは[MIT](https://github.com/ionic-team/stencil/blob/master/LICENSE)です。
 
 
-### Stencilの開発者は誰ですか？
+Stencil’s software [license is MIT](https://github.com/ionic-team/stencil/blob/master/LICENSE.md).
+
+
+### Who works on Stencil?
+
+The majority of the development is done by engineers at [Ionic](https://github.com/ionic-team/ionic). If you’re excited about Stencil, we encourage you to join the community and contribute! Best place to start is on the [Stencil Slack Channel](https://stencil-worldwide.herokuapp.com/).
 
 開発の大部分は、[Ionic](https://github.com/ionic-team/ionic)のエンジニアによって行われます。Stencilに興奮している場合は、コミュニティに参加して貢献することをお勧めします。開始するのに最適な場所は、[Stencil Slack Channel](https://stencil-worldwide.herokuapp.com/)です。

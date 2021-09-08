@@ -46,14 +46,14 @@ document.body.appendChild(el);
 
 ## componentWillLoad()
 
+
 コンポーネントが最初にDOMに接続された直後に1回呼び出されます。このメソッドは1回しか呼び出されないため、データを非同期でロードするのに適した場所です。
 
-最初のレンダリングを待つために使用できるpromiseを返すことができます。
+最初の `render()` の実行を待つために利用できるPromiseを返すことができます。
 
 ## componentDidLoad()
 
 コンポーネントが完全に読み込まれ、最初の `render（）`が発生した直後に1回呼び出されます。
-
 
 ## componentShouldUpdate()
 
