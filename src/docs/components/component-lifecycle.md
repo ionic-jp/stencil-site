@@ -20,7 +20,7 @@ Stencilには、コンポーネントがいつロード、更新、およびレ�
 コンポーネントがDOMに接続されるたびに、呼び出されます。
 コンポーネントが最初に接続されたとき、このメソッドは `componentWillLoad`の前に呼び出されます。
 
-このメソッドは、DOM内で要素が、**attached**または、**move**されるたびに、複数回呼び出されるので注意してください。
+It's important to note that this method can be called more than once, every time, the element is **attached** or **moved** in the DOM. For logic that needs to run every time the element is attached or moved in the DOM, it is considered a best practice to use this lifecycle method.
 
 ```tsx
 const el = document.createElement('my-cmp');
@@ -32,10 +32,8 @@ el.remove();
 // disconnectedCallback()
 
 document.body.appendChild(el);
-// connectedCallback() called again, but `componentWillLoad` is not.
+// connectedCallback() called again, but `componentWillLoad()` is not.
 ```
-
-上記は、このメソッドの素晴らしい使用例です！
 
 
 この `lifecycle`フックは、[Custom Elements Spec](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)で説明されているものと、同じセマンティクスに従います。

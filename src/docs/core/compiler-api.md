@@ -126,7 +126,7 @@ JavaScriptを最適化するためにコンパイラーが使用するユーテ�
 path: PlatformPath
 ```
 
-NodeJSによって提供される `path` APIのユーティリティですが、どの環境でも実行できます。 この `path` APIはPOSIXバージョンのみです：https：//nodejs.org/api/path.html
+NodeJSによって提供される `path` APIのユーティリティですが、どの環境でも実行できます。 この `path` APIはPOSIXバージョンのみです：https://nodejs.org/api/path.html
 
 
 ## version

@@ -41,7 +41,7 @@ export class TodoList {
 <todo-list class="todo-list is-open" aria-hidden="false"></todo-list>
 ```
 
-同じ用に `this.open === false`:
+シンプルに if `this.open === false`:
 
 ```tsx
 <todo-list class="todo-list" aria-hidden="true"></todo-list>

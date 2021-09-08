@@ -17,7 +17,7 @@ Vueアプリ内でCustom Elementライブラリを使用するには、Custom El
 Webコンポーネントを`test-component`という名前でnpmに公開し、事前に`npm install --save test-components`を実行した想定で、`main.js`ファイルにコンポーネントをインポートします。
 
 - nodeモジュールをインポート
-- VueにCustom Elementのタグを無視するように指定する（`https://vuejs.org/v2/api/#ignoredElement`を参照）
+- VueにCustom Elementのタグを無視するように指定する（[docs](https://vuejs.org/v2/api/#ignoredElements)を参照）
 - Stencilコンポーネントのコードをwindowオブジェクトにバインドする
 
 ```tsx

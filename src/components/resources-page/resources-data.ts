@@ -29,7 +29,8 @@ export const RESOURCES = {
     { title: 'Alert Component', url: 'https://github.com/ftonato/stenciljs-components/tree/master/alert-component' },
     { title: 'Badge Component', url: 'https://github.com/ftonato/stenciljs-components/tree/master/badge-component' },
     { title: 'Progress Component', url: 'https://github.com/ftonato/stenciljs-components/tree/master/progress-component' },
-    { title: 'A small collection of Awesome Stencil UI components', url: 'https://github.com/dlucidone/awesome-ui' }
+    { title: 'A small collection of Awesome Stencil UI components', url: 'https://github.com/dlucidone/awesome-ui' },
+    { title: 'Soft Components (Neumorphism design inspired web components)', url: 'https://soft.components.rocks' }
   ],
   TOOLS: [
     { title: 'How Stencil and Storybook help build fast, accessible web apps with Web Components', url: 'https://www.d4l.io/blog/web-apps-with-stencil-storybook-web-components/' },
@@ -157,8 +158,8 @@ export const RESOURCES = {
     {
       title: 'RevoGrid',
       description: 'Excel like complex virtual grid with amazing performance with @stencil/core, @stencil/store',
-      imgPath: 'https://revolist.github.io/revogrid/static/media/logo.1cfff539.svg',
-      demoUrl: 'https://revolist.github.io/revogrid/',
+      imgPath: '/assets/img/demos/demo-revogrid',
+      demoUrl: 'https://revolist.github.io/revogrid',
       sourceUrl: 'https://github.com/revolist/revogrid',
     }
   ],

@@ -171,16 +171,33 @@ srcDir: 'src'
 
 ## taskQueue
 
-*デフォルト: `congestionAsync`*
+*default: `async`*
 
-ステンシルのランタイムが使用するタスクキューを設定します。タスクキューは、フレーム全体でDOMの読み取りと書き込みをスケジュールして、レイアウトのスラッシングを効率的にレンダリングおよび削減します。デフォルトでは、 `congestionAsync`が使用されます。また、各設定を試して、ユースケースに最適な設定を決定することをお勧めします。すべての場合において、アプリにCPUを集中的に使用するタスクが多数あり、メインスレッドが定期的にロックアップする場合は、常に試してみることをお勧めします。
-これらのタスクには[Web Workers](/docs/web-workers)。
+Sets the task queue used by stencil's runtime. The task queue schedules DOM read and writes
+across the frames to efficiently render and reduce layout thrashing. By default, the
+`async` is used. It's recommended to also try each setting to decide which works
+best for your use-case. In all cases, if your app has many CPU intensive tasks causing the
+main thread to periodically lock-up, it's always recommended to try
+[Web Workers](https://stenciljs.com/docs/web-workers) for those tasks.
 
-* `congestionAsync`: DOMの読み取りと書き込みは、レイアウトのスラッシングを防ぐために次のフレームでスケジュールされます。 アプリのタスクが多く、キューが混雑すると、メインスレッドがブロックされないように、作業が複数のフレームに分割されます。 ただし、場合によっては、特に起動時に不要なリフローが発生する可能性もあります。 `congestionAsync`は、アニメーションを実行しながら、メインスレッドをロックする可能性のある集中的なタスクを同時に実行するアプリに最適です。
+* `congestionAsync`: DOM reads and writes are scheduled in the next frame to prevent layout
+  thrashing. When the app is heavily tasked and the queue becomes congested it will then
+  split the work across multiple frames to prevent blocking the main thread. However, it can
+  also introduce unnecessary reflows in some cases, especially during startup. `congestionAsync`
+  is ideal for apps running animations while also simultaneously executing intensive tasks
+  which may lock-up the main thread.
 
-* `async`: DOMの読み取りと書き込みは、レイアウトのスラッシングを防ぐために次のフレームでスケジュールされます。 集中的なCPUタスクの間、次のフレームで発生するようにレンダリングを再スケジュールしません。 `async`はほとんどのアプリに理想的であり、アプリに多くの集中的なタスクがあり、メインスレッドがロックアップする場合は、むしろ[Web Workers](https://stenciljs.com/docs/web-workers)を試すことをお勧めします。
+* `async`: DOM read and writes are scheduled in the next frame to prevent layout thrashing.
+  During intensive CPU tasks it will not reschedule rendering to happen in the next frame.
+  `async` is ideal for most apps, and if the app has many intensive tasks causing the main
+  thread to lock-up, it's recommended to try [Web Workers](https://stenciljs.com/docs/web-workers)
+  rather than the congestion async queue.
 
-* `immediate`: writeTask()コールバックとreadTask()コールバックを同期して実行します。 タスクは次のフレームで実行されるようにスケジュールされていませんが、少なくとも1つのマイクロタスクがあることに注意してください。「即時」設定は、長時間実行されてスムーズなアニメーションを提供しないアプリに最適です。 非同期設定と同様に、アプリに集中的なタスクがあり、メインスレッドがロックアップする場合は、[Web Workers](https://stenciljs.com/docs/web-workers)を試すことをお勧めします。
+* `immediate`: Makes writeTask() and readTask() callbacks to be executed synchronously. Tasks
+  are not scheduled to run in the next frame, but do note there is at least one microtask.
+  The `immediate` setting is ideal for apps that do not provide long-running and smooth
+  animations. Like the async setting, if the app has intensive tasks causing the main thread
+  to lock-up, it's recommended to try [Web Workers](https://stenciljs.com/docs/web-workers).
 
 ```tsx
 taskQueue: 'async'

@@ -77,7 +77,10 @@
   * [コンパイラAPI](core/compiler-api.md)
   * [CLI API](core/cli-api.md)
   * [開発サーバーAPI](core/dev-server-api.md)
-* コミュニティ
+* Community
   * [StencilのTwitter](https://twitter.com/stenciljs)
   * [StencilのSlack](https://stencil-worldwide.herokuapp.com/)
   * [StencilのGitHub](https://github.com/ionic-team/stencil)
+* Legal
+  * [Telemetry](telemetry.md)
+  * [Privacy Policy](https://ionicframework.com/privacy)

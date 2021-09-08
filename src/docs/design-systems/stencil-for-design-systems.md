@@ -25,3 +25,5 @@ contributors:
 
 ## 始める方法
 Stencilのすぐに使える機能は、プラットフォーム、デバイス、フロントエンドフレームワーク間で機能するユニバーサルUIコンポーネントの独自のライブラリを構築するのに役立ちます。 開始するには、このサイトのドキュメントを確認してください。
+
+__Need help building and scaling your company's design system?__ With Ionic as your development partner, you can reduce design debt, connect disparate tech teams, and get assistance enforcing brand consistency at scale. [Learn more about Stencil Enterprise.](https://ionic.io/products/stencil)

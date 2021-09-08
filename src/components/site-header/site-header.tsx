@@ -1,9 +1,9 @@
 import { Component, Element, Listen, State, h } from '@stencil/core';
-import { ResponsiveContainer } from '@ionic-internal/sites-shared';
+import { ResponsiveContainer } from '@ionic-internal/ionic-ds';
 
 @Component({
   tag: 'site-header',
-  styleUrl: 'site-header.css'
+  styleUrl: 'site-header.css',
 })
 export class SiteHeader {
   @Element() el!: Element;
@@ -14,7 +14,7 @@ export class SiteHeader {
   handleResize() {
     requestAnimationFrame(() => {
       if (window.innerWidth > 768) {
-        const menu = (this.el.querySelector('.header-menu') as HTMLElement);
+        const menu = this.el.querySelector('.header-menu') as HTMLElement;
         menu.style.display = '';
         this.el.classList.remove('show-mobile-menu');
         document.body.classList.remove('no-scroll');
@@ -27,30 +27,30 @@ export class SiteHeader {
     this.isMobileMenuShown = false;
   }
 
-  showNav () {
+  showNav() {
     if (this.isMobileMenuShown) return;
     this.isMobileMenuShown = true;
 
-    const menu = (this.el.querySelector('.header-menu') as HTMLElement);
+    const menu = this.el.querySelector('.header-menu') as HTMLElement;
 
-    menu.style.display = "flex";
+    menu.style.display = 'flex';
     setTimeout(() => {
       this.el.classList.add('show-mobile-menu');
       document.body.classList.add('no-scroll');
-    }, 1)
+    }, 1);
   }
 
-  hideNav () {
+  hideNav() {
     if (!this.isMobileMenuShown) return;
     this.isMobileMenuShown = false;
 
-    const menu = (this.el.querySelector('.header-menu') as HTMLElement);
+    const menu = this.el.querySelector('.header-menu') as HTMLElement;
 
     this.el.classList.remove('show-mobile-menu');
     setTimeout(() => {
-      menu.style.display = "none";
+      menu.style.display = 'none';
       document.body.classList.remove('no-scroll');
-    }, 300)
+    }, 300);
   }
 
   render() {
@@ -58,19 +58,35 @@ export class SiteHeader {
       <ResponsiveContainer>
         <stencil-route class="burger-menu" url="/docs" component="app-burger" />
         <stencil-route-link url="/" class="logo-link" anchorTitle="Stencil logo">
-          <app-icon name="logo"/>
+          <app-icon name="logo" />
         </stencil-route-link>
 
         <div class="header-menu">
-          <stencil-route-link urlMatch="/docs" url="/docs/introduction" onClick={() => { this.hideNav() }}>
+          <stencil-route-link
+            urlMatch="/docs"
+            url="/docs/introduction"
+            onClick={() => {
+              this.hideNav();
+            }}
+          >
             ドキュメント
           </stencil-route-link>
-          <stencil-route-link url="/resources" exact={true} onClick={() => { this.hideNav() }}>
+          <stencil-route-link
+            url="/resources"
+            exact={true}
+            onClick={() => {
+              this.hideNav();
+            }}
+          >
             リソース
           </stencil-route-link>
-          <stencil-route-link url="/blog" onClick={() => { this.hideNav() }}>
+          <a href="https://ionicframework.com/blog/tag/stencil/" aria-label="Blog" class="external-links">
             ブログ
-          </stencil-route-link>
+          </a>
+
+          <a href="https://ionic.io/products/stencil" class="external-links">
+            Enterprise
+          </a>
 
           <ul class="external-links list--unstyled">
             <li>
@@ -90,12 +106,23 @@ export class SiteHeader {
             </li>
           </ul>
 
-          <button class="header-close" onClick={() => { this.hideNav() }}>
+          <button
+            class="header-close"
+            onClick={() => {
+              this.hideNav();
+            }}
+          >
             <app-icon name="close"></app-icon>
           </button>
         </div>
 
-        <button class="header-overflow" onClick={() => { this.showNav() }} aria-label="Open menu">
+        <button
+          class="header-overflow"
+          onClick={() => {
+            this.showNav();
+          }}
+          aria-label="Open menu"
+        >
           <app-icon name="more"></app-icon>
         </button>
       </ResponsiveContainer>

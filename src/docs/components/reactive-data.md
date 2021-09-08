@@ -17,18 +17,26 @@ Stencilコンポーネントは、コンポーネントのPropまたは状態が
 
 ## デコレータを見る
 
-ユーザーがプロパティを更新すると、 `Watch`はアタッチされているメソッドを起動し、そのメソッドに古い値と一緒にPropの新しい値を渡します。 「ウォッチ」は、Propの検証や副作用の処理に役立ちます。 コンポーネントが最初にロードされたとき、 `Watch`デコレータは起動しません。
+## Watch Decorator
+
+`Watch` will fire the method it's attached to when a user updates a property, or when an internal state member changes. That method will receive the new value of the prop/state, along with the old value. `Watch` is useful for validation or the handling of side effects. The `Watch` decorator does not fire when a component initially loads.
 
 
 ```tsx
-import { Prop, Watch } from '@stencil/core';
+import { Prop, State, Watch } from '@stencil/core';
 
 export class LoadingIndicator {
   @Prop() activated: boolean;
+  @State() busy: boolean;
 
   @Watch('activated')
-  watchHandler(newValue: boolean, oldValue: boolean) {
+  watchPropHandler(newValue: boolean, oldValue: boolean) {
     console.log('The new value of activated is: ', newValue);
+  }
+
+  @Watch('busy')
+  watchStateHandler(newValue: boolean, oldValue: boolean) {
+    console.log('The new value of busy is: ', newValue);
   }
 }
 ```

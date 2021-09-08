@@ -53,6 +53,7 @@ Stencilでは、私達のビジョンは真ん中のどこかにあります。�
 
 同時に、Webコンポーネントに不可欠な機能は、これらのコンポーネントの配布とデザインシステムの問題を解決することであると考えています。ただし、市場の90％にはそもそもこれらの問題がないため、Webコンポーネントのメリットに関する現在の議論はやや非生産的であると考えています。
 
+At the same time, we believe an indispensable feature for Web Components is solving those component distribution and design system problems. We also believe, however, that 90% of the market doesn’t have those problems to begin with, so the current debate about the merits of Web Components is somewhat unproductive.
 
 ### Stencilがフレームワークにとらわれないとみなされるのはなぜですか？
 
@@ -222,4 +223,3 @@ Stencilのソフトウェアライセンは[MIT](https://github.com/ionic-team/s
 ### Stencilの開発者は誰ですか？
 
 開発の大部分は、[Ionic](https://github.com/ionic-team/ionic)のエンジニアによって行われます。Stencilに興奮している場合は、コミュニティに参加して貢献することをお勧めします。開始するのに最適な場所は、[Stencil Slack Channel](https://stencil-worldwide.herokuapp.com/)です。
-

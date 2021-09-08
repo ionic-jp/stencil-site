@@ -7,6 +7,7 @@ contributors:
   - jthoms1
   - adamdbradley
   - BDav24
+  - DaniAcu
 ---
 
 # フレームワークを使用しないコンポーネント
@@ -54,7 +55,7 @@ export class TodoList {
 }
 ```
 
-```tsx
+```markup
 <todo-list></todo-list>
 <script>
   const todoListElement = document.querySelector('todo-list');

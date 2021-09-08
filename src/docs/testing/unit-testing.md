@@ -37,6 +37,26 @@ it('should render my component', async () => {
 });
 ```
 
+The example below uses the template option to test the component
+```tsx
+// mycmp.spec.tsx
+// Since the 'template' argument to `newSpecPage` is using jsx syntax, this should be in a .tsx file.
+import { h } from '@stencil/core';
+import { newSpecPage } from '@stencil/core/testing';
+import { MyCmp } from '../my-cmp';
+
+it('should render my component', async () => {
+  const greeting = 'Hello World';
+  const page = await newSpecPage({
+    components: [MyCmp],
+    template: () => (<my-cmp greeting={greeting}></my-cmp>),
+  });
+  expect(page.root).toEqualHtml(`
+    <my-cmp>Hello World</my-cmp>
+  `);
+});
+
+```
 
 ### スペックページオプション
 
@@ -48,6 +68,7 @@ it('should render my component', async () => {
 |--------|-------------|
 | `components` | テストするコンポーネントの配列。コンポーネントクラスはスペックファイルにインポートできます。その後、テスト全体で使用するために、それらの参照を `component`配列に追加する必要があります。 *必須*  |
 | `html` | テストの生成に使用される最初のHTML。これは、連携して動作するコンポーネントのコレクションを構築し、HTML属性を割り当てるのに役立ちます。この値は、モックされた `document.body.innerHTML`を設定します。 |
+| `template` | The initial JSX used to generate the test. Use `template` when you want to initialize a component using their properties, instead of their HTML attributes. It will render the specified template (JSX) into `document.body`. |
 | `autoApplyChanges` | デフォルトでは、コンポーネントのプロパティと属性への変更は、更新をテストするために `page.waitForChanges()`を呼び出す必要があります。オプションとして、 `autoApplyChanges`はバックグラウンドでキューを継続的にフラッシュします。デフォルトは `false` |
 | `cookie` | モックされた `document.cookie`を設定します。 |
 | `direction` | 模擬の `dir`属性を`<html>`に設定します。 |
