@@ -64,7 +64,7 @@
   * [サービスワーカー](guides/service-workers.md)
   * [Stencil Store](guides/store.md)
   * [公開](guides/publishing.md)
-  * [Deno (実験的)](guides/deno.md)
+  * [Deno (end-of-life)](guides/deno.md)
 * テスト
   * [概要](testing/overview.md)
   * [Config](testing/config.md)
