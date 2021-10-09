@@ -1,54 +1,45 @@
 ---
-title: カスタムエレメントをステンシルでバンドルする
-description: カスタムエレメントをステンシルでバンドルする
+title: Stencilでつくるカスタムエレメント
+description: Stencilでつくるカスタムエレメント
 url: /docs/custom-elements
 contributors:
   - adamdbradley
+  - splitinfinities
 ---
 
-# カスタムエレメントバンドル
+# カスタムエレメント
 
-`dist-custom-elements-bundle`出力ターゲットは、カスタムエレメントを単一のバンドルとして生成するために使用されます。 出力は最終的に「単一の」バンドルになりますが、コンポーネントがツリーシェイク可能であることを保証するために生成されます。 たとえば、コンポーネントライブラリに100個のコンポーネントがあり、外部プロジェクトがバンドルから1つのコンポーネントのみをインポートした場合、その1つのコンポーネントで使用されるコードのみがプロジェクトにプルされます。 これは、ステンシルがESモジュールを使用し、コンパイラーがバンドラーが解析して理解するためのわかりやすいコードを生成するためです。
+`dist-custom-elements` 出力ターゲットは、ツリーシェイクに最適化された方法でカスタムエレメントを生成するために使用され、フロントエンドフレームワークとの統合を使用する際に推奨される方法です。例えば、コンポーネントライブラリに100個のコンポーネントがあり、外部プロジェクトがそのディレクトリから1つのコンポーネントだけをインポートした場合、その1つのコンポーネントで使用されているコードだけがプロジェクトに取り込まれることになります。これは、StencilがESモジュールを使用していることと、コンパイラがバンドルラーが解析して理解できるようなフレンドリーなコードを生成しているためです。
 
 ```tsx
 outputTargets: [
   {
-    type: 'dist-custom-elements-bundle',
+    type: 'dist-custom-elements',
   },
 ];
 ```
 
 ## エクスポートされたカスタムエレメントの定義
 
-デフォルトでは、カスタムエレメントバンドルは `dist/custom-elements/index.js`に書き込まれます。 このディレクトリは、出力ターゲットの `dir`設定を使用して設定できます。 生成された `index.js`ファイルには、各コンポーネントクラスへのエクスポートが含まれ、それらのスタイルがバンドルに含まれます。 ただし、このビルドでは、カスタムエレメントを自動的に定義したり、ポリフィルを適用したりすることはありません。
+デフォルトでは、カスタムエレメントのファイルは `dist/components/index.js` に書き込まれます。このディレクトリは、出力ターゲットの `dir` コンフィグで設定できます。生成された `index.js` ファイルには、各コンポーネントクラスのエクスポートが含まれており、それらのスタイルがバンドル内に含まれます。ただし、このビルドでは、自動的にカスタム要素を定義したり、ポリフィルを適用したりすることはありません。
 
-以下は、バンドル内のカスタムエレメントを定義する例です。クスポートされたカスタムエレメントの定義
+以下に、カスタム要素の定義の例を示します。
 
 ```tsx
-import { HelloWorld } from 'my-library/dist/custom-elements';
+import { HelloWorld } from 'my-library/dist/components/hello-world';
 
 customElements.define('hello-world', HelloWorld);
 ```
 
-コンポーネントが他のコンポーネントに依存している場合は、各コンポーネントを手動で登録する必要があります。 これは面倒な場合があるため、便宜上、バンドルは `defineCustomElements()`メソッドもエクスポートします。
+生成されたファイルは、各コンポーネントクラスをエクスポートし、すでにスタイルがバンドルされています。しかし、カスタム要素の定義やポリフィルの適用は行われません。また、インポートされたコンポーネントの依存関係があれば、それも読み込む必要があります。
 
-`defineCustomElements()`が呼び出されると、バンドル内のすべてのコンポーネントが定義されます。 ただし、自動的には実行されず、インポートおよび実行されない場合は呼び出されません。 未使用のコンポーネントがインポートされている場合は、バンドルサイズが大きくなる可能性もあります。
+## アセットの利用
 
-```tsx
-import { defineCustomElements } from 'my-library/dist/custom-elements';
+パフォーマンス上の理由から、生成されたバンドルには、JavaScriptの出力に組み込まれた[local assets](/docs/local-assets)は含まれていません。外部ファイルにしておくことで、その内容をJSファイルに溶接したり、バンドルラーが出力に追加するために多くのURLを追加するのではなく、必要に応じてリクエストできるようになります。ローカルアセット](/docs/local-assets)を外部のビルドやHTTPサーバーから利用できるようにする方法の一つとして、`setAssetPath()`を使ってアセットパスを設定する方法があります。
 
-defineCustomElements();
-```
+`setAssetPath()`関数は、スタティックアセットが存在するベースパスを手動で設定するために使用します。遅延ロードされた出力ターゲットの場合、アセットパスは自動的に設定され、アセットは正しいビルドディレクトリにコピーされます。しかし、カスタムエレメントのビルドでは、アセットパスをhttpサーバ上のどこで見つかるかに応じてカスタマイズするために、`setAssetPath(path)`を使用する必要があります。
 
-生成されたバンドルは各コンポーネントクラスをエクスポートし、すでにスタイルがバンドルされています。 ただし、カスタムエレメントを定義したり、ポリフィルを適用したりすることはありません。
-
-## Making Assets Available
-
-For performance reasons, the generated bundle does not include [local assets](/docs/local-assets) built within the JavaScript output, but instead it's recommended to keep static assets as external files. By keeping them external this ensures they can be requested on-demand, rather than either welding their content into the JS file, or adding many URLs for the bundler to add to the output. One method to ensure [local assets](/docs/local-assets) are available to external builds and http servers is to set the asset path using `setAssetPath()`.
-
-The `setAssetPath()` function is used to manually set the base path where static assets can be found. For the lazy-loaded output target the asset path is automatically set and assets copied to the correct build directory. However, for custom elements builds, the `setAssetPath(path)` should be used to customize the asset path depending on where they are found on the http server.
-
-If the component's script is a `type="module"`, it's recommended to use `import.meta.url`, such as `setAssetPath(import.meta.url)`. Other options include `setAssetPath(document.currentScript.src)`, or using a bundler's replace plugin to dynamically set the path at build time, such as `setAssetPath(process.env.ASSET_PATH)`.
+コンポーネントのスクリプトが `type="module"` の場合は、 `setAssetPath(import.meta.url)` のように `import.meta.url` を使うことが推奨されます。その他のオプションとしては、`setAssetPath(document.currentScript.src)`や、`setAssetPath(process.env.asset_PATH)`のように、バンドルラーのreplaceプラグインを使用して、ビルド時にパスを動的に設定することもできます。
 
 ## アセットを利用可能にする
 
@@ -60,26 +51,27 @@ If the component's script is a `type="module"`, it's recommended to use `import.
 
 
 ```tsx
-import { defineCustomElements, setAssetPath } from 'my-library/dist/custom-elements';
+import { setAssetPath } from 'my-library/dist/components';
 
 setAssetPath(document.currentScript.src);
-defineCustomElements();
 ```
 
-アセットをアプリのパブリックディレクトリにコピーしてください。 この構成は、スクリプトがどのようにバンドルされているか、またはバンドルされていないか、およびアセットをどこからロードできるかによって異なります。 ファイルが本番ビルドディレクトリにコピーされる方法は、バンドラーまたはツールによって異なります。 以下の設定は、人気のあるバンドラーでこれを自動的に行う方法の例を示しています。
-The configs below provide examples of how to do this automatically with popular bundlers.
+アセットは必ずアプリ内の公開ディレクトリにコピーしてください。この設定は、スクリプトがどのようにバンドルされているか、あるいはバンドルされていないか
+また、アセットをどこから読み込むかによっても異なります。本番のビルドディレクトリにどのようにファイルをコピーするかは、バンドルラーやツールに依存します。
+以下の設定は、一般的なバンドルラーで自動的に行う方法の例です。
 
 ## カスタムエレメントの配布
 
-コンポーネントライブラリは、[`@ionic/core`](https://www.npmjs.com/package/@ionic/core)と同様に、NPMで簡単に配布できます。 そこから、ライブラリの利用者は、ライブラリをプロジェクトにインポートする方法を決定できます。 `dist-custom-elements-bundle`の場合、デフォルトのインポート場所は`my-library/dist/custom-elements-bundle`ですが、これは `package.json`ファイル内でさらに構成できます。
+=======
+あなたのコンポーネントライブラリは、[`@ionic/core`](https://www.npmjs.com/package/@ionic/core)のやり方と同様に、NPMで簡単に配布することができます。そこから、あなたのライブラリの消費者は、あなたのライブラリを自分のプロジェクトにどのようにインポートするかを決めることができます。dist-custom-elements`では、デフォルトのインポート先は `my-library/dist/components` ですが、これは `package.json` ファイル内でさらに設定することができます。
 
-カスタムエレメントにパッケージのエントリモジュールをバンドルさせるには、 `package.json`の`module`プロパティを次のように設定します。
+カスタムエレメントのインデックスをパッケージのエントリーモジュールにするには、`package.json` の `module` プロパティを次のように設定します。
 
 また、パッケージの依存関係として必ず `@stencil/core`を設定してください。
 
 ```tsx
 {
-  "module": "dist/custom-elements-bundle/index.js",
+  "module": "dist/components/index.js",
   "dependencies": {
     "@stencil/core": "latest"
   },
@@ -87,7 +79,7 @@ The configs below provide examples of how to do this automatically with popular 
 }
 ```
 
-注： `dist`と`dist-custom-elements-bundle`の両方を配布する場合は、 `module`エントリでどちらを使用できるかを選択するのはあなた次第です。
+注意: `dist` と `dist-custom-elements` の両方を配布している場合は、どちらを `module` のエントリで利用できるようにするかは、あなた次第です。
 
 これで、ライブラリを[Node Package Manager(NPM)](https://www.npmjs.com/)に公開できます。 `package.json`ファイルの設定と公開の詳細については、[コンポーネントライブラリをNPMに公開する](/docs/Publishing)を参照してください。
 
@@ -170,17 +162,19 @@ export default {
 };
 ```
 
-## これは「dist」出力ターゲットとどう違うのですか？
+## "dist "や "dist-custom-element-bundle "の出力ターゲットとはどう違うのですか?
 
-`dist-custom-elements-bundle`は、各コンポーネントを`HTMLElement`を拡張するスタンドアロンクラスとして構築します。 出力は標準化されたカスタムエレメントであり、スタイルはすでにアタッチされており、Stencilの遅延読み込みはありません。 これは、カスタムエレメント自体のバンドル、遅延読み込み、および定義をすでに処理しているプロジェクトに適している場合があります。
+`dist-custom-elements` は、各コンポーネントを `HTMLElement` を拡張したスタンドアローンのクラスとしてビルドします。出力されるのは、スタイルがすでにアタッチされ、Stencilのレイジーローディングが一切ない、標準化されたカスタムエレメントです。これは、バンドル、レイジーローディング、カスタムエレメントの定義をすでに自分たちで行っているプロジェクトにとっては好ましいものでしょう。
+
+`dist-custom-elements-bundle` は `dist-custom-elements` とほぼ同じですが、`dist-custom-elements-bundle` は1つのファイルしか作成しないという例外があります。どちらを使用するかはあなた次第ですが、React、Vue、Angularの出力ターゲットでは、ツリーシェイク機能を向上させるために、`dist-custom-elements`を使用しています。また、IE11や古いEdgeのバージョンに依存しない、参入障壁の低いアプリでは、このシングルファイルを使用することができます。
 
 一方、 `dist`出力ターゲットは、バンドル構成をセットアップすることなく、コンポーネントが自身を遅延ロードできるようにしたいプロジェクト向けです。
 
-幸い、両方のビルドを同じソースコードを使用して同時に生成し、同じディストリビューションで出荷することができます。 使用するビルドを決定するのは、コンポーネントライブラリの利用者次第です。
+幸いなことに、すべてのビルドは、同じソースコードを使って同時に生成され、同じディストリビューションで出荷することができます。どのビルドを使用するかは、コンポーネントライブラリの消費者が決めることになります。
 
 ## ブラウザサポート
 
-ライブラリをIE11で使用する場合は、必要なポリフィルのみをオンデマンドでロードするため、代わりに[`dist`出力ターゲット](/output-targets/dist)を使用することをお勧めします。 `dist-custom-elements-bundle`は、カスタムエレメント、Shadow DOM、およびCSS変数（基本的にIE11またはEdge 12-18ではない）をすでにサポートしている最新のブラウザーにのみ推奨されます。 このビルドをレガシーブラウザー内で使用する場合、これらのコンポーネントを使用するプロジェクトは、独自のポリフィルを提供し、出力をES5に正しくダウンレベルする必要があります。
+このライブラリを IE11 で使用する場合は、代わりに [`dist` 出力対象](/docs/distribution) を使用することをお勧めします。必要なポリフィルだけをオンデマンドで読み込むことができます。 `dist-custom-elements`は、Custom Elements、Shadow DOM、CSS Variablesをすでにサポートしているモダンブラウザにのみ推奨されます（基本的にIE11やEdge 12-18は対象外）。このビルドをレガシーブラウザで使用する場合は、これらのコンポーネントを消費するプロジェクトが独自のポリフィルを提供し、出力を正しくES5にダウンレベルする必要があります。
 
 良いニュースは、これらが現代のWeb開発ですでに広くサポートされていることです。
 

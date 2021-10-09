@@ -37,7 +37,7 @@ export const config: Config = {
 };
 ```
 
-JSON出力のtypescript宣言を確認してください：https://github.com/ionic-team/stencil/blob/master/src/declarations/stencil-public-docs.ts
+JSON出力のTypeScript宣言を確認してください: https://github.com/ionic-team/stencil/blob/main/src/declarations/stencil-public-docs.ts
 
 ## CSS変数
 

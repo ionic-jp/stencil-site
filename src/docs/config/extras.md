@@ -78,6 +78,10 @@ div {
 
 safari 10は`<script type="module">`でESモジュールをサポートしていますが、`<script nomodule>`は実装されていませんでした。`safari10`が`false`に設定されている場合、ランタイムはsafari 10のサポートを適用しません。もしアプリケーションがsafari 10をサポートする必要がない場合は、この値を`false`に設定することをお勧めします。デフォルトは `false`です。
 
+### scopedSlotTextContentFix
+
+An experimental flag that when set to `true`, aligns the behavior of invoking the `textContent` getter/setter on a scoped component to act more like a component that uses the shadow DOM. Specifically, invoking `textContent` on a component will adhere to the return values described in [MDN's article on textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent#description). Defaults to `false`.
+
 ### scriptDataOpts
 
 実際の`<script>`要素の`data-opts`プロパティにデータを割り当てることが可能であり、そのデータはStencilの最初の自動実行に渡されます。この機能は非常に特殊なケースでのみ必要とされ、ほとんどの場合必要とされません。`false`に設定すると、このデータは読み込まれません。デフォルトは `false`です。

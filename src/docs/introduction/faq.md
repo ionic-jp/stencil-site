@@ -14,7 +14,7 @@ contributors:
 
 Stencilは、再利用可能で、スケーラブルなコンポーネントライブラリ、アプリケーション、およびデザインシステムを構築するための開発者向けツールです。高度に最適化されたWebコンポーネントを生成するコンパイラを提供し、最も人気のあるフレームワークの概念をビルドツールに結合します。
 
-Stencilは、Web標準を使用したコンポーネントの構築に重点を置いています。これは世界中の開発者や組織によって使用されており、[MITライセンスのOSS](https://github.com/ionic-team/stencil/blob/master/LICENSE.md)です
+Stencilは、Web標準でコンポーネントを構築することに重点を置いています。世界中の開発者や組織で使用されており、[100%フリーでMITオープンソース](https://github.com/ionic-team/stencil/blob/main/LICENSE.md)となっています。
 
 ### Stencilは何をしますか？
 
@@ -211,7 +211,7 @@ StencilをInternetExplorer 11以降で動作させるには、いくつかのポ
 Stencilはオープンソースプロジェクトであり、貢献することをお勧めします。まず、GitHubで問題を作成し、機能リクエストを送信して、バグの再現を支援します。投稿に興味がある場合は、[コントリビュートガイド](https://github.com/ionic-team/ionic/blob/master/.github/CONTRIBUTING.md)を参照し、[issueを報告してください](https://github.com/ionic-team/stencil/issues)。
 
 
-Stencil is an open source project, and we encourage you to contribute. You can start by creating issues on GitHub, submitting feature requests, and helping to replicate bugs. If you’re interested in contributing, please see our [Contributor Guide](https://github.com/ionic-team/stencil/blob/master/.github/CONTRIBUTING.md) and check out our [issue tracker](https://github.com/ionic-team/stencil/issues).
+Stencil is an open source project, and we encourage you to contribute. You can start by creating issues on GitHub, submitting feature requests, and helping to replicate bugs. If you’re interested in contributing, please see our [Contributor Guide](https://github.com/ionic-team/stencil/blob/main/.github/CONTRIBUTING.md) and check out our [issue tracker](https://github.com/ionic-team/stencil/issues).
 
 はい、Stencilはオープンソースであり、そのソースコードは[GitHubにあります](https://github.com/ionic-team/stencil)です。コミュニティからの貢献を歓迎します。
 
@@ -221,7 +221,7 @@ Stencil is an open source project, and we encourage you to contribute. You can s
 Stencilのソフトウェアライセンは[MIT](https://github.com/ionic-team/stencil/blob/master/LICENSE)です。
 
 
-Stencil’s software [license is MIT](https://github.com/ionic-team/stencil/blob/master/LICENSE.md).
+Stencil’s software [license is MIT](https://github.com/ionic-team/stencil/blob/main/LICENSE.md).
 
 
 ### Who works on Stencil?

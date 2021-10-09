@@ -12,10 +12,12 @@ contributors:
 コンパイラのより強力な機能の1つは、コンポーネントが使用される _方法_ に応じてさまざまなビルドを生成する機能です。 Stencilは、アプリのソースを取得して、httpサーバーにデプロイするWebアプリ、[npm](https://www.npmjs.com/)で配布するサードパーティコンポーネントの遅延読み込みライブラリ、またはVanillaJSのカスタムエレメントなど、多数のターゲットにコンパイルできます。 デフォルトでは、Stecnilの出力ターゲットタイプは `www`であり、これはWebアプリに最適です。
 
 
-## 出力ターゲットタイプ
- - [`dist-custom-elements-bundle`: カスタムエレメント](/docs/custom-elements)
- - [`dist`: ディストリビューション](/docs/distribution)
+## 出力ターゲットタイプ:
+ - [`dist`: 配布](/docs/distribution)
  - [`www`: Webサイト](/docs/www)
+ - [`dist-custom-elements`: カスタムエレメント](/docs/custom-elements)
+ - [`dist-custom-elements-bundle`: カスタムエレメントバンドル](/docs/custom-elements-bundle)
+ - [`stats`: Stats about the compiled files](/docs/stats)
  - [`docs-readme`: マークダウンでフォーマットされたドキュメントのreadmeファイル](/docs/docs-readme)
  - [`docs-json`: JSONでフォーマットされたドキュメントデータ](/docs/docs-json)
  - [`docs-custom`: カスタムドキュメントの生成](/docs/docs-custom)
