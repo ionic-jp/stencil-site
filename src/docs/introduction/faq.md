@@ -208,7 +208,20 @@ StencilをInternetExplorer 11以降で動作させるには、いくつかのポ
 
 ### どうすれば参加できますか？
 
-Stencilはオープンソースプロジェクトであり、貢献することをお勧めします。まず、GitHubで問題を作成し、機能リクエストを送信して、バグの再現を支援します。投稿に興味がある場合は、[コントリビュートガイド](https://github.com/ionic-team/ionic/blob/master/.github/CONTRIBUTING.md)を参照し、[issueを報告してください](https://github.com/ionic-team/stencil/issues)。
+### What versions of Stencil are currently supported?
+
+Currently, Stencil is on version 2.
+
+Stencil follows [semantic versioning](https://semver.org/), meaning that the team at Ionic strives to avoid any type of breaking change to Stencil without changing the 'major version number' of the library. Therefore, versions 2.7.0 and 2.8.0 are designed to be backwards compatible with one another. However, there may be breaking changes between v2.7.0 and v3.0.0. Breaking changes to the library can be found [here](https://github.com/ionic-team/stencil/blob/master/BREAKING_CHANGES.md).
+
+To determine the version of Stencil your project has installed, run:
+```shell
+npm ls @stencil/core
+```
+
+To view the latest version of Stencil, please see the project's [releases page](https://github.com/ionic-team/stencil/releases).
+
+> At this time, versions 0 and 1 of Stencil are not actively supported.
 
 
 Stencil is an open source project, and we encourage you to contribute. You can start by creating issues on GitHub, submitting feature requests, and helping to replicate bugs. If you’re interested in contributing, please see our [Contributor Guide](https://github.com/ionic-team/stencil/blob/main/.github/CONTRIBUTING.md) and check out our [issue tracker](https://github.com/ionic-team/stencil/issues).
@@ -216,10 +229,7 @@ Stencil is an open source project, and we encourage you to contribute. You can s
 はい、Stencilはオープンソースであり、そのソースコードは[GitHubにあります](https://github.com/ionic-team/stencil)です。コミュニティからの貢献を歓迎します。
 
 
-### Stencilはどのソフトウェアライセンスを使用しますか？
-
-Stencilのソフトウェアライセンは[MIT](https://github.com/ionic-team/stencil/blob/master/LICENSE)です。
-
+### Which software license does Stencil use?
 
 Stencil’s software [license is MIT](https://github.com/ionic-team/stencil/blob/main/LICENSE.md).
 

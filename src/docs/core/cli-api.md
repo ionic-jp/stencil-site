@@ -49,7 +49,7 @@ run(init: CliInitOptions): Promise<void>
 ## runTask()
 
 ```tsx
-runTask(process: any, config: Config, task: TaskCommand): Promise<void>
+runTask(process: any, config: Config, task: TaskCommand,  sys?: CompilerSystem): Promise<void>
 ```
 
-NodeJS `process`、Stencil`config`、およびtaskコマンドを指定して個々のタスクを実行します。
+Runs individual tasks giving a NodeJS `process`, Stencil `config`, and task command. You can optionally pass in the `sys` that's used by the compiler. See [createNodeSystem()](#createnodesystem) for more details.

@@ -4,6 +4,7 @@ description: Stencilでつくるカスタムエレメント
 url: /docs/custom-elements
 contributors:
   - adamdbradley
+  - rwaskiewicz
   - splitinfinities
 ---
 
@@ -33,7 +34,24 @@ customElements.define('hello-world', HelloWorld);
 
 生成されたファイルは、各コンポーネントクラスをエクスポートし、すでにスタイルがバンドルされています。しかし、カスタム要素の定義やポリフィルの適用は行われません。また、インポートされたコンポーネントの依存関係があれば、それも読み込む必要があります。
 
-## アセットの利用
+## Config
+
+### autoDefineCustomElements
+
+By default, consumers of the `custom-elements` output target need to either register each Stencil component in the
+bundle manually, or call a convenience method, `defineCustomElements()`, that is exported as a part of the bundle to
+define every component in the bundle. This behavior can be cumbersome, especially when only a handful of components are
+needed and/or those components have several child components (and their children have children, etc.).
+
+Setting this flag to `true` will recursively define all children components for a Stencil component when it is
+registered. Users of this flag should note that this may increase their bundle size by automatically defining &
+registering child components.
+
+This flag defaults to `false` when omitted from a Stencil configuration file.
+
+> Note: At this time, components created not using JSX may not be automatically defined. This is a known limitation of the API and users should be aware of it
+
+## Making Assets Available
 
 パフォーマンス上の理由から、生成されたバンドルには、JavaScriptの出力に組み込まれた[local assets](/docs/local-assets)は含まれていません。外部ファイルにしておくことで、その内容をJSファイルに溶接したり、バンドルラーが出力に追加するために多くのURLを追加するのではなく、必要に応じてリクエストできるようになります。ローカルアセット](/docs/local-assets)を外部のビルドやHTTPサーバーから利用できるようにする方法の一つとして、`setAssetPath()`を使ってアセットパスを設定する方法があります。
 

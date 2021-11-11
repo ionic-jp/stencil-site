@@ -7,15 +7,17 @@ contributors:
   - natemoo-re
   - larionov
   - joestrouth1
+  - rwaskiewicz
 ---
 
 
 # Stencil Style Guide
 
-これは、[Ionic Core](https://ionicframework.com/)コンポーネントを標準化する目的で、Stencilのコアチームによって内部的に作成および実施されるコンポーネントスタイルガイドです。 これは、他のチームが独自のスタイルガイドを作成する際の参照としてのみ使用する必要があります。 チームの好みに合わせて自由に変更してください。
+This is a component style guide created and enforced internally by the core team of Stencil, for the purpose of standardizing Stencil components. This should only be used as a reference for other teams in creating their own style guides. Feel free to modify to your team's own preference.
 
->この（またはチームの）スタイルガイドを実施するには、[TSLint](https://palantir.github.io/tslint/)などの静的分析ツールを活用することをお勧めします。 Ionicは[tslint-ionic-rules](https://github.com/ionic-team/tslint-ionic-rules/blob/master/tslint.js)に従います。 オプションで、_communitymaintained_ パッケージ[tslint-stencil](https://www.npmjs.com/package/tslint-stencil)は、特にステンシルコンポーネントを作成するためのルールを提供します。
+> In order to enforce this (or your team's) style guide, we recommend leveraging a static analysis tool like [ESLint](https://eslint.org/). [@stencil/eslint-plugin](https://www.npmjs.com/package/@stencil/eslint-plugin) provides rules specifically for writing Stencil components.
 
+> This guide once recommended TSLint as a static analysis tool. TSLint has been deprecated by its maintaining organization in favor of ESLint and is no longer recommended by the Stencil team.
 
 ## ファイル構造
 
@@ -50,8 +52,8 @@ Ionic Coreの例：
 ## ネーミング
 ### HTMLタグ
 
-#### プレフィックス
-[@ionic/core](https://www.npmjs.com/package/@ionic/core)のように、さまざまなプロジェクトで使用することを目的としたコンポーネントのコレクションを作成する場合、プレフィックスは主要な役割を果たします。 Webコンポーネントは、Webページ内でグローバルに宣言されているため、スコープが設定されていません。つまり、衝突を防ぐために「一意の」プレフィックスが必要です。 プレフィックスは、コンポーネントのコレクションをすばやく識別するのにも役立ちます。 さらに、Webコンポーネントはタグ名内に「-」ダッシュを含める必要があるため、最初のセクションを使用してコンポーネントに名前空間を付けるのが自然です。
+#### Prefix
+The prefix has a major role when you are creating a collection of components intended to be used across different projects, like [@ionic/core](https://www.npmjs.com/package/@ionic/core). Web Components are not scoped because they are globally declared within the webpage, which means a "unique" prefix is needed to prevent collisions. The prefix also helps to quickly identify the collection a component is part of. Additionally, web components are required to contain a "-" dash within the tag name, so using the first section to namespace your components is a natural fit.
 
 Stencilはステンシルコンポーネントを出力しないため、プレフィックスとして「stencil」を使用することはお勧めしません。出力は標準に準拠したWebコンポーネントです。
 
@@ -103,16 +105,14 @@ export class Menu { ... }
 
 ## TypeScript
 
-1. **フォローする** [tslint-ionic-rules](https://github.com/ionic-team/tslint-ionic-rules/blob/master/tslint.js)
-
-2. **可変デコレータはインライン化する必要があります。**
+1. **Variable decorators should be inlined.**
 
 ```tsx
 @Prop() name: string;
 @Element() el: HTMLElement;
 ```
 
-3. **メソッドデコレータは複数行である必要があります**
+2. **Method decorator should be multi-line**
 
 ```tsx
 @Listen('click')
@@ -121,9 +121,9 @@ onClick() {
 }
 ```
 
-4. **プライベート変数とメソッドを可能な限り使用します。**デッドコードを検出し、カプセル化を実施するのに役立ちます。これはTypeScriptがコードを強化するために提供する機能ですが、 `private`、`public`、または `protected`を使用しても、実際のJavaScript出力に違いはありません。
+3. **Use private variables and methods as much possible:** They are useful to detect dead code and enforce encapsulation. Note that this is a feature which TypeScript provides to help harden your code, but using `private`, `public` or `protected` does not make a difference in the actual JavaScript output.
 
-5. **メソッド/プロップ/イベント/コンポーネントデコレータを含むコードにはjsdocsが必要です：**これにより、ドキュメントの生成が可能になり、TypeScriptインテリセンスを備えたエディターでのユーザーエクスペリエンスが向上します。
+4. **Code with Method/Prop/Event/Component decorators should have JSDocs:** This allows for documentation generation and for better user experience in an editor that has TypeScript intellisense
 
 ## コード編成
 

@@ -4,6 +4,7 @@ description: プロパティ
 url: /docs/properties
 contributors:
   - jthoms1
+  - rwaskiewicz
 ---
 
 # Propデコレータ
@@ -11,8 +12,32 @@ contributors:
 Propは、開発者が値を提供できる要素で公開されているカスタム属性/プロパティです。 子コンポーネントは親コンポーネントを認識または参照してはならないため、プロップを使用して親から子にデータを渡す必要があります。 コンポーネントは、 `@Prop()`デコレータを使用して、受け取る予定のPropを明示的に宣言する必要があります。 Propは、 `number`、`string`、 `boolean`、または`Object`や `Array`にすることができます。 デフォルトでは、 `@Prop()`デコレータでデコレートされたメンバーが設定されている場合、コンポーネントは効率的に再レンダリングされます。
 
 ```tsx
+// TodoList.tsx
 import { Prop } from '@stencil/core';
+import { MyHttpService } from '../some/local/directory/MyHttpService';
+...
+export class TodoList {
+  @Prop() color: string;
+  @Prop() favoriteNumber: number;
+  @Prop() isSelected: boolean;
+  @Prop() myHttpService: MyHttpService;
+}
+```
 
+When using user-defined types like `MyHttpService`, the type must be exported using the `export` keyword. Above,
+`MyHttpService` is imported from `'../some/local/directory/MyHttpService'`, and must be exported from that file.
+
+If `MyHttpService` were defined in `TodoList.tsx`, the `export` keyword would still be required, as Stencil needs to
+know what type `myHttpService` is when passing an instance of `MyHttpService` to `TodoList` from a parent component.
+
+```tsx
+// TodoList.tsx
+import { Prop } from '@stencil/core';
+...
+// the export keyword is still required here, so that a parent component knows what a `MyHttpService` is
+export type MyHttpService = {
+  // type definition goes here  
+};
 ...
 export class TodoList {
   @Prop() color: string;

@@ -7,6 +7,7 @@ contributors:
   - jthoms1
   - flawyte
   - BDav24
+  - rwaskiewicz
   - simonhaenisch
   - splitinfinities
 ---
@@ -161,12 +162,47 @@ namespace: "Ionic"
 
 *デフォルト: `undefined`*
 
-`preamble`は、ビルドのメインファイルのプリアンブルを表す`string`を指定します。バナーを永続化したり、ビルド結果に関する情報を追加するのに役立ちます。
+バナーを持続させたり、ビルド結果についての関連情報を追加するために使用される、 `preamble` 設定の
+フィールドは、ピン留めされたコメントに変換され、出力されるすべてのJavaScriptファイルの先頭に配置される `文字列` です。
+ただし、生成されるポリフィルは例外です。エスケープされた改行は、このフィールドに指定された値の中に入れることができます。
+Stencilはそれを尊重します。
 
+Example:
 ```tsx
-preamble: 'Built with Stencil'
+preamble: 'Built with Stencil\nCopyright (c) SomeCompanyInc.'
+```
+Will generate the following comment:
+```tsx
+/*!
+ * Built with Stencil
+ * Copyright (c) SomeCompanyInc.
+ */
 ```
 
+## sourceMap
+
+*default: `false`*
+
+When set to `true`, sourcemaps will be generated for a project.
+
+```tsx
+sourceMap: true
+```
+
+Sourcemaps create a translation between Stencil components that are written in TypeScript/JSX and the resulting
+JavaScript that is output by Stencil. Enabling source maps in your project allows for an improved debugging experience
+for Stencil components. For example, they allow external tools (such as an Integrated Development Environment) to add
+breakpoints directly in the original source code, which allows you to 'step through' your code line-by-line, to inspect
+the values held in variables, to observe logic flow, and more.
+
+Please note: Stencil will always attempt to minify a component's source code as much as possible during compilation.
+When `sourceMap` is enabled, it is possible that a slightly different minified result will be produced by Stencil when
+compared to the minified result produced when `sourceMap` is not enabled.
+
+Developers are responsible for determining whether or not they choose to serve sourcemaps in each environment their
+components are served and implementing their decision accordingly.
+
+When omitted or set to `false`, sourcemaps will not be generated.
 
 ## srcDir
 
