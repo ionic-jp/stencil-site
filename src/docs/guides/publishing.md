@@ -23,12 +23,12 @@ contributors:
 
 ```json
 {
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
   "es2015": "dist/esm/index.mjs",
   "es2017": "dist/esm/index.mjs",
-  "types": "dist/types/interface.d.ts",
-  "unpkg": "dist/ionic/ionic.js",
+  "types": "dist/types/components.d.ts",
+  "unpkg": "dist/my-project-name/my-project-name.esm.js",
   "collection:main": "dist/collection/index.js",
   "collection": "dist/collection/collection-manifest.json",
   "files": [

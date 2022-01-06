@@ -4,14 +4,15 @@ description:  Stencil Core Dev Server API
 url: /docs/dev-server-api
 contributors:
   - adamdbradley
+  - dominikpieper
 ---
 
 # StencilCore開発サーバーAPI
 
 CLI APIは、 `@stencil/core/dev-server`にあります。
 
-## startServer()
+## start()
 
 ```tsx
-startServer(devServerConfig: DevServerConfig, logger: Logger): Promise<DevServer>
+start(stencilDevServerConfig: StencilDevServerConfig, logger: Logger, watcher?: CompilerWatcher): Promise<DevServer>
 ```
