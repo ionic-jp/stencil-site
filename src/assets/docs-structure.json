@@ -3,8 +3,8 @@
     "text": "前書き",
     "children": [
       {
-        "text": "Why Stencil",
-        "filePath": "/assets/docs/introduction/why-stencil.json",
+        "text": "Overview",
+        "filePath": "/assets/docs/introduction/overview.json",
         "url": "/docs/introduction"
       },
       {

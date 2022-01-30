@@ -67,7 +67,7 @@ logColor() {
 JSXでは、キャメルケースを使用して属性を設定します。
 
 ```markup
-<todo-list color="blue" favoriteNumber={24} isSelected="true"></todo-list>
+<todo-list color="blue" favoriteNumber={24} isSelected={true}></todo-list>
 ```
 
 要素からJS経由でアクセスすることもできます。

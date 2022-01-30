@@ -184,7 +184,7 @@ export default {
 
 `dist-custom-elements` は、各コンポーネントを `HTMLElement` を拡張したスタンドアローンのクラスとしてビルドします。出力されるのは、スタイルがすでにアタッチされ、Stencilのレイジーローディングが一切ない、標準化されたカスタムエレメントです。これは、バンドル、レイジーローディング、カスタムエレメントの定義をすでに自分たちで行っているプロジェクトにとっては好ましいものでしょう。
 
-`dist-custom-elements-bundle` は `dist-custom-elements` とほぼ同じですが、`dist-custom-elements-bundle` は1つのファイルしか作成しないという例外があります。どちらを使用するかはあなた次第ですが、React、Vue、Angularの出力ターゲットでは、ツリーシェイク機能を向上させるために、`dist-custom-elements`を使用しています。また、IE11や古いEdgeのバージョンに依存しない、参入障壁の低いアプリでは、このシングルファイルを使用することができます。
+`dist-custom-elements-bundle` 出力ターゲットは `dist-custom-elements` とほぼ同じですが、[Stencil v2.12.0](https://github.com/ionic-team/stencil/releases/tag/v2.12.0) で非推奨となり、ツリーシェイク機能が向上した `dist-custom-elements` が使用されるようになりました。Stencil の React、Vue、Angular の出力先では、この理由により `dist-custom-elements` を使用しています。
 
 一方、 `dist`出力ターゲットは、バンドル構成をセットアップすることなく、コンポーネントが自身を遅延ロードできるようにしたいプロジェクト向けです。
 

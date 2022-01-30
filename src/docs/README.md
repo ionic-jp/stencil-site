@@ -1,10 +1,10 @@
 # Table of Contents
 
 * 前書き
-  * [Why Stencil](introduction/why-stencil.md)
+  * [概要](introduction/overview.md)
   * [目標と目的](introduction/goals-and-objectives.md)
   * [ブラウザサポート](introduction/browser-support.md)
-  * [はじめに](introduction/getting-started.md)
+  * [はじめかた](introduction/getting-started.md)
   * [最初のコンポーネント](introduction/my-first-component.md)
   * [よくある質問](introduction/faq.md)
   * [デザインシステムとは](design-systems/what-is-design-system.md)

@@ -7,38 +7,76 @@ contributors:
   - brandyscarney
   - camwiegert
   - kensodemann
+  - rwaskiewicz
 ---
 
 # テスト
 
-Stencil内のテストは、単体テストとエンドツーエンド（e2e）テストの2つの異なるタイプに分けられます。 どちらのタイプも、JavaScriptテストソリューションとして[Jest](https://jestjs.io/)を使用します。 エンドツーエンドテスト用のブラウザ環境は、[Puppeteer](https://pptr.dev/)を使用して実行されます。これにより、Stencilがビルドに組み込み始めることができる多くの利点が提供されます。
-
+In order to ensure that your Stencil components work the way you expect, Stencil provides testing support out of the
+box. Stencil offers both unit testing and end-to-end testing capabilities.
 
 ## ユニットテストとエンドツーエンドテスト
 
-テストをどのように行うべきか、そして単体テスト、エンドツーエンドテスト、さらには統合テストと見なすべきものについては、無数の哲学があります。すべてを単純化するために、ステンシルはそれを分解して、開発者が各タイプのテストをいつ使用するかについて定義された説明を持っているようにします。
+Testing within Stencil is broken up into two distinct types: Unit tests and End-to-end (e2e) tests.
 
-**単体テスト**は、コンポーネントのメソッドを分離してテストすることに重点を置いています。たとえば、メソッドに引数 `X`を指定すると、`Y`が返されます。
+There are several philosophies on how testing should be done, and how to differentiate what should be considered a unit
+test versus an end-to-end test. Stencil takes an opinionated stance so developers have a description of each to better
+choose when to use each type of testing:
 
-**エンドツーエンドのテスト**は、コンポーネントがDOMでどのようにレンダリングされるか、および個々のコンポーネントがどのように連携するかに焦点を当てています。たとえば、 `my-component`に`X`属性がある場合、子コンポーネントはテキスト `Y`をレンダリングし、イベント`Z`を受け取ることを期待します。エンドツーエンドのテストでは、ノード環境の代わりに[Puppeteer](https://pptr.dev/)を使用します。これにより、より現実的な結果を提供するために、実際のブラウザー内でエンドツーエンドのテストを実行できます。
+**Unit tests** focus on testing a component's methods in isolation. For example, when a method is given the argument
+`X`, it should return `Y`.
 
-JavaScriptテストとDOMテストの境界線を曖昧にしないことで、大規模なチーム間でテストをすばやく構築できます。
+**End-to-end tests** focus on how the components are rendered in the DOM and how the individual components work
+together. For example, when `my-component` has the `X` attribute, the child component then renders the text `Y`, and
+expects to receive the event `Z`.
 
+Both testng types use [Jest](https://jestjs.io/) as the JavaScript testing solution. End-to-end tests also use
+[Puppeteer](https://pptr.dev/) instead of a Node environment. This allows end-to-end tests to run within an actual
+browser in order to provide more realistic results.
+
+## Library Support
+
+Stencil uses [Jest](https://jestjs.io/) and [Puppeteer](https://pptr.dev/) as its testing libraries, and allows
+developers to install both libraries using their preferred package manager. Stencil currently supports:
+- Jest v24.9.0 through v27.Y.Z (inclusive)
+- Puppeteer v1.19.0 through v10.Y.Z (inclusive)
+
+If you created a project using `npm init stencil`, these libraries were installed for you. Depending on when your
+project was created, you may or may not have the latest supported version installed.
 
 ## テストコマンド
 
-以下は、アプリの `package.json`ファイルに追加できる`npm`スクリプトの例です。 コマンドが `stencil test`であり、単体テストの場合は` --spec`、エンドツーエンドテストの場合は `--e2e`のオプションのフラグがあることに注意してください。
+Stencil tests are run using the command `stencil test`, followed by one or more optional flags:
+- `--spec` to run unit tests
+- `--e2e` to run end-to-end tests
+- `--watchAll` to watch the file system for changes, and rerun tests when changes are detected
 
-```tsx
-"scripts": {
-  "test": "stencil test --spec",
-  "test.watch": "stencil test --spec --watch",
-  "test.e2e": "stencil test --e2e"
+When the `--spec` and/or `--e2e` flags are provided, Stencil will automatically run the tests associated with each flag.
+
+Below a series of example `npm` scripts which can be added to the project's `package.json` file to run Stencil tests:
+
+```json
+{
+    "scripts": {
+      "test": "stencil test --spec",
+      "test.watch": "stencil test --spec --watchAll",
+      "test.end-to-end": "stencil test --e2e"
+    }
 }
 ```
 
-この構成はすべて、Stencil AppStarterとStencilComponent Starterに含まれているため、これらのテンプレートの1つを使用してプロジェクトを開始する場合は、何も追加する必要はありません。 この情報は、主に情報提供を目的としてここに表示されます。
+Each command above begins with `stencil test`, which tells Stencil to run tests. Note that each `stencil test` command
+in example above is followed one or more of the optional flags. Looking at each script, one at a time:
+- the `test` script runs unit tests for our Stencil project.
+- the `test.watch` script runs unit tests for our Stencil project. It watches the filesystem for changes, and reruns
+tests when changes are detected.
+- the `test.end-to-end` script runs the end-to-end tests for our Stencil project.
 
+If you created a project using `npm init stencil`, these scripts are provided to you automatically.
+
+Stencil does not prescribe any specific naming convention for the names of your scripts. The `test.watch` script could
+as easily be named `test-watch`, `test.incremental`, etc. As long as the script itself uses the `stencil test` command,
+your tests should be run.
 
 ### 構成のテスト
 
@@ -58,7 +96,7 @@ export const config: Config = {
 
 次の構成を `.vscode/launch.json`に追加すると、VS Code Debuggerを使用して、エディターで現在アクティブなファイルのステンシルテストランナーを実行できます。 実行するテストファイルが表示されていることを確認してから、デバッグ構成をそれぞれ選択し（スペックテストかe2eテストかに応じて）、再生ボタンを押します。
 
-```tsx
+```json
 {
   "configurations": [
     {

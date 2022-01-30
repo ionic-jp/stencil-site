@@ -5,167 +5,214 @@ url: /docs/styling
 contributors:
   - jthoms1
   - shreeshbhat
+  - a-giuliano
 ---
 
 # スタイリングコンポーネント
 
 ## ShadowDOM
 
-### ShadowDOMとは
+### What is the Shadow DOM?
 
-[ShadowDOM](https://developers.google.com/web/fundamentals/web-components/shadowdom)は、DOMのカプセル化とスタイルのカプセル化を可能にするブラウザーに組み込まれたAPIです。 ShadowDOMは、コンポーネントを周囲の環境から保護します。 これは、CSSを正しくスコープすることを心配する必要がなく、内部DOMがコンポーネントの外部に干渉されることを心配する必要がないことを意味します。
+The [shadow DOM](https://developers.google.com/web/fundamentals/web-components/shadowdom) is an API built into the browser that allows for DOM encapsulation and style encapsulation. It is a core aspect of the Web Component standards. The shadow DOM shields a component’s styles, markup, and behavior from its surrounding environment. This means that we do not need to be concerned about scoping our CSS to our component, nor worry about a component’s internal DOM being interfered with by anything outside the component.
 
-### ブラウザのサポート
-
-ShadowDOMは現在、次のブラウザでネイティブにサポートされています。
-
-- クローム
-- Firefox
-- Safari
-- Opera
-
-ShadowDOMをサポートしていないブラウザーでは、スコープ付きCSSにフォールバックします。 これにより、ShadowDOMに付属するスタイルのカプセル化が可能になりますが、巨大なShadowDOMポリフィルは読み込まれません。
-
->スコープ付きCSSとは何かについて混乱していますか？ 心配しないでください。[後で詳細を説明します](#scoped-css)。
+When talking about the shadow DOM, we use the term "light DOM" to refer to the “regular” DOM. The light DOM encompasses any part of the DOM that does not use the shadow DOM.
 
 ### StencilのShadowDOM
 
-ShadowDOMは現在、Stencilで構築されたWebコンポーネントに対してデフォルトでオンになっていません。 Stencilで構築されたWebコンポーネントでShadowDOMをオンにするには、コンポーネントデコレータで `shadow`パラメータを使用できます。 以下はその一例です。
+The shadow DOM hides and separates the DOM of a component in order to prevent clashing styles or unwanted side effects. We can use the shadow DOM in our Stencil components to ensure our components won’t be affected by the applications in which they are used.
+
+To use the Shadow DOM in a Stencil component, you can set the `shadow` option to `true` in the component decorator.
 
 ```tsx
 @Component({
   tag: 'shadow-component',
   styleUrl: 'shadow-component.css',
-  shadow: true
+  shadow: true,
 })
-export class ShadowComponent {
-
-}
+export class ShadowComponent {}
 ```
 
-### ShadowDOMで覚えておくべきこと
+If you'd like to learn more about enabling and configuring the shadow DOM, see the [shadow field of the component api](https://stenciljs.com/docs/component#component-options).
 
-- QuerySelector: ShadowDOMを使用していて、Webコンポーネント内の要素をクエリする場合は、 `this.el.shadowRoot.querySelector()`を使用する必要があります。 これは、Webコンポーネント内のすべてのDOMがShadowDOMが作成するshadowRootにあるためです。
+By default, components created with the [`stencil generate` command](https://stenciljs.com/docs/cli#stencil-generate-sub-folder) use the shadow DOM.
 
-- グローバルスタイル: ShadowDOMを使用してコンポーネントを外部スタイルにするには、[CSSカスタムプロパティ](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables)または提案されている[CSS Shadow パーツ](https://meowni.ca/posts/part-theme-explainer/)を使用する必要があります。
+### Styling with the Shadow DOM
 
-- 通常は、次のようにコンポーネントのタグ名でスタイルをラップします。
-
-```css
-my-element {
-  color: black;
-}
-my-element div {
-  background: blue;
-}
-```
-
-ShadowDOMを有効にすると、Shadow ルート内の要素がスコープされ、コンポーネント外のスタイルは適用されません。 その結果、コンポーネント内のCSSセレクターを簡略化でき、上記の例は次のようになります。
+With the shadow DOM enabled, elements within the shadow root are scoped, and styles outside of the component do not apply. As a result, CSS selectors inside the component can be simplified, as they will only apply to elements within the component. We do not have to include any specific selectors to scope styles to the component.
 
 ```css
 :host {
   color: black;
 }
+
 div {
   background: blue;
 }
 ```
 
-### スコープ付きCSS
+> **NOTE**: The `:host` pseudo-class selector is used to select the [`Host` element](https://stenciljs.com/docs/host-element) of the component
 
-現在、ShadowDOMをサポートしていないブラウザーでは、Stencilで構築されたWebコンポーネントは、大きなShadowDOMポリフィルをロードする代わりに、スコープ付きCSSの使用にフォールバックします。 スコープ付きCSSは、実行時に各スタイルにデータ属性を追加することにより、CSSを要素に自動的にスコープします。
+With the shadow DOM enabled, only these styles will be applied to the component. Even if a style in the light DOM uses a selector that matches an element in the component, those styles will not be applied.
 
+### Shadow DOM QuerySelector
 
-## グローバルスタイル
+When you are using the shadow DOM and you want to query an element inside your web component, you must use `this.el.shadowRoot.querySelector()`. This is because all of the DOM inside your web component is in a shadowRoot that the shadow DOM creates.
 
-Stencilは、開発者が各コンポーネントを対象とするスタイルを作成することを推奨していますが、使用するコンポーネントに関係なく、ドキュメント全体に適用されるグローバルスタイルが必要になる場合があります。
+### Shadow DOM Browser Support
 
-そのために、 `stencil.config.ts`には、スタイルシートパスを指すオプションの[` globalStyle`設定](https://stenciljs.com/docs/config#globalstyle)が付属しています。
+The shadow DOM is currently natively supported in the following browsers:
+
+- Chrome
+- Firefox
+- Safari
+- Edge (v79+)
+- Opera
+
+In browsers which do not support the shadow DOM we fall back to scoped CSS. This gives you the style encapsulation that comes along with the shadow DOM but without loading in a huge shadow DOM polyfill.
+
+### Scoped CSS
+
+An alternative to using the shadow DOM is using scoped components. You can use scoped components by setting the `scoped` option to `true` in the component decorator.
+
+```tsx
+@Component({
+  tag: 'scoped-component',
+  styleUrl: 'scoped-component.css',
+  scoped: true,
+})
+export class ScopedComponent {}
+```
+
+Scoped CSS is a proxy for style encapsulation. It works by appending a data attribute to your styles to make them unique and thereby scope them to your component. It does not, however, prevent styles from the light DOM from seeping into your component.
+
+## CSS Custom Properties
+
+CSS custom properties, also often referred to as CSS variables, are used to contain values that can then be used in multiple CSS declarations. For example, we can create a custom property called `--color-primary` and assign it a value of `blue`.
+
+```css
+:host {
+  --color-primary: blue;
+}
+```
+
+And then we can use that custom property to style different parts of our component
+
+```css
+h1 {
+  color: var(--color-primary);
+}
+```
+
+### Customizing Components with Custom Properties
+
+CSS custom properties can allow the consumers of a component to customize a component’s styles from the light DOM. Consider a `shadow-card` component that uses a custom property for the color of the card heading.
+
+```css
+:host {
+  --heading-color: black;
+}
+
+.heading {
+  color: var(--heading-color);
+}
+```
+
+> **NOTE**: CSS custom properties must be declared on the `Host` element (`:host`) in order for them to be exposed to the consuming application.
+
+The `shadow-card` heading will have a default color of `black`, but this can now be changed in the light DOM by selecting the `shadow-card` and changing the value of the `--heading-color` custom property.
+
+```css
+shadow-card {
+  --heading-color: blue;
+}
+```
+
+## CSS Parts
+
+CSS custom properties can be helpful for customizing components from the light DOM, but they are still a little limiting as they only allow a user to modify specific properties. For situations where users require a higher degree of flexibility, we recommend using the [CSS `::part()` pseudo-element](https://developer.mozilla.org/en-US/docs/Web/CSS/::part). You can define parts on elements of your component with the “part” attribute.
+
+```tsx
+@Component({
+  tag: 'shadow-card',
+  styleUrl: 'shadow-card.css',
+  shadow: true,
+})
+export class ShadowCard {
+  @Prop() heading: string;
+
+  render() {
+    return (
+      <Host>
+        <h1 part="heading">{this.heading}</h1>
+        <slot></slot>
+      </Host>
+    );
+  }
+}
+```
+
+Then you can use the `::part()` pseudo-class on the host element to give any styles you want to the element with the corresponding part.
+
+```css
+shadow-card::part(heading) {
+  text-transform: uppercase;
+}
+```
+
+This allows for greater flexibility in styling as any styles can now be added to this element.
+
+## Global styles
+
+While most styles are usually scoped to each component, sometimes it's useful to have styles that are available to all the components in your design system. To create styles that are globally available, start by creating a global stylesheet. For example, you can create a folder in your `src` directory called `global` and create a file called `global.css` within that. Most commonly, this file is used to declare CSS custom properties on the root element via the `:root` pseudo-class. This is because styles provided via the `:root` pseudo-class can pass through the shadow boundary. For example, you can define a primary color that all your components can use.
+
+```css
+:root {
+  --color-primary: blue;
+}
+```
+
+In addition to CSS custom properties, other use cases for a global stylesheet include
+
+- Theming: defining CSS variables used across the app
+- Load fonts with `@font-face`
+- App wide font-family
+- CSS resets
+
+To make the global styles available to all the components in your design system, the `stencil.config.ts` file comes with an optional [`globalStyle` setting](https://stenciljs.com/docs/config#globalstyle) that accepts the path to your global stylesheet.
 
 ```tsx
 export const config: Config = {
   namespace: 'app',
   globalStyle: 'src/global/global.css',
-  outputTarget: [{
-    type: 'www'
-  }]
-}
+  outputTarget: [
+    {
+      type: 'www',
+    },
+  ],
+};
 ```
 
-コンパイラは、`global.css`に対して同じ縮小、自動プレフィックス、プラグインを実行し、 [`www`](https://stenciljs.com/docs/www)と、[`dist`](https://stenciljs.com/docs/distribution)の出力ファイルを生成します。 生成されたファイルの拡張子は常に `.css`で、指定された`namespace`という名前が付けられます。
+The compiler will run the same minification, autoprefixing, and plugins over `global.css` and generate an output file for the [`www`](https://stenciljs.com/docs/www) and [`dist`](https://stenciljs.com/docs/distribution) output targets. The generated file will always have the `.css` extension and be named as the specified `namespace`.
 
-上記の例では、名前空間が `app`であるため、生成されたグローバルスタイルファイルは`./www/build/app.css`にあります。
+In the example above, since the namespace is `app`, the generated global styles file will be located at: `./www/build/app.css`.
 
-このファイルは、アプリケーションの `index.html`に手動でインポートする必要があります。これは、`src/index.html`にあります。
+This file must be manually imported in the `index.html` of your application.
 
-```tsx
-<link rel="stylesheet" href="/build/app.css">
+```html
+<link rel="stylesheet" href="/build/app.css" />
 ```
 
-グローバルスタイルは**グローバル**スタイル用に予約する必要があることに注意してください。つまり、コンポーネントのスタイルを設定しないようにする必要があります。代わりに、次のような興味深いユースケースがあります。
+## IE support
 
-- テーマ: アプリ全体で使用されるCSS変数を定義する
-- `@font-face`でフォントをロードします
-- アプリ全体のフォントファミリー
-- スタイルボディの背景
-- CSSリセット
+IE11 does not support CSS variables natively, Stencil does however provide a best-effort polyfill since it's impossible to polyfill CSS features in the same way JS can be polyfilled.
 
+The stencil polyfill for CSS variables has plenty of limitations with respect to a browser supporting it natively, and incurs a heavy performance overhead.
 
-## CSS変数
-
-### CSS変数とは何ですか？
-
-[CSS変数](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables)は[Sass変数](https://ionicframework.com/docs/theming/sass-variables/)によく似ています。ですが、ブラウザに組み込まれています。 CSS変数を使用すると、アプリ全体で使用できるCSSプロパティを指定できます。
-
-
-### 使用事例
-
-CSS変数の1つのユースケースは色です。 アプリの主要なブランドカラーがアプリ全体で使用されている場合は、アプリ内の必要な場所ごとに同じ色を書き出す代わりに、変数を作成して、アプリ内でその色が必要な場所でその変数を使用できます。また、この色を変更する必要がある場合は、変数を変更するだけで、アプリ全体で更新されます。
-
-### StencilでのCSS変数の使用
-
-StencilでCSS変数を使用するための推奨手順は次のとおりです。
-
-- 変数定義を保持するCSSファイルを作成します。 通常、 `src/global/`に `variables.css`ファイルを作成することをお勧めします
-- 次に、この構成 `globalStyle: 'src/global/variables.css'`を`stencil.config.ts`ファイルに入れることができます。
-
-それでおしまい！ これで、変数の定義を開始できます。
-
-### CSS変数の定義
-
-CSS変数を定義する例を次に示します。
-
-```css
-/* inside our src/global/variables.css file */
-
-:root {
-  --app-primary-color: #488aff;
-}
-```
-
-この例では、色 `#488aff`に設定された`--app-primary-color`というCSS変数を定義しました。 この例の `:root`セレクターは、変数をアプリ全体で使用できるように、プロジェクトのルート要素の変数を定義する[CSS疑似クラス](https://developer.mozilla.org/en-US/docs/Web/CSS/:root)です（通常は `<html>`）。
-
-### CSS変数の使用
-
-上記で定義したCSS変数の使用例を次に示します。
-
-```css
-h1 {
-  color: var(--app-primary-color)
-}
-```
-
-これにより、CSS変数で定義した色（この場合は `#488aff`）が`h1`要素に適用されます。
-
-### IEのサポート
-
-IE11はCSS変数をネイティブにサポートしていませんが、JSをポリフィルするのと同じ方法でCSS機能をポリフィルすることは不可能であるため、Stencilはベストエフォートのポリフィルを提供します。
-
-CSS変数のStencilポリフィルには、それをネイティブにサポートするブラウザーに関して多くの制限があり、パフォーマンスのオーバーヘッドが大きくなります。
-
-- グローバルCSS変数は、 `:root`または`html`でのみ宣言でき、動的にすることはできません。
-- 動的CSS変数を持つことができるのは、`shadow`または`scoped`コンポーネントのスタイルシートのみです。
-- コンポーネント内のCSS変数は、 `:host(...)`セレ
+- Global CSS variables can only be declared in `:root` or `html`, they can't be dynamic.
+- Only the stylesheets of `shadow` or `scoped` components can have dynamic CSS variables.
+- CSS variables within a component can be consumed (`var(--thing)`) in any selector.
+- CSS variables within a component can ONLY be defined within a `:host(...)` selector.
 
 ```css
 :host() {
@@ -182,9 +229,6 @@ CSS変数のStencilポリフィルには、それをネイティブにサポー�
 }
 ```
 
-
-- コンポーネント内のCSS変数は、任意のセレクターで使用できます(`var(--thing)`)。
-
-IE11でCSS変数を使用する場合のパフォーマンスのオーバーヘッドは、CPU時間とメモリの点で高くなります。 これは、CSS変数の動的な性質を「シミュレート」するために、ポリフィルが異なるスタイルシートPERインスタンスを動的に生成する必要があるためです。 たとえば、DOMに200個の `my-cmp`要素がある場合、ポリフィルは200個の類似した`<style>`タグを添付して各要素のスタイルを設定します。
+The performance overhead of using CSS variables in IE11 is elevated in terms of CPU time and memory. This is because in order to "simulate" the dynamic nature of CSS variables, the polyfill needs to dynamically generate a different stylesheet PER instance. For example, if you have 200 `my-cmp` elements in the DOM, the polyfill will attach 200 analogous `<style>` tags to style each element.
 
 IE11で処理されるスタイルシートの総数は急速に増加する可能性があり、大量のメモリを消費し、スタイルの無効化ごとに大量のCPUを必要とします。
