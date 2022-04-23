@@ -103,7 +103,7 @@ propまたは状態の変更に応じてホスト要素を更新する必要が�
 
 ## スタイリング
 
-[スタイリングページ](https://stenciljs.com/docs/styling#shadow-dom-in-stencil)でスタイリングの詳細を確認してください。
+[スタイリングページ](/docs/styling#shadow-dom-in-stencil)でスタイリングの詳細を確認してください。
 
 CSSは、`@Component`デコレータで定義されたコンポーネントタグを使用して`<Host>`要素に適用できます。
 

@@ -56,4 +56,4 @@ export const config = {
 
 ## Nodeポリフィル
 
-他の例は、[モジュールバンドリングのNodeポリフィル](https://stenciljs.jp/docs/module-bundling/#node-polyfills)を参照してください。
+他の例は、[モジュールバンドリングのNodeポリフィル](/docs/module-bundling#node-polyfills)を参照してください。

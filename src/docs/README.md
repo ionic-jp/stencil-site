@@ -1,15 +1,11 @@
 # Table of Contents
 
-* 前書き
+* Introduction
   * [概要](introduction/overview.md)
   * [目標と目的](introduction/goals-and-objectives.md)
-  * [ブラウザサポート](introduction/browser-support.md)
   * [はじめかた](introduction/getting-started.md)
   * [最初のコンポーネント](introduction/my-first-component.md)
-  * [よくある質問](introduction/faq.md)
-  * [デザインシステムとは](design-systems/what-is-design-system.md)
-  * [デザインシステム用StencilJS](design-systems/stencil-for-design-systems.md)
-* コンポーネント
+* Components
   * [API](components/api.md)
   * [コンポーネント](components/component.md)
   * [ライフサイクルメソッド](components/component-lifecycle.md)
@@ -61,11 +57,12 @@
   * [バンドリング](guides/module-bundling.md)
   * [型付きコンポーネント](guides/typed-components.md)
   * [フォーム](guides/forms.md)
-  * [ローカルアセット](guides/local-assets.md)
-  * [スタリグガイド](guides/style-guide.md)
-  * [サービスワーカー](guides/service-workers.md)
+  * [Assets](guides/assets.md)
+  * [スタイルガイド](guides/style-guide.md)
+  * [Service Workers](guides/service-workers.md)
   * [Stencil Store](guides/store.md)
   * [公開](guides/publishing.md)
+  * [Design Systems](guides/design-systems.md)
   * [Deno (end-of-life)](guides/deno.md)
 * テスト
   * [概要](testing/overview.md)
@@ -86,3 +83,8 @@
 * Legal
   * [Telemetry](telemetry.md)
   * [Privacy Policy](https://ionicframework.com/privacy)
+* Reference
+  * [Support Policy](reference/support-policy.md)
+  * [Versioning](reference/versioning.md)
+  * [Browser Support](reference/browser-support.md)
+  * [FAQ](reference/faq.md)

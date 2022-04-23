@@ -4,6 +4,7 @@ description: Stencilは、再利用可能でスケーラブルなコンポーネ
 url: /docs/faq
 contributors:
   - adamdbradley
+  - rwaskiewicz
 ---
 
 # よくある質問
@@ -57,7 +58,7 @@ At the same time, we believe an indispensable feature for Web Components is solv
 
 ### Stencilがフレームワークにとらわれないとみなされるのはなぜですか？
 
-おそらく、Webコンポーネントの最も魅力的な利点は、開発チームが基盤となるツールとフレームワーク（およびそれらのフレームワークのバージョン）と、好みのツールを柔軟に選択できることです。 先に指摘したように、ユニバーサルデザインシステムを実装する際の大きな課題の1つは、すべての開発チームが1セットのテクノロジーで標準化することです。 Webコンポーネントを使用すると、各チームは自分に最適なものを使用できるため、今日も明日も、好きなツールを完全に自由に使用できます。
+### Why is Stencil considered framework-agnostic?
 
 
 ## Stencilは何を提供しますか?
@@ -122,6 +123,7 @@ You can also learn more about lazy loading in [How Lazy-Loading Web Components W
 
 Webコンポーネント仕様の一部はHTMLElementを拡張することですが、Stencilはいくつかの理由でこれを必要としません。 具体的には、HTMLElementは、ロジックをAPIから解放するのではなく、ブラウザでのみ機能するようにソースコードをロックします。 Stencilコンパイラは、さまざまな出力ターゲット用にさまざまなバージョンのコンポーネントを最適化できます。これを簡単にする1つの方法は、HTMLElementを除外することです。
 
+Part of the Web Component spec is to extend HTMLElement, however, Stencil does not require this for a few reasons. Specifically, HTMLElement locks source code to only work in the browser, rather than keeping the logic free from any APIs. The Stencil compiler is able to optimize many versions of components for various output targets, and one way to make that easier is by keeping HTMLElement out of it.
 
 ### StencilコンポーネントがTypeScriptで記述されているのはなぜですか？
 
@@ -144,6 +146,7 @@ Webページの他のDOM要素と同様に、配列、オブジェクト、文�
 
 文字列のみをカスタム要素に渡すことができると誤って主張する1つの誤解は、ReactのバージョンのVDomに由来します。 箱から出して、Reactは文字列と数値のみをコンポーネントに渡すことができ、カスタムイベントをリッスンすることはできません。 ステンシルを使用すると、コンポーネントはReactコンポーネントであるかのように表示され、関数、オブジェクト、配列を含むすべてのプロパティが正しく渡されます。 バインディングは、「on<EventName>」という小道具を作成することにより、カスタムイベントも考慮します。 これらにより、React開発者はReactコンポーネントであるかのようにWebコンポーネントと対話できます。
 
+One misconception that falsely claims only strings can be passed to custom elements comes from React’s version of VDom. Out of the box, React can only pass strings and numbers to components, and it cannot listen to custom events. With Stencil, the components appear as though they are React components and all properties get passed correctly including functions, objects, and arrays. The bindings also account for custom events by creating a prop called “on<EventName>”. These allow React developers to interact with the Web Components as though they are React components.
 
 ### Stencilはどのテクノロジーで構築されていますか？
 
@@ -165,8 +168,7 @@ Webコンポーネントを使用する大きな利点の1つは、コンポー�
 
 いくつかの制限は次のとおりです。
 
-アプリケーションで純粋なバニラWebコンポーネントを使用しようとすると、サーバー側のレンダリングやプログレッシブエンハンスメントなどの機能はデフォルトでサポートされません。
-一部の古いクライアントは、Webコンポーネント標準をサポートしていません。
+Some limitations include:
 
 さらに、Webコンポーネントは技術的にはどのフレームワークでも機能しますが、上記のように、型のサポートや入力バインディングの欠如、コンポーネントへのプロパティの受け渡しなど、いくつかの制限があります。
 
@@ -182,7 +184,7 @@ Webコンポーネントは任意のJavaScriptフレームワークと組み合�
 
 Webコンポーネントだけでは、高品質の開発エクスペリエンスを提供するのに十分ではありませんでした。 高速なWebアプリを構築するには、以前は従来のWebフレームワーク内に閉じ込められていたイノベーションが必要でした。 Stencilは、これらの機能を従来のフレームワークから引き出し、急速に出現しているWebコンポーネント標準に組み込むために構築されました。
 
-Stencilは、Webコンポーネントを直接使用する場合と比較して、高速コンポーネントの作成を簡単にする追加のAPIを提供します。 仮想DOM、JSX、非同期レンダリングなどのAPIを使用すると、Webコンポーネントとの100％の互換性を維持しながら、高速で強力なコンポーネントを簡単に作成できます。
+Web Components by themselves weren't enough to provide a quality development experience. Building fast web apps required innovations that were previously locked up inside traditional web frameworks. Stencil was built to pull these features out of traditional frameworks and bring them to the fast emerging Web Component standard.
 
 
 ### どのブラウザがStencilコンポーネントをサポートできますか？
@@ -205,24 +207,7 @@ StencilをInternetExplorer 11以降で動作させるには、いくつかのポ
 
 デザインシステムを構築するのが初めての場合、またはStencilを初めて使用する場合は、ソリューションエンジニアの1人に、目標を達成し、プラットフォームを最大限に活用する方法について[相談](https://ionicframework.com/sales?product_of_interest=Design%20Systems)ください。。
 
-
-### どうすれば参加できますか？
-
-### What versions of Stencil are currently supported?
-
-Currently, Stencil is on version 2.
-
-Stencil follows [semantic versioning](https://semver.org/), meaning that the team at Ionic strives to avoid any type of breaking change to Stencil without changing the 'major version number' of the library. Therefore, versions 2.7.0 and 2.8.0 are designed to be backwards compatible with one another. However, there may be breaking changes between v2.7.0 and v3.0.0. Breaking changes to the library can be found [here](https://github.com/ionic-team/stencil/blob/master/BREAKING_CHANGES.md).
-
-To determine the version of Stencil your project has installed, run:
-```shell
-npm ls @stencil/core
-```
-
-To view the latest version of Stencil, please see the project's [releases page](https://github.com/ionic-team/stencil/releases).
-
-> At this time, versions 0 and 1 of Stencil are not actively supported.
-
+### How do I get involved?
 
 Stencil is an open source project, and we encourage you to contribute. You can start by creating issues on GitHub, submitting feature requests, and helping to replicate bugs. If you’re interested in contributing, please see our [Contributor Guide](https://github.com/ionic-team/stencil/blob/main/.github/CONTRIBUTING.md) and check out our [issue tracker](https://github.com/ionic-team/stencil/issues).
 

@@ -30,36 +30,10 @@ button.fill = 'outline';
 
 **重要**：コンポーネントへの参照を保持するために、常に `HTML{}Element`インターフェースを使用してください。
 
+## Properties
 
-## プロパティ
+This section has moved to [Property Types](/docs/properties#types)
 
-コンポーネントのプロパティと属性は、インスタンス変数に注釈を付けることで定義されます。
-`@Prop()` デコレータ:
+### Required Properties
 
-```tsx
-@Prop() prop: number;
-```
-
-Stencilはまた、**タイプ情報**を使用してWebコンポーネントタイプを生成し、実行時に指定されたタイプに値を自動的にキャストします:
-
-```tsx
-@Prop() str1: string; // string attribute
-@Prop() str2: 'md' | 'ios'; // string attribute
-@Prop() str3 = 'defaultValue'; // string attribute
-
-@Prop() number1: number; // numeric attribute
-@Prop() number2 = 42; // numeric attribute
-
-@Prop() boolean1: boolean; // boolean attribute
-@Prop() boolean2 = true; // boolean attribute
-```
-
-
-### 必要なプロパティ
-
-変数名の後に `!`を使用すると、この属性/プロパティが必要に応じてマークされます。これにより、JSXタイプが確実になります。
-プロパティは渡されます。
-
-```tsx
-@Prop() value!: string;
-```
+This section has moved to [Required Properties](/docs/properties#required-properties)

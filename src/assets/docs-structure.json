@@ -13,12 +13,7 @@
         "url": "/docs/goals-and-objectives"
       },
       {
-        "text": "ブラウザサポート",
-        "filePath": "/assets/docs/introduction/browser-support.json",
-        "url": "/docs/browser-support"
-      },
-      {
-        "text": "はじめに",
+        "text": "はじめかた",
         "filePath": "/assets/docs/introduction/getting-started.json",
         "url": "/docs/getting-started"
       },
@@ -26,21 +21,6 @@
         "text": "最初のコンポーネント",
         "filePath": "/assets/docs/introduction/my-first-component.json",
         "url": "/docs/my-first-component"
-      },
-      {
-        "text": "よくある質問",
-        "filePath": "/assets/docs/introduction/faq.json",
-        "url": "/docs/faq"
-      },
-      {
-        "text": "デザインシステムとは",
-        "filePath": "/assets/docs/design-systems/what-is-design-system.json",
-        "url": "/docs/what-is-design-system"
-      },
-      {
-        "text": "デザインシステム用StencilJS",
-        "filePath": "/assets/docs/design-systems/stencil-for-design-systems.json",
-        "url": "/docs/stencil-for-design-systems"
       }
     ]
   },
@@ -303,9 +283,9 @@
         "url": "/docs/forms"
       },
       {
-        "text": "ローカルアセット",
-        "filePath": "/assets/docs/guides/local-assets.json",
-        "url": "/docs/local-assets"
+        "text": "アセット",
+        "filePath": "/assets/docs/guides/assets.json",
+        "url": "/docs/assets"
       },
       {
         "text": "スタリグガイド",
@@ -326,6 +306,11 @@
         "text": "公開",
         "filePath": "/assets/docs/guides/publishing.json",
         "url": "/docs/publishing"
+      },
+      {
+        "text": "Design Systems",
+        "filePath": "/assets/docs/guides/design-systems.json",
+        "url": "/docs/design-systems"
       },
       {
         "text": "Deno (end-of-life)",
@@ -422,6 +407,31 @@
       {
         "text": "Privacy Policy",
         "filePath": "https://ionicframework.com/privacy"
+      }
+    ]
+  },
+  {
+    "text": "Reference",
+    "children": [
+      {
+        "text": "Support Policy",
+        "filePath": "/assets/docs/reference/support-policy.json",
+        "url": "/docs/support-policy"
+      },
+      {
+        "text": "Versioning",
+        "filePath": "/assets/docs/reference/versioning.json",
+        "url": "/docs/versioning"
+      },
+      {
+        "text": "Browser Support",
+        "filePath": "/assets/docs/reference/browser-support.json",
+        "url": "/docs/browser-support"
+      },
+      {
+        "text": "FAQ",
+        "filePath": "/assets/docs/reference/faq.json",
+        "url": "/docs/faq"
       }
     ]
   }

@@ -22,14 +22,14 @@ Stencilが提供するAPIは、デコレータ、ライフサイクルフック�
 デコレータは、コンポーネントに関するすべてのメタデータ、プロパティ、属性、メソッド、イベント、関連するスタイルシートを収集するために、Stencilによって使用される、コンパイラ時のためのAPIです。
 メタデータが収集されると、すべてのデコレータは出力から削除されるので、実行時のオーバーヘッドは発生しません。
 
-- [@Component()](component#component-decorator)は、新しいウェブコンポーネントの宣言します。
-- [@Prop()](properties#prop-decorator)は、公開されたプロパティ/属性を宣言します。
-- [@State()](state#state-decorator)は、コンポーネントの内部状態を宣言します。
-- [@Watch()](reactive-data#watch-decorator)は、プロパティや状態が変化したときに実行されるフックを宣言します。
-- [@Element()](host-element#element-decorator)は、ホスト要素への参照を宣言します。
-- [@Method()](methods#method-decorator)は、公開されたパブリックメソッドを宣言します。
-- [@Event()](events#event-decorator)は、コンポーネントが発する可能性のあるDOMイベントを宣言します。
-- [@Listen()](events#listen-decorator)は、DOMイベントを監視します。
+- [@Component()](component#component-decorator) は、新しいウェブコンポーネントの宣言します。
+- [@Prop()](properties#prop-decorator) は、公開されたプロパティ/属性を宣言します。
+- [@State()](state#the-state-decorator-state) は、コンポーネントの内部状態を宣言します。
+- [@Watch()](reactive-data#watch-decorator) は、プロパティや状態が変化したときに実行されるフックを宣言します。
+- [@Element()](host-element#element-decorator) は、ホスト要素への参照を宣言します。
+- [@Method()](methods#method-decorator) は、公開されたパブリックメソッドを宣言します。
+- [@Event()](events#event-decorator) は、コンポーネントが発する可能性のあるDOMイベントを宣言します。
+- [@Listen()](events#listen-decorator) は、DOMイベントを監視します。
 
 
 ## ライフサイクル・フック
@@ -70,7 +70,7 @@ window.addEventListener('appload', (event) => {
 
 - **forceUpdate()**: 状態が変更されていなくても、指定されたインスタンス、または要素の新しいレンダリングをスケジュールします。`forceUpdate()` は同期しておらず、次のフレームで、DOMレンダリングを実行する可能性があることに注意してください。
 
-- getAssetPath(): ローカルアセットへのパスを取得します。使用方法は[Local Assets](/docs/local-assets#component-s-assetsdirs)ページを参照してください。
+- getAssetPath(): ローカルアセットへのパスを取得します。使用方法は[Local Assets](/docs/assets#getassetpath)ページを参照してください。
 - setMode()
 - getMode()
 - getElement()

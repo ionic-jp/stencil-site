@@ -46,7 +46,7 @@ export const config: Config = {
 
 以下の例では、2つのスクリプトタグがありますが、ユーザーが要求するのはそのうちの1つだけです。 IE11ユーザーの場合、`ES5`構文ですべてのポリフィルを含む`app.js`ファイルをダウンロードします。 最新のブラウザを使用しているユーザーは、[ESモジュール](https://developers.google.com/web/fundamentals/primers/modules)、[動的インポート](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Dynamic_Import)、[非同期/待機](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)、[クラス](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)などの最新のJavaScript機能を使用する `app.esm.js`ファイルのみをダウンロードします。
 
-注：IE11 ES5ファイルを生成するには、[buildEs5](https://stenciljs.com/docs/config#buildes5)をtrueに設定する必要があります
+注：IE11 ES5ファイルを生成するには、[buildEs5](/docs/config#buildes5)をtrueに設定する必要があります
 
 ```markup
 <script type="module" src="/build/app.esm.js"></script>

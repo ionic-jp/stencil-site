@@ -230,4 +230,4 @@ export const config: Config = {
 };
 ```
 
-この問題の可能性について詳しくは、[ドキュメントのこの部分](https://stenciljs.com/docs/config#testing)を確認してください。
+この問題の可能性について詳しくは、[ドキュメントのこの部分](/docs/config#testing)を確認してください。

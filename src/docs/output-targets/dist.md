@@ -22,7 +22,7 @@ outputTargets: [
 
 ## dist-custom-elements-bundle "の出力先とどう違うのですか？
 
-[Stencil v2.12.0](https://github.com/ionic-team/stencil/releases/tag/v2.12.0) において `dist-custom-elements-bundle` 出力ターゲットは非推奨となり、代わりに [`dist-custom-elements` 出力ターゲット](https://stenciljs.com/docs/custom-elements) が推奨されます。以下の情報は、歴史的な目的のみに使用されます。
+[Stencil v2.12.0](https://github.com/ionic-team/stencil/releases/tag/v2.12.0) において `dist-custom-elements-bundle` 出力ターゲットは非推奨となり、代わりに [`dist-custom-elements` 出力ターゲット](custom-elements) が推奨されます。以下の情報は、歴史的な目的のみに使用されます。
 
 まず、Stencilは、コンポーネントが実際にページで使用された場合にのみ、それ自体を遅延ロードするように設計されました。このアプローチには多くの利点があります。たとえば、任意のページにスクリプトタグを追加するだけで、ライブラリ全体を使用できますが、実際に使用されるコンポーネントのみがダウンロードされます。たとえば、[`@ionic/core`](https://www.npmjs.com/package/@ionic/core)には100を超えるコンポーネントが付属していますが、1つのWebページに必要なのは`ion-toggle`だけです。コンポーネントライブラリ全体をリクエストしたり、 `ion-toggle`だけのカスタムバンドルを生成したりする代わりに、`dist`出力ターゲットは、そのコンポーネントをオンデマンドでロードする準備ができた小さなエントリビルドを生成できます。
 

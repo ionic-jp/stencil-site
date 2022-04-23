@@ -57,6 +57,7 @@ document.body.appendChild(el);
 
 ## componentShouldUpdate()
 
+This hook is called when a component's [`Prop`](/docs/properties) or [`State`](/docs/state) property changes and a rerender is about to be requested. This hook receives three arguments: the new value, the old value and the name of the changed state. It should return a boolean to indicate if the component should rerender (`true`) or not (`false`).
 
 このフックは、コンポーネントの `Prop`または `State`プロパティが変更され、再レンダリングが要求されようとしているときに呼び出されます。このフックは、新しい値、古い値、および変更された状態の名前の3つの引数を受け取ります。コンポーネントを再レンダリングする必要があるか(`true`)、再レンダリングしないか(` false`)を示すブール値を返す必要があります。
 

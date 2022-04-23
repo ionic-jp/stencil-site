@@ -362,8 +362,8 @@ export class LandingPage {
                   </li>
                 </ul>
                 <p>Stencilを使用した設計システムの構築について詳しく知りたいですか？</p>
-                <stencil-route-link anchorClass="btn btn--tertiary btn--small" url="/docs/stencil-for-design-systems">
-                  詳細を見る
+                <stencil-route-link anchorClass="btn btn--tertiary btn--small" url="/docs/design-systems">
+                  Show me more
                 </stencil-route-link>
               </div>
             </div>
